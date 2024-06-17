@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 14:30:37 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/14 01:10:07 by albartol         ###   ########.fr       */
+/*   Updated: 2024/06/17 16:47:18 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char	*substr_nl(char *str)
 	res = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!res)
 		return (0);
-	ft_strlcpy(res, str, len);
+	ft_strlcpy(res, str, len + 1);
 	return (res);
 }
 
@@ -71,8 +71,8 @@ static char	*strjoin_nl(char *s1, char *s2)
 	str = (char *)ft_calloc(len1 + len2 + 1, sizeof(char));
 	if (!str)
 		return (free(s1), NULL);
-	ft_strlcpy(str, s1, len1);
-	ft_strlcpy(str + len1, s2, len2);
+	ft_strlcpy(str, s1, len1 + 1);
+	ft_strlcpy(str + len1, s2, len2 + 1);
 	return (free(s1), str);
 }
 
@@ -120,15 +120,14 @@ char	*get_next_line(int fd)
 /* int	main(int argc, char **argv)
 {
 	int i = 50;
-	int fd = open(argv[argc], O_RDONLY);
+	int fd = open(argv[1], O_RDONLY);
 	char *res;
-	while (i-- && --argc)
+	while (i--)
 	{
 		res = get_next_line(fd);
 		printf("%s", res);
 		if (res)
 			free (res);
-		fd = open(argv[argc], O_RDONLY);
 	}
 	return (0);
 } */

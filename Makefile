@@ -6,7 +6,7 @@
 #    By: albartol <albartol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/06/17 00:00:16 by albartol         ###   ########.fr        #
+#    Updated: 2024/06/17 16:09:22 by albartol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ CC := cc
 
 INCLUDE := -Iinclude
 
-FLAGS := -Wall -Wextra -Werror -O2 $(INCLUDE)
+# CFLAGS := -Wall -Wextra -Werror -O2 $(INCLUDE)
+CFLAGS := -Wall -Wextra -Werror -ggdb $(INCLUDE)
 
 LIBFT := lib/libft/libft.a
 LIBFT_DIR := lib/libft
@@ -26,7 +27,7 @@ MLX :=	-L$(MINILIBX_DIR) -lmlx
 
 MATH := -lm
 
-CFLAGS := $(FLAGS) $(MATH) $(FT) $(MLX)
+LIBS := $(MATH) $(FT) $(MLX)
 
 SRC_DIR	:= src
 OBJ_DIR	:= obj
@@ -40,7 +41,7 @@ YELLOW := \033[0;93m
 RESET := \033[0m
 
 # ---------- MANDATORY ----------
-SRC :=	main.c
+SRC :=	main.c print_error.c read_scene_file.c
 
 SOURCES := $(SRC)
 
@@ -52,7 +53,7 @@ NAME := cube3D
 # ---------- MANDATORY END ----------
 
 # ---------- BONUS ----------
-BNS :=	main.c
+BNS :=	
 
 BNS_SOURCES := $(BNS)
 
@@ -66,18 +67,18 @@ BONUS := cube3D_bonus
 all: $(OBJ_DIR) $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(MINILIBX)
-	$(CC) $(CFLAGS) $(OBJS) -o $@
+	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $@
 	@echo "$(GREEN)Program $(NAME) created ✅$(RESET)"
 
 bonus: $(OBJ_DIR) $(BONUS)
 
 $(BONUS): $(BNS_OBJS) $(LIBFT) $(MINILIBX)
-	$(CC) $(CFLAGS) $(BNS_OBJS)  -o $@
+	$(CC) $(CFLAGS) $(BNS_OBJS) $(LIBS) -o $@
 	@echo "$(GREEN)Program $(BONUS) created ✅$(RESET)"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@echo "$(YELLOW)Compiling...$(RESET)"
-	$(CC) $(FLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
 	@echo "$(YELLOW)Creating object directories...$(RESET)"

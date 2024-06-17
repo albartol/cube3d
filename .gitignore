@@ -1,6 +1,7 @@
 .DS_Store
 .vscode
-obj
+cube3D
+cube3D_bonus
 *.sw*
 *.o
 *.a
