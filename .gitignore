@@ -1,0 +1,8 @@
+.DS_Store
+.vscode
+obj
+*.sw*
+*.o
+*.a
+*.txt
+*.sh
