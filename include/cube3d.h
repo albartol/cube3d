@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/17 15:54:19 by albartol         ###   ########.fr       */
+/*   Updated: 2024/06/20 18:39:59 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,14 @@
 # include "../lib/libft/include/libft.h"
 
 # define MAX_LINES SHRT_MAX
+
+// identifiers
+# define NO "NO"
+# define SO "SO"
+# define EA "EA"
+# define WE "WE"
+# define F "F"
+# define C "C"
 
 enum e_map_tiles
 {
@@ -142,6 +150,7 @@ struct s_game
 };
 
 void	print_error(const char *message);
-int		read_scene_file(t_scene_file *scene_data, const char *file_path);
+int		read_scene_file(t_scene_file *scene_info, const char *file_path);
+int		extract_scene_info(t_scene_file *scene_info);
 
 #endif

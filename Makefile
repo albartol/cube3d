@@ -6,7 +6,7 @@
 #    By: albartol <albartol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/06/17 16:09:22 by albartol         ###   ########.fr        #
+#    Updated: 2024/06/20 18:51:24 by albartol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ YELLOW := \033[0;93m
 RESET := \033[0m
 
 # ---------- MANDATORY ----------
-SRC :=	main.c print_error.c read_scene_file.c
+SRC :=	main.c print_error.c read_scene_file.c extract_scene_info.c
 
 SOURCES := $(SRC)
 

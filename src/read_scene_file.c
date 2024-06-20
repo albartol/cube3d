@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 14:25:58 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/17 16:58:09 by albartol         ###   ########.fr       */
+/*   Updated: 2024/06/17 22:09:25 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static t_list	*read_file(int fd)
 	return (file_content);
 }
 
-int	read_scene_file(t_scene_file *scene_data, const char *file_path)
+int	read_scene_file(t_scene_file *scene_info, const char *file_path)
 {
 	int		fd;
 
@@ -87,9 +87,9 @@ int	read_scene_file(t_scene_file *scene_data, const char *file_path)
 		perror(NULL);
 		return (EXIT_FAILURE);
 	}
-	scene_data->file_content = read_file(fd);
+	scene_info->file_content = read_file(fd);
 	close(fd);
-	if (!scene_data->file_content)
+	if (!scene_info->file_content)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
