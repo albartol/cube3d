@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:18 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/20 18:50:57 by albartol         ###   ########.fr       */
+/*   Updated: 2024/06/20 22:28:14 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,24 @@ void print(void *str)
 	ft_putchar_fd('\n', 1);
 }
 
+void print_map(char **map)
+{
+	int	i;
+
+	i = 0;
+	ft_putstr_fd("------------------------------------------------------\n", 1);
+	while (map[i])
+	{
+		ft_putstr_fd(map[i], 1);
+		ft_putchar_fd('\n', 1);
+		i++;
+	}
+	ft_putstr_fd("------------------------------------------------------\n", 1);
+}
+
 void print_info(t_scene_file *info)
 {
+	ft_putstr_fd("------------------------------------------------------\n", 1);
 	ft_putstr_fd(info->north_texture, 1);
 	ft_putchar_fd('\n', 1);
 	ft_putstr_fd(info->south_texture, 1);
@@ -32,6 +48,7 @@ void print_info(t_scene_file *info)
 	ft_putchar_fd('\n', 1);
 	ft_putstr_fd(info->celling_color, 1);
 	ft_putchar_fd('\n', 1);
+	ft_putstr_fd("------------------------------------------------------\n", 1);
 }
 
 void	game_data_init(t_game *data)
@@ -56,6 +73,18 @@ void	game_data_init(t_game *data)
 	data->scene.textures.west_texture.addr = NULL;
 }
 
+void	free_scene_info(t_scene_file *info)
+{
+	ft_lstclear(&info->file_content, free);
+	array_free(info->map);
+	free(info->north_texture);
+	free(info->south_texture);
+	free(info->east_texture);
+	free(info->west_texture);
+	free(info->floor_color);
+	free(info->celling_color);
+}
+
 int	main(int argc, char **argv)
 {
 	t_game	data;
@@ -72,5 +101,7 @@ int	main(int argc, char **argv)
 	if (extract_scene_info(&data.file))
 		return (EXIT_FAILURE);
 	print_info(&data.file);
+	print_map(data.file.map);
+	free_scene_info(&data.file);
 	return (EXIT_SUCCESS);
 }

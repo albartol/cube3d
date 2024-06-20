@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 13:21:43 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/14 01:10:07 by albartol         ###   ########.fr       */
+/*   Updated: 2024/06/20 21:40:05 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strdup(const char *str)
 	dup = (char *)malloc(len + 1);
 	if (!dup)
 		return (0);
-	ft_strlcpy(dup, str, len);
+	ft_strlcpy(dup, str, len + 1);
 	return (dup);
 }
 
