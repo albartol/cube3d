@@ -6,7 +6,7 @@
 #    By: albartol <albartol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/06/20 21:32:20 by albartol         ###   ########.fr        #
+#    Updated: 2024/06/22 18:46:40 by albartol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,11 +41,15 @@ YELLOW := \033[0;93m
 RESET := \033[0m
 
 # ---------- MANDATORY ----------
-SRC :=	main.c print_error.c read_scene_file.c
+SRC :=	main.c read_scene_file.c
 
 EXT := extract_scene_info.c extract_elements.c extract_map.c
 
-SOURCES := $(SRC) $(EXT)
+CHK := check_scene_info.c check_elements.c check_map.c check_colors.c
+
+UTIL := print_error.c in_range.c create_color.c
+
+SOURCES := $(SRC) $(EXT) $(CHK) $(UTIL)
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SOURCES))
 

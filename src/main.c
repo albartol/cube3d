@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:18 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/20 22:28:14 by albartol         ###   ########.fr       */
+/*   Updated: 2024/06/22 18:58:14 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void	game_data_init(t_game *data)
 	data->file.floor_color = NULL;
 	data->file.celling_color = NULL;
 	data->file.map = NULL;
+	data->scene.floor_color = 0;
+	data->scene.celling_color = 0;
 	data->scene.textures.north_texture.img = NULL;
 	data->scene.textures.south_texture.img = NULL;
 	data->scene.textures.east_texture.img = NULL;
@@ -102,6 +104,11 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	print_info(&data.file);
 	print_map(data.file.map);
+	if (check_scene_info(&data.file, &data.scene))
+		print_error("Error in color\n");
+		// return (EXIT_FAILURE);
 	free_scene_info(&data.file);
+	printf("floor_color: %X\n", data.scene.floor_color);
+	printf("celling_color: %X\n", data.scene.celling_color);
 	return (EXIT_SUCCESS);
 }

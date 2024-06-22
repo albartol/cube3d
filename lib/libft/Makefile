@@ -25,7 +25,8 @@ PRI :=	ft_printf.c ft_putstr_n.c ft_putchar_n.c ft_putnbr_n.c \
 		ft_putnbr_base_n.c ft_putptr_n.c
 
 EXT :=	merge_sort.c quick_sort.c charjoin.c ft_atol.c ft_atoll.c \
-		array_char_len.c array_to_str.c array_dup.c array_free.c array_len.c
+		array_char_len.c array_to_str.c array_dup.c array_free.c array_len.c \
+		array_trim.c
 
 SOURCES := $(SRC) $(BNS) $(GNL) $(PRI) $(EXT)
 

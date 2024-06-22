@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 11:53:14 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/14 01:25:14 by albartol         ###   ########.fr       */
+/*   Updated: 2024/06/22 18:47:09 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,6 @@ void				array_free(char **array);
 char				**array_dup(const char **array);
 size_t				array_char_len(const char **array);
 char				*array_to_str(const char **array, const char spliter);
-
+char				**array_trim(const char **array, const char *set);
 
 #endif

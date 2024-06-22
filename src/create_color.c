@@ -1,29 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extract_scene.h                                    :+:      :+:    :+:   */
+/*   create_color.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/17 22:09:48 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/22 18:18:25 by albartol         ###   ########.fr       */
+/*   Created: 2024/06/22 18:22:04 by albartol          #+#    #+#             */
+/*   Updated: 2024/06/22 18:22:12 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXTRACT_SCENE_H
-# define EXTRACT_SCENE_H
-
-# include <cube3d.h>
-
-// element type identifiers
-# define NO "NO"
-# define SO "SO"
-# define EA "EA"
-# define WE "WE"
-# define F "F"
-# define C "C"
-
-size_t	extract_elements(t_scene_file *info);
-int		extract_map(t_scene_file *info, size_t list_pos);
-
-#endif
+int	create_color(const int t, const int r, const int g, const int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}

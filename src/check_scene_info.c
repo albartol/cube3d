@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extract_scene.h                                    :+:      :+:    :+:   */
+/*   check_scene_info.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/17 22:09:48 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/22 18:18:25 by albartol         ###   ########.fr       */
+/*   Created: 2024/06/21 19:31:15 by albartol          #+#    #+#             */
+/*   Updated: 2024/06/22 18:24:16 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXTRACT_SCENE_H
-# define EXTRACT_SCENE_H
+#include <cube3d.h>
+#include <check_scene.h>
 
-# include <cube3d.h>
-
-// element type identifiers
-# define NO "NO"
-# define SO "SO"
-# define EA "EA"
-# define WE "WE"
-# define F "F"
-# define C "C"
-
-size_t	extract_elements(t_scene_file *info);
-int		extract_map(t_scene_file *info, size_t list_pos);
-
-#endif
+int	check_scene_info(t_scene_file *scene_info, t_scene *scene)
+{
+	if (check_elements(scene_info, scene))
+		return (EXIT_FAILURE);
+	if (check_map(scene_info))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}

@@ -6,14 +6,14 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 20:56:48 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/20 21:48:07 by albartol         ###   ########.fr       */
+/*   Updated: 2024/06/22 18:59:38 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cube3d.h>
 #include <extract_scene.h>
 
-static size_t	identifier_len(char *content)
+static size_t	identifier_len(const char *content)
 {
 	size_t	len;
 	char	spaces;
@@ -33,19 +33,19 @@ static size_t	identifier_len(char *content)
 	return (len);
 }
 
-static char	*get_value(char *content)
+static char	*get_value(const char *content)
 {
-	size_t	identifier_pos;
+	size_t	value_pos;
 	char	*value;
 
-	identifier_pos = identifier_len(content);
-	if (!identifier_pos || identifier_pos > UINT_MAX)
+	value_pos = identifier_len(content);
+	if (!value_pos || value_pos > UINT_MAX)
 		return (NULL);
-	while (content[identifier_pos] == ' ')
-		identifier_pos++;
-	if (identifier_pos > UINT_MAX)
+	while (content[value_pos] == ' ')
+		value_pos++;
+	if (value_pos > UINT_MAX)
 		return (NULL);
-	value = ft_substr(content, identifier_pos, ft_strlen(content));
+	value = ft_substr(content, value_pos, ft_strlen(content + value_pos));
 	if (!value)
 		perror(NULL);
 	return (value);
