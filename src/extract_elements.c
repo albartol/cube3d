@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 20:56:48 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/22 18:59:38 by albartol         ###   ########.fr       */
+/*   Updated: 2024/06/23 00:44:03 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ size_t	extract_elements(t_scene_file *info)
 		len = identifier_len(temp->content);
 		if (len >= 1 && check_identifiers(info, temp->content, len))
 		{
-			ft_putstr_fd(temp->content, STDERR_FILENO);
-			ft_putstr_fd(" : is an invalid element\n", STDERR_FILENO);
+			print_error(temp->content);
+			ft_putstr_fd(": Is an invalid element\n", STDERR_FILENO);
 			return (0);
 		}
 		if (errno == ENOMEM)

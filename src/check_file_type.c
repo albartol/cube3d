@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   check_file_type.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/23 00:13:27 by albartol         ###   ########.fr       */
+/*   Created: 2024/06/23 00:09:31 by albartol          #+#    #+#             */
+/*   Updated: 2024/06/23 00:12:41 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include <cube3d.h>
 
-void	print_error(const char *message);
-int		check_file_type(const char *file_path, const char *file_type);
-int		in_range(const int value, const int min_value, const int max_value);
-int		create_color(const int t, const int r, const int g, const int b);
+int	check_file_type(const char *file_path, const char *file_type)
+{
+	size_t	path_len;
+	size_t	type_len;
 
-#endif
+	path_len = ft_strlen(file_path);
+	type_len = ft_strlen(file_type);
+	if (path_len <= type_len)
+		return (EXIT_FAILURE);
+	path_len = path_len - type_len;
+	if (ft_strncmp(file_path + path_len, file_type, type_len))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}

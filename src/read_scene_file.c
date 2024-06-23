@@ -6,24 +6,11 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 14:25:58 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/17 22:09:25 by albartol         ###   ########.fr       */
+/*   Updated: 2024/06/23 00:12:59 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cube3d.h>
-
-static int	check_file(const char *file_path)
-{
-	size_t	len;
-
-	len = ft_strlen(file_path);
-	if (len <= 4)
-		return (EXIT_FAILURE);
-	len = len - 4;
-	if (ft_strncmp(file_path + len, ".cub", 4))
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
-}
 
 static void	remove_newline(char *str)
 {
@@ -76,7 +63,7 @@ int	read_scene_file(t_scene_file *scene_info, const char *file_path)
 {
 	int		fd;
 
-	if (check_file(file_path))
+	if (check_file_type(file_path, ".cub"))
 	{
 		print_error("Invalid file type.\n");
 		return (EXIT_FAILURE);

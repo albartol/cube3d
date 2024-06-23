@@ -6,7 +6,7 @@
 #    By: albartol <albartol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/06/22 18:46:40 by albartol         ###   ########.fr        #
+#    Updated: 2024/06/23 00:30:05 by albartol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ EXT := extract_scene_info.c extract_elements.c extract_map.c
 
 CHK := check_scene_info.c check_elements.c check_map.c check_colors.c
 
-UTIL := print_error.c in_range.c create_color.c
+UTIL := print_error.c in_range.c create_color.c check_file_type.c
 
 SOURCES := $(SRC) $(EXT) $(CHK) $(UTIL)
 
