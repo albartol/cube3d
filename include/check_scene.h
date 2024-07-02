@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_scene.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:10:54 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/22 18:18:24 by albartol         ###   ########.fr       */
+/*   Updated: 2024/07/02 12:45:48 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ enum e_map_tiles
 	PLAYER_SOUTH = 'S',
 	PLAYER_EAST = 'E',
 	PLAYER_WEST = 'W',
+	SPACE = ' ',
 	WALL = '1',
 	EMPTY = '0'
 };
 
 int	check_elements(t_scene_file *info, t_scene *scene);
 int	check_colors(char *floor_color, char *celling_color, t_scene *scene);
-int	check_map(t_scene_file *info);
+int	check_map(char **map);
 
 #endif

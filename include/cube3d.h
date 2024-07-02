@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/22 18:20:10 by albartol         ###   ########.fr       */
+/*   Updated: 2024/07/02 12:27:58 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,14 @@
 # include "utils.h"
 
 # define MAX_LINES SHRT_MAX
+
+# define RED "\033[0;91m"
+# define GREEN "\033[0;92m"
+# define CYAN "\033[0;96m"
+# define BLUE "\033[0;34m"
+# define PURPLE "\033[0;35m"
+# define YELLOW "\033[0;93m"
+# define RESET "\033[0m"
 
 enum e_keys
 {
