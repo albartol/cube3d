@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:18 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/22 22:21:03 by albartol         ###   ########.fr       */
+/*   Updated: 2024/07/02 20:07:15 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,32 @@ void print(void *str)
 void print_map(char **map)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	ft_putstr_fd("------------------------------------------------------\n", 1);
+	ft_putstr_fd("────────────────────────MAP──────────────────────\n", 1);
 	while (map[i])
 	{
-		ft_putstr_fd(map[i], 1);
-		ft_putchar_fd('\n', 1);
+		j = 0;
+		while (map[i][j])
+		{
+			if (ft_strchr("NSWE", map[i][j]))
+				printf(PLAYER_COL);
+			else if (map[i][j] == '1')
+				printf(WALL_COL);
+			printf("%c", map[i][j]);
+			printf(RESET);
+			j++;
+		}
+		printf("\n");
 		i++;
 	}
-	ft_putstr_fd("------------------------------------------------------\n", 1);
+	ft_putstr_fd("──────────────────────────────────────────────────────\n", 1);
 }
 
 void print_info(t_scene_file *info)
 {
-	ft_putstr_fd("------------------------------------------------------\n", 1);
+	ft_putstr_fd("──────────────────────────────────────────────────────\n", 1);
 	ft_putstr_fd(info->north_texture, 1);
 	ft_putchar_fd('\n', 1);
 	ft_putstr_fd(info->south_texture, 1);
@@ -48,7 +59,7 @@ void print_info(t_scene_file *info)
 	ft_putchar_fd('\n', 1);
 	ft_putstr_fd(info->celling_color, 1);
 	ft_putchar_fd('\n', 1);
-	ft_putstr_fd("------------------------------------------------------\n", 1);
+	ft_putstr_fd("──────────────────────────────────────────────────────\n", 1);
 }
 
 void	game_data_init(t_game *data)
@@ -92,10 +103,7 @@ int	main(int argc, char **argv)
 	t_game	data;
 
 	if (argc != 2)
-	{
-		print_error("Wrong number of arguments\n");
-		return (EXIT_FAILURE);
-	}
+		return (exit_msg("Wrong number of arguments\n", EXIT_FAILURE));
 	game_data_init(&data);
 	if (read_scene_file(&data.file, argv[1]))
 		return (EXIT_FAILURE);

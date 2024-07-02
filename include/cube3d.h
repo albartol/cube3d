@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/07/02 12:27:58 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/07/02 20:06:57 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@
 # define PURPLE "\033[0;35m"
 # define YELLOW "\033[0;93m"
 # define RESET "\033[0m"
+
+# define PLAYER_COL YELLOW
+# define WALL_COL GREEN
 
 enum e_keys
 {
