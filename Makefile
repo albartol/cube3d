@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: albartol <albartol@student.42.fr>          +#+  +:+       +#+         #
+#    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/06/23 00:30:05 by albartol         ###   ########.fr        #
+#    Updated: 2024/07/02 13:53:49 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ EXT := extract_scene_info.c extract_elements.c extract_map.c
 
 CHK := check_scene_info.c check_elements.c check_map.c check_colors.c
 
-UTIL := print_error.c in_range.c create_color.c check_file_type.c
+UTIL := print_error.c in_range.c create_color.c check_file_type.c exit_msg.c
 
 SOURCES := $(SRC) $(EXT) $(CHK) $(UTIL)
 
