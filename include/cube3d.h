@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/07/03 16:09:28 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/07/03 18:28:55 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,5 +154,5 @@ void	free_scene_info(t_scene_file *info);
 //Grafics part
 
 int init_images(t_game *data);
-int init_grafics(t_game *data);
+int start_grafics(t_game *data);
 #endif

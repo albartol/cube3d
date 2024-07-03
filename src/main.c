@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:18 by albartol          #+#    #+#             */
-/*   Updated: 2024/07/03 17:18:21 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/07/03 18:28:55 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	main(int argc, char **argv)
 	// 	free_scene_info(&data.file);
 	// 	return (EXIT_FAILURE);
 	// }
-	if (init_grafics(&data))
+	if (start_grafics(&data))
 	{
 		free_scene_info(&data.file);
 		return (EXIT_FAILURE);

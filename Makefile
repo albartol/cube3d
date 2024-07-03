@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/07/03 15:38:43 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/07/03 18:28:55 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ CHK := check_scene_info.c \
 		check_map.c \
 		check_colors.c
 
-GRAFICS := init_grafics.c
+GRAFICS := start_grafics.c
 
 UTIL := print_error.c \
 		in_range.c \

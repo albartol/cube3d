@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:31:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/07/03 18:19:53 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/07/03 18:29:55 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ size_t len_to_char(char *str, char *chars)
 	return (i);
 }
 
-int check_up_down(char **map, size_t x, size_t y)
+int check_up_down(char **map, size_t y)
 {
 	size_t	up_len;
 	size_t	actual_len;
@@ -54,7 +54,7 @@ static int	check_inside_walls(char **map, size_t x, size_t y)
 
 	if (ft_strchr("NSWE", map[y][x]))
 	{
-		if (check_up_down(map, x, y)) // If you answer: Why did my parner do this??? try discoment the below function (before parser)  and run test.cub
+		if (check_up_down(map, y)) // If you answer: Why did my parner do this??? try discoment the below function (before parser)  and run test.cub
 			return (EXIT_FAILURE);
 	}
 	if (y == 0 || map[y - 1][x] == SPACE) // UP
