@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/07/02 20:06:57 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/07/03 16:09:28 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ enum e_keys
 	DOWN = 125,
 	RIGHT = 124,
 	LEFT = 123,
-	W_UP = 13,
-	S_DOWN = 1,
-	D_RIGHT = 2,
-	A_LEFT = 0,
-	END = 53,
-	Q_END = 0,
+	W_UP = 119,
+	S_DOWN = 115,
+	D_RIGHT = 100,
+	A_LEFT = 97,
+	END = 53, // ???
+	Q_END = 113,
 	WSL_LEFT = 65361,
 	WSL_UP = 65362,
 	WSL_RIGTH = 65363,
@@ -148,4 +148,11 @@ int		read_scene_file(t_scene_file *scene_info, const char *file_path);
 int		extract_scene_info(t_scene_file *scene_info);
 int		check_scene_info(t_scene_file *scene_info, t_scene *scene);
 
+//Utils
+void	free_scene_info(t_scene_file *info);
+
+//Grafics part
+
+int init_images(t_game *data);
+int init_grafics(t_game *data);
 #endif

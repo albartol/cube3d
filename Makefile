@@ -6,23 +6,24 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/07/02 13:53:49 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/07/03 15:38:43 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC := cc
 
-INCLUDE := -Iinclude
+MINILIBX_DIR :=	lib/minilibx-linux
+INCLUDE := -Iinclude -I/usr/include -I/$(MINILIBX_DIR)
 
 # CFLAGS := -Wall -Wextra -Werror -O2 $(INCLUDE)
-CFLAGS := -Wall -Wextra -Werror -ggdb $(INCLUDE)
+CFLAGS := -Wall -Wextra -Werror -ggdb $(INCLUDE) -g3 -fsanitize=address
+MLX_FLAGS   =  -L/$(MINILIBX_DIR) -lmlx_Linux -L/usr/lib -I/$(MINILIBX_DIR) -lXext -lX11 -lm -lz
 
 LIBFT := lib/libft/libft.a
 LIBFT_DIR := lib/libft
 FT := -L$(LIBFT_DIR) -lft
 
 MINILIBX :=	lib/minilibx-linux/libmlx.a
-MINILIBX_DIR :=	lib/minilibx-linux
 MLX :=	-L$(MINILIBX_DIR) -lmlx
 
 MATH := -lm
@@ -41,15 +42,28 @@ YELLOW := \033[0;93m
 RESET := \033[0m
 
 # ---------- MANDATORY ----------
-SRC :=	main.c read_scene_file.c
+SRC :=	main.c \
+		read_scene_file.c
+		
+EXT := extract_scene_info.c \
+		extract_elements.c \
+		extract_map.c
 
-EXT := extract_scene_info.c extract_elements.c extract_map.c
+CHK := check_scene_info.c \
+		check_elements.c \
+		check_map.c \
+		check_colors.c
 
-CHK := check_scene_info.c check_elements.c check_map.c check_colors.c
+GRAFICS := init_grafics.c
 
-UTIL := print_error.c in_range.c create_color.c check_file_type.c exit_msg.c
-
-SOURCES := $(SRC) $(EXT) $(CHK) $(UTIL)
+UTIL := print_error.c \
+		in_range.c \
+		create_color.c \
+		check_file_type.c \
+		exit_msg.c \
+		free_scene_info.c
+		
+SOURCES := $(SRC) $(EXT) $(CHK) $(UTIL) $(GRAFICS)
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SOURCES))
 
@@ -73,7 +87,7 @@ BONUS := cube3D_bonus
 all: $(OBJ_DIR) $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(MINILIBX)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $@
+	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $@ $(MLX_FLAGS)
 	@echo "$(GREEN)Program $(NAME) created ✅$(RESET)"
 
 bonus: $(OBJ_DIR) $(BONUS)

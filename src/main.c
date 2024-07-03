@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:18 by albartol          #+#    #+#             */
-/*   Updated: 2024/07/02 20:07:15 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/07/03 17:18:21 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,18 +86,6 @@ void	game_data_init(t_game *data)
 	data->scene.textures.west_texture.addr = NULL;
 }
 
-void	free_scene_info(t_scene_file *info)
-{
-	ft_lstclear(&info->file_content, free);
-	array_free(info->map);
-	free(info->north_texture);
-	free(info->south_texture);
-	free(info->east_texture);
-	free(info->west_texture);
-	free(info->floor_color);
-	free(info->celling_color);
-}
-
 int	main(int argc, char **argv)
 {
 	t_game	data;
@@ -120,8 +108,18 @@ int	main(int argc, char **argv)
 		free_scene_info(&data.file);
 		return (EXIT_FAILURE);
 	}
-	free_scene_info(&data.file);
+	// free_scene_info(&data.file);
 	printf("floor_color: %0X\n", data.scene.floor_color);
 	printf("celling_color: %0X\n", data.scene.celling_color);
+	// if (init_images(&data))
+	// {
+	// 	free_scene_info(&data.file);
+	// 	return (EXIT_FAILURE);
+	// }
+	if (init_grafics(&data))
+	{
+		free_scene_info(&data.file);
+		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
