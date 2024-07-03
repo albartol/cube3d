@@ -6,7 +6,7 @@
 #    By: albartol <albartol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/07/03 21:08:04 by albartol         ###   ########.fr        #
+#    Updated: 2024/07/03 23:22:52 by albartol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,11 @@ MINILIBX_DIR := lib/minilibx-linux
 MLX :=	-L$(MINILIBX_DIR) -lmlx -lXext -lX11
 
 MATH := -lm
+
+UNAME := $(shell uname)
+ifeq ($(UNAME), Darwin)
+	MLX := -lmlx -framework OpenGL -framework AppKit
+endif
 
 LIBS := $(MATH) $(FT) $(MLX)
 

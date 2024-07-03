@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/07/03 21:07:31 by albartol         ###   ########.fr       */
+/*   Updated: 2024/07/04 00:08:12 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,9 +136,9 @@ struct s_display
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	void	*player_map;
-	int		x;
-	int		y;
+	void	*frames[3];
+	int		width;
+	int		height;
 };
 
 struct s_game
