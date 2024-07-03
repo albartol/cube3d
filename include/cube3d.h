@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/07/03 18:28:55 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/07/03 19:03:32 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@
 # define PURPLE "\033[0;35m"
 # define YELLOW "\033[0;93m"
 # define RESET "\033[0m"
+# define SPEED 10
 
 # define PLAYER_COL YELLOW
 # define WALL_COL GREEN
@@ -135,6 +136,9 @@ struct s_display
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
+	void	*player_map;
+	int		x;
+	int		y;
 };
 
 struct s_game
