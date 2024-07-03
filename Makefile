@@ -3,28 +3,27 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
+#    By: albartol <albartol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/07/03 18:28:55 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/07/03 21:08:04 by albartol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC := cc
 
-MINILIBX_DIR :=	lib/minilibx-linux
-INCLUDE := -Iinclude -I/usr/include -I/$(MINILIBX_DIR)
+INCLUDE := -Iinclude
 
 # CFLAGS := -Wall -Wextra -Werror -O2 $(INCLUDE)
-CFLAGS := -Wall -Wextra -Werror -ggdb $(INCLUDE) -g3 -fsanitize=address
-MLX_FLAGS   =  -L/$(MINILIBX_DIR) -lmlx_Linux -L/usr/lib -I/$(MINILIBX_DIR) -lXext -lX11 -lm -lz
+CFLAGS := -Wall -Wextra -Werror -ggdb $(INCLUDE)
 
 LIBFT := lib/libft/libft.a
 LIBFT_DIR := lib/libft
 FT := -L$(LIBFT_DIR) -lft
 
 MINILIBX :=	lib/minilibx-linux/libmlx.a
-MLX :=	-L$(MINILIBX_DIR) -lmlx
+MINILIBX_DIR := lib/minilibx-linux
+MLX :=	-L$(MINILIBX_DIR) -lmlx -lXext -lX11
 
 MATH := -lm
 
@@ -87,7 +86,7 @@ BONUS := cube3D_bonus
 all: $(OBJ_DIR) $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(MINILIBX)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $@ $(MLX_FLAGS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $@
 	@echo "$(GREEN)Program $(NAME) created ✅$(RESET)"
 
 bonus: $(OBJ_DIR) $(BONUS)
