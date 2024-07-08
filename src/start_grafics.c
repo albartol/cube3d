@@ -20,10 +20,41 @@ int exit_window(t_game	*data)
 	return (0);
 }
 
+
+void	put_img(t_display display, int x, int y, void *image)
+{
+	mlx_put_image_to_window(display.mlx_ptr, display.win_ptr, image, x * P_SIZE, y * P_SIZE);
+}
+void	put_img_map(t_game *data, int x, int y)
+{
+	if (data->file.map[y][x] == '1')
+		put_img(data->display, x, y, data->display.frames[0]);
+	else if (data->file.map[y][x] == '0')
+		put_img(data->display, x, y, data->display.frames[1]);
+}
+
+void	put_map(t_game *data)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (data->file.map[y])
+	{
+		x = 0;
+		while (data->file.map[y][x])
+		{
+			put_img_map(data, x, y);
+			x++;
+		}
+		y++;
+	}
+}
 void	put_player(t_game *data)
 {
 	mlx_clear_window(data->display.mlx_ptr, data->display.win_ptr);
-	mlx_put_image_to_window(data->display.mlx_ptr, data->display.win_ptr, data->display.frames[0], data->display.width >> 1, data->display.height >> 1);
+	put_map(data);
+	put_img(data->display, data->display.width >> 1, data->display.height >> 1, data->display.frames[2]);
 }
 
 int	key_events(int keycode, t_game *data)
@@ -53,13 +84,16 @@ int start_grafics(t_game *data)
 	int img_width;
 	int img_height;
 
-	data->display.frames[0] = mlx_xpm_file_to_image(data->display.mlx_ptr, data->file.east_texture, &img_height, &img_width);
-	if (!data->display.frames[0])
+	data->display.frames[0] = mlx_xpm_file_to_image(data->display.mlx_ptr, data->file.north_texture, &img_height, &img_width);
+	data->display.frames[1] = mlx_xpm_file_to_image(data->display.mlx_ptr, data->file.south_texture, &img_height, &img_width);
+	data->display.frames[2] = mlx_xpm_file_to_image(data->display.mlx_ptr, data->file.west_texture, &img_height, &img_width);
+	if (!data->display.frames[0] || !data->display.frames[0] || !data->display.frames[2])
 	{
 		print_error("Error al abrir la imagen\n");
 		return (EXIT_FAILURE);
 	}
 
+	put_map(data);
 	put_player(data);
 
 	mlx_hook(data->display.win_ptr, ON_DESTROY, 0, exit_window, data);

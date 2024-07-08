@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/07/04 00:08:12 by albartol         ###   ########.fr       */
+/*   Updated: 2024/07/08 11:14:40 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@
 # define PURPLE "\033[0;35m"
 # define YELLOW "\033[0;93m"
 # define RESET "\033[0m"
+# define P_SIZE 64
 # define SPEED 10
 
 # define PLAYER_COL YELLOW
