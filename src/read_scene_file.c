@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 14:25:58 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/23 00:12:59 by albartol         ###   ########.fr       */
+/*   Updated: 2024/07/09 16:35:38 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,12 @@ int	read_scene_file(t_scene_file *scene_info, const char *file_path)
 	{
 		print_error("Invalid file type.\n");
 		return (EXIT_FAILURE);
+	}
+	fd = open(file_path, O_RDONLY | O_DIRECTORY);
+	if (fd > 0)
+	{
+		close(fd);
+		return (exit_msg("Invalid file type.\n", EXIT_FAILURE));
 	}
 	fd = open(file_path, O_RDONLY);
 	if (fd == -1)
