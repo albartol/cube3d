@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start_grafics.c                                     :+:      :+:    :+:   */
+/*   start_grafics.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:44:53 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/07/03 17:29:43 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/07/10 16:21:35 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 int start_grafics(t_game *data)
 {
-	(void)data;
-	// mlx_t	*mlx;
-	// mlx = mlx_init(400, 400, "Cube 3d", false);
-
-	// mlx_loop(mlx);
+	// mlx_get_monitor_size(0, &data->display.width, &data->display.height);
+	// mlx_set_setting(MLX_FULLSCREEN, true);
+	// data->display.mlx = mlx_init(data->display.width, data->display.height,
+	// 	"cube3d", false);
+	data->display.mlx = mlx_init(400, 400, "cube3d", false);
+	if (!data->display.mlx)
+		return (exit_msg(mlx_strerror(mlx_errno), EXIT_FAILURE));
+	mlx_loop(data->display.mlx);
 	return (EXIT_SUCCESS);
 }

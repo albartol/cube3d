@@ -12,7 +12,7 @@
 
 CC := cc
 
-INCLUDE := -Iinclude -Ilib/libft -Ilib/MLX42/include/MLX42
+INCLUDE := -Iinclude -Ilib/libft/include -Ilib/MLX42/include/MLX42
 
 # CFLAGS := -Wall -Wextra -Werror -O2 $(INCLUDE)
 CFLAGS := -Wall -Wextra -Werror -ggdb $(INCLUDE)
@@ -26,7 +26,7 @@ MLX42_DIR := lib/MLX42
 MLX42_BUILD := lib/MLX42/build
 MLX :=	-L$(MLX42_BUILD) -lmlx42 -ldl -lglfw -pthread -lm
 
-UNAME := $(shell uname)
+# UNAME := $(shell uname)
 # ifeq ($(UNAME), Darwin)
 # 	MLX := -lmlx -framework OpenGL -framework AppKit
 # endif

@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:31:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/22 18:12:52 by albartol         ###   ########.fr       */
+/*   Updated: 2024/07/10 16:06:55 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	color_str_to_int(const char *color)
 	return (ft_atoi(color));
 }
 
-static int	validate_color_str(const char *color, int *final_color)
+static int	validate_color_str(const char *color, uint32_t *final_color)
 {
 	char	**color_array;
 	char	**temp;

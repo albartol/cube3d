@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/07/10 15:07:54 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/07/10 16:15:28 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@
 # include <math.h>
 
 // all functions
-# include "../lib/MLX42/include/MLX42/MLX42.h"
+# include <MLX42.h>
 
-# include "../lib/libft/include/libft.h"
+# include <libft.h>
 
-# include "utils.h"
+# include <utils.h>
 
 # define MAX_LINES SHRT_MAX
 
@@ -52,47 +52,15 @@
 # define PURPLE "\033[0;35m"
 # define YELLOW "\033[0;93m"
 # define RESET "\033[0m"
-# define P_SIZE 64
-# define SPEED 10
+// # define P_SIZE 64
+// # define SPEED 10
 
 # define PLAYER_COL YELLOW
 # define WALL_COL GREEN
 
-enum e_keys
-{
-	UP = 126,
-	DOWN = 125,
-	RIGHT = 124,
-	LEFT = 123,
-	W_UP = 119,
-	S_DOWN = 115,
-	D_RIGHT = 100,
-	A_LEFT = 97,
-	END = 53, // ???
-	Q_END = 113,
-	WSL_LEFT = 65361,
-	WSL_UP = 65362,
-	WSL_RIGTH = 65363,
-	WSL_DOWN = 65364,
-	WSL_END = 65307
-};
-
-enum e_events
-{
-	ON_KEYDOWN = 2,
-	ON_KEYUP = 3,
-	ON_MOUSEDOWN = 4,
-	ON_MOUSEUP = 5,
-	ON_MOUSEMOVE = 6,
-	ON_EXPOSE = 12,
-	ON_DESTROY = 17
-};
-
 typedef struct s_game		t_game;
 typedef struct s_scene		t_scene;
-typedef struct s_textures	t_textures;
 typedef struct s_scene_file	t_scene_file;
-typedef struct s_image		t_image;
 typedef struct s_display	t_display;
 
 struct s_scene_file
@@ -107,39 +75,22 @@ struct s_scene_file
 	char	**map;
 };
 
-struct s_image
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	int		width;
-	int		height;
-};
-
-struct s_textures
-{
-	t_image	north_texture;
-	t_image	south_texture;
-	t_image	west_texture;
-	t_image	east_texture;
-};
-
 struct s_scene
 {
-	t_textures	textures;
-	int			floor_color;
-	int			celling_color;
+	mlx_texture_t	*north_texture;
+	mlx_texture_t	*south_texture;
+	mlx_texture_t	*west_texture;
+	mlx_texture_t	*east_texture;
+	uint32_t		floor_color;
+	uint32_t		celling_color;
 };
 
 struct s_display
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_image	frames[3];
-	int		width;
-	int		height;
+	mlx_t		*mlx;
+	mlx_image_t	*frames[2];
+	int32_t		width;
+	int32_t		height;
 };
 
 struct s_game
@@ -157,7 +108,6 @@ int		check_scene_info(t_scene_file *scene_info, t_scene *scene);
 void	free_scene_info(t_scene_file *info);
 
 //Grafics part
+int		start_grafics(t_game *data);
 
-int init_images(t_game *data);
-int start_grafics(t_game *data);
 #endif
