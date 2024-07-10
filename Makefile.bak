@@ -12,7 +12,7 @@
 
 CC := cc
 
-INCLUDE := -Iinclude -Ilib/libft -Ilib/MLX42/include/MLX42
+INCLUDE := -Iinclude
 
 # CFLAGS := -Wall -Wextra -Werror -O2 $(INCLUDE)
 CFLAGS := -Wall -Wextra -Werror -ggdb $(INCLUDE)
@@ -21,17 +21,18 @@ LIBFT := lib/libft/libft.a
 LIBFT_DIR := lib/libft
 FT := -L$(LIBFT_DIR) -lft
 
-MLX42 :=	lib/MLX42/build/libmlx42.a
-MLX42_DIR := lib/MLX42
-MLX42_BUILD := lib/MLX42/bulid
-MLX :=	-L$(MLX42_BUILD) -lmlx42 -ldl -lglfw -pthread -lm
+MINILIBX :=	lib/minilibx-linux/libmlx.a
+MINILIBX_DIR := lib/minilibx-linux
+MLX :=	-L$(MINILIBX_DIR) -lmlx -lXext -lX11
+
+MATH := -lm
 
 UNAME := $(shell uname)
 ifeq ($(UNAME), Darwin)
 	MLX := -lmlx -framework OpenGL -framework AppKit
 endif
 
-LIBS := $(FT) $(MLX)
+LIBS := $(MATH) $(FT) $(MLX)
 
 SRC_DIR	:= src
 OBJ_DIR	:= obj
@@ -89,13 +90,13 @@ BONUS := cube3D_bonus
 
 all: $(OBJ_DIR) $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT) $(MLX42)
+$(NAME): $(OBJS) $(LIBFT) $(MINILIBX)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $@
 	@echo "$(GREEN)Program $(NAME) created ✅$(RESET)"
 
 bonus: $(OBJ_DIR) $(BONUS)
 
-$(BONUS): $(BNS_OBJS) $(LIBFT) $(MLX42)
+$(BONUS): $(BNS_OBJS) $(LIBFT) $(MINILIBX)
 	$(CC) $(CFLAGS) $(BNS_OBJS) $(LIBS) -o $@
 	@echo "$(GREEN)Program $(BONUS) created ✅$(RESET)"
 
@@ -111,14 +112,13 @@ $(LIBFT):
 	@echo "$(YELLOW)Compiling libft...$(RESET)"
 	$(MAKE) -j -C $(LIBFT_DIR)
 
-$(MLX42):
-	@echo "$(YELLOW)Compiling MLX42...$(RESET)"
-	cmake -S $(MLX42_DIR) -B $(MLX42_BUILD)
-	$(MAKE) -j -C $(MLX42_BUILD)
+$(MINILIBX):
+	@echo "$(YELLOW)Compiling minilibx-linux...$(RESET)"
+	$(MAKE) -j -C $(MINILIBX_DIR)
 
 clean:
 	$(MAKE) fclean -C $(LIBFT_DIR)
-	$(MAKE) clean -C $(MLX42_BUILD)
+	$(MAKE) clean -C $(MINILIBX_DIR)
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
