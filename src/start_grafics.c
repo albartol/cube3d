@@ -15,5 +15,9 @@
 int start_grafics(t_game *data)
 {
 	(void)data;
+	// mlx_t	*mlx;
+	// mlx = mlx_init(400, 400, "Cube 3d", false);
+
+	// mlx_loop(mlx);
 	return (EXIT_SUCCESS);
 }

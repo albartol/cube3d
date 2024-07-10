@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/07/09 18:41:05 by albartol         ###   ########.fr       */
+/*   Updated: 2024/07/10 15:07:54 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # include <math.h>
 
 // all functions
-# include "../lib/minilibx-linux/mlx.h"
+# include "../lib/MLX42/include/MLX42/MLX42.h"
 
 # include "../lib/libft/include/libft.h"
 

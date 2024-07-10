@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: albartol <albartol@student.42.fr>          +#+  +:+       +#+         #
+#    By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/07/03 23:22:52 by albartol         ###   ########.fr        #
+#    Updated: 2024/07/10 15:13:13 by fabriciolop      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,13 +23,13 @@ FT := -L$(LIBFT_DIR) -lft
 
 MLX42 :=	lib/MLX42/build/libmlx42.a
 MLX42_DIR := lib/MLX42
-MLX42_BUILD := lib/MLX42/bulid
+MLX42_BUILD := lib/MLX42/build
 MLX :=	-L$(MLX42_BUILD) -lmlx42 -ldl -lglfw -pthread -lm
 
 UNAME := $(shell uname)
-ifeq ($(UNAME), Darwin)
-	MLX := -lmlx -framework OpenGL -framework AppKit
-endif
+# ifeq ($(UNAME), Darwin)
+# 	MLX := -lmlx -framework OpenGL -framework AppKit
+# endif
 
 LIBS := $(FT) $(MLX)
 
