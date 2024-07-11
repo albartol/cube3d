@@ -5,6 +5,6 @@ cube3D_bonus
 *.sw*
 *.o
 *.a
-*.txt
+# *.txt
 *.sh
 build
