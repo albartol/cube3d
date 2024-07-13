@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:31:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/07/13 16:11:19 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/07/13 16:21:08 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	check_inside_walls(char **map, size_t x, size_t y)
 	return (EXIT_SUCCESS);
 }
 
-static int	check_value(char **map, size_t x, size_t y)
+static int	check_value(char **map, size_t x, size_t y, t_scene *scene)
 {
 	static int	cant_player;
 
@@ -37,6 +37,8 @@ static int	check_value(char **map, size_t x, size_t y)
 	{
 		if (cant_player > 0)
 			return (exit_msg("Too many players\n", EXIT_FAILURE));
+		scene->player_x = x;
+		scene->player_y = y;
 		cant_player++;
 		if (check_inside_walls(map, x, y))
 			return (exit_msg("Player position not valid\n", EXIT_FAILURE));
@@ -68,7 +70,7 @@ int	check_map(char **map,  t_scene *scene)
 		{
 			if (x > max_x)
 				max_x = x;
-			if (check_value(map, x, y))
+			if (check_value(map, x, y, scene))
 				return (EXIT_FAILURE);
 			x++;
 		}

@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/07/13 15:55:48 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/07/13 19:28:35 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ struct s_scene
 	uint32_t		celling_color;
 	size_t			map_width;
 	size_t			map_height;
+	size_t			player_x;
+	size_t			player_y;
 };
 
 struct s_display
@@ -114,5 +116,9 @@ void	free_scene_info(t_scene_file *info);
 
 //Grafics part
 int		start_grafics(t_game *data);
+// int		put_map(char **map, t_display *display);
+int		put_map(char **map, t_display *display, mlx_image_t	*wall);
+void	fill_color(mlx_image_t *img, uint32_t r, uint32_t g, uint32_t b, uint32_t t);
+
 
 #endif
