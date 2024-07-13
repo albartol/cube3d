@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:18 by albartol          #+#    #+#             */
-/*   Updated: 2024/07/10 16:15:01 by albartol         ###   ########.fr       */
+/*   Updated: 2024/07/13 19:44:26 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ void	game_data_init(t_game *data)
 	data->scene.south_texture = NULL;
 	data->scene.east_texture = NULL;
 	data->scene.west_texture = NULL;
+	data->display.grafics.player = NULL;
+	data->display.grafics.wall = NULL;
 }
 
 int	main(int argc, char **argv)
