@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/07/11 12:12:13 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/07/13 14:44:54 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC := cc
 INCLUDE := -Iinclude -Ilib/libft/include -Ilib/MLX42/include/MLX42
 
 # CFLAGS := -Wall -Wextra -Werror -O2 $(INCLUDE)
-CFLAGS := -Wall -Wextra -Werror -ggdb $(INCLUDE) #-fsanitize=address
+CFLAGS := -Wall -Wextra -Werror -ggdb $(INCLUDE) -fsanitize=address
 
 LIBFT := lib/libft/libft.a
 LIBFT_DIR := lib/libft
@@ -118,8 +118,13 @@ $(MLX42):
 
 clean:
 	$(MAKE) fclean -C $(LIBFT_DIR)
-	$(MAKE) clean -C $(MLX42_BUILD)
+	rm -rf $(MLX42_BUILD)
 	rm -rf $(OBJ_DIR)
+
+# clean:
+# 	$(MAKE) fclean -C $(LIBFT_DIR)
+# 	# $(MAKE) clean -C $(MLX42_BUILD)
+# 	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -f $(NAME) $(BONUS)

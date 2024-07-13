@@ -3,70 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:31:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/07/03 21:29:28 by albartol         ###   ########.fr       */
+/*   Updated: 2024/07/13 16:11:19 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <check_scene.h>
 #include <cube3d.h>
 
-
-
-// size_t len_to_char(char *str, char *chars)
-// {
-// 	size_t i;
-
-// 	i = 0;
-// 	if (!str)
-// 		return (0);
-// 	while (str[i] && !ft_strchr(chars, str[i]))
-// 		i++;
-// 	return (i);
-// }
-
-// int check_up_down(char **map, size_t y)
-// {
-// 	size_t	up_len;
-// 	size_t	actual_len;
-// 	size_t	down_len;
-
-// 	actual_len = len_to_char(map[y], "NSWE");
-// 	if (y > 0)
-// 	{
-// 		up_len = ft_strlen(map[y - 1]);
-// 		if (up_len < actual_len)
-// 			return (EXIT_FAILURE);
-// 	}
-// 	if (map[y + 1])
-// 	{
-// 		down_len = ft_strlen(map[y + 1]);
-// 		if (actual_len > down_len)
-// 		return (EXIT_FAILURE);
-// 	}
-// 	return (EXIT_SUCCESS);
-// }
-
-// static int	check_inside_walls(char **map, size_t x, size_t y)
-// {
-
-// 	if (ft_strchr("NSWE", map[y][x]))
-// 	{
-// 		if (check_up_down(map, y)) // If you answer: Why did my parner do this??? try discoment the below function (before parser)  and run test.cub
-// 			return (EXIT_FAILURE);
-// 	}
-// 	if (y == 0 || map[y - 1][x] == SPACE) // UP
-// 			return (EXIT_FAILURE);
-// 	if (!map[y + 1] || map[y + 1][x] == SPACE) // DOWN
-// 		return (EXIT_FAILURE);
-// 	if (x == 0 || map[y][x - 1] == SPACE) // LEFT
-// 		return (EXIT_FAILURE);
-// 	if (!map[y][x + 1] || map[y][x + 1] == SPACE) // RIGHT
-// 		return (EXIT_FAILURE);
-// 	return (EXIT_SUCCESS);
-// }
 
 static int	check_inside_walls(char **map, size_t x, size_t y)
 {
@@ -105,12 +51,14 @@ static int	check_value(char **map, size_t x, size_t y)
 	return (EXIT_SUCCESS);
 }
 
-int	check_map(char **map)
+int	check_map(char **map,  t_scene *scene)
 {
 	size_t	y;
 	size_t	x;
+	size_t	max_x;
 
 	y = 0;
+	max_x = 0;
 	while (map[y])
 	{
 		x = 0;
@@ -118,11 +66,15 @@ int	check_map(char **map)
 			return (exit_msg("Invalid map\n", EXIT_FAILURE));
 		while (map[y][x])
 		{
+			if (x > max_x)
+				max_x = x;
 			if (check_value(map, x, y))
 				return (EXIT_FAILURE);
 			x++;
 		}
 		y++;
 	}
+	scene->map_height = y;
+	scene->map_width = max_x + 1;
 	return (EXIT_SUCCESS);
 }
