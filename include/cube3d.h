@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/07/13 19:57:37 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/07/14 16:24:55 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@
 # define RESET "\033[0m"
 # define P_SIZE 64
 # define SPEED 10
+# define VISIBILITY 100
 
 # define PLAYER_COL YELLOW
 # define WALL_COL GREEN
@@ -97,6 +98,7 @@ struct s_grafics
 {
 	mlx_image_t	*wall;
 	mlx_image_t	*player;
+	mlx_image_t	*line_ray;
 };
 
 struct s_display
@@ -125,6 +127,7 @@ void	free_scene_info(t_scene_file *info);
 //Grafics part
 int		start_grafics(t_game *data);
 // int		put_map(char **map, t_display *display);
+// int		draw_line(t_game *data, size_t x1, size_t y1, size_t x2, size_t y2);
 int		put_map(char **map, t_display *display, mlx_image_t	*wall);
 void	fill_color(mlx_image_t *img, uint32_t r, uint32_t g, uint32_t b, uint32_t t);
 

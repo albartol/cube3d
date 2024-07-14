@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:18 by albartol          #+#    #+#             */
-/*   Updated: 2024/07/13 19:44:26 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/07/14 16:24:51 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,11 @@ void	game_data_init(t_game *data)
 	data->scene.south_texture = NULL;
 	data->scene.east_texture = NULL;
 	data->scene.west_texture = NULL;
+	data->scene.player_x = 0;
+	data->scene.player_y = 0;
 	data->display.grafics.player = NULL;
 	data->display.grafics.wall = NULL;
+	data->display.grafics.line_ray = NULL;
 }
 
 int	main(int argc, char **argv)
