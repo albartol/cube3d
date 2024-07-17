@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/07/14 16:24:55 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/07/17 17:58:54 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@
 # define RESET "\033[0m"
 # define P_SIZE 64
 # define SPEED 10
+# define R_SPEED 0.5
 # define VISIBILITY 100
 
 # define PLAYER_COL YELLOW
@@ -96,8 +97,8 @@ struct s_scene
 
 struct s_grafics
 {
-	mlx_image_t	*wall;
 	mlx_image_t	*player;
+	mlx_image_t	*wall;
 	mlx_image_t	*line_ray;
 };
 
@@ -109,6 +110,16 @@ struct s_display
 	int32_t		height;
 	t_grafics	grafics;
 };
+
+typedef struct	s_player
+{
+	mlx_t		*mlx;
+	mlx_image_t	*player;
+	size_t		x;
+	size_t		y;
+	float		angle;
+}		t_player;
+
 
 struct s_game
 {
