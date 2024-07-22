@@ -6,37 +6,17 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:44:53 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/07/14 16:39:48 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/07/22 15:53:36 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cube3d.h>
-
-// void	key_functions(mlx_key_data_t keydata, void *param)
-// {
-// 	t_game	*data;
-
-// 	data = (t_game *)param;
-// 	if (keydata.key == MLX_KEY_ESCAPE)
-// 		mlx_close_window(data->display.mlx);
-// 	if (keydata.key == MLX_KEY_W)
-// 		data->display.grafics.player->instances[0].y -= SPEED;
-// 	if (keydata.key == MLX_KEY_S)
-// 		data->display.grafics.player->instances[0].y += SPEED;
-// 	if (keydata.key == MLX_KEY_A)
-// 		data->display.grafics.player->instances[0].x -= SPEED;
-// 	if (keydata.key == MLX_KEY_D)
-// 		data->display.grafics.player->instances[0].x += SPEED;
-// }
-
-void	rotate_key_functions(void *param)
+void	print_pos(t_game *data)
 {
-	t_game	*data;
-
-	data = (t_game *)param;
-	if (mlx_is_key_down(data->display.mlx, MLX_KEY_LEFT))
-		printf("izquierdaaa\n");
-	
+	printf("=============================\n");
+	printf("Player pos (window)--> (%d, %d)\n", data->display.grafics.player->instances[0].x, data->display.grafics.player->instances[0].y);
+	printf("Player pos (  map )--> (%d, %d)\n", data->display.grafics.player->instances[0].x  / P_SIZE, data->display.grafics.player->instances[0].y  / P_SIZE);
+	printf("=============================\n");
 }
 
 void	wasd_key_functions(void *param)
@@ -49,34 +29,28 @@ void	wasd_key_functions(void *param)
 	if (mlx_is_key_down(data->display.mlx, MLX_KEY_W))
 	{
 		data->display.grafics.player->instances[0].y -= SPEED;
-		data->display.grafics.line_ray->instances[0].y -= SPEED;
+		print_pos(data);
 	}
 	if (mlx_is_key_down(data->display.mlx, MLX_KEY_S))
 	{
 		data->display.grafics.player->instances[0].y += SPEED;
-		data->display.grafics.line_ray->instances[0].y += SPEED;
+		print_pos(data);
 	}
 	if (mlx_is_key_down(data->display.mlx, MLX_KEY_A))
 	{
 		data->display.grafics.player->instances[0].x -= SPEED;
-		data->display.grafics.line_ray->instances[0].x -= SPEED;
+		print_pos(data);
 	}
 	if (mlx_is_key_down(data->display.mlx, MLX_KEY_D))
 	{
 		data->display.grafics.player->instances[0].x += SPEED;
-		data->display.grafics.line_ray->instances[0].x += SPEED;
+		print_pos(data);
 	}
+
 }
 
 int	put_player(t_game *data)
 {
-	// char	orientation;
-
-	// orientation = data->file.map[data->scene.player_y, data->scene.player_y];
-	// if (orientation == 'N')
-
-	if (mlx_image_to_window(data->display.mlx, data->display.grafics.line_ray, data->scene.player_x * P_SIZE, data->scene.player_y * P_SIZE) == -1)
-		return (EXIT_FAILURE);
 	if (mlx_image_to_window(data->display.mlx, data->display.grafics.player, data->scene.player_x * P_SIZE, data->scene.player_y * P_SIZE) == -1)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
@@ -86,32 +60,31 @@ int	init_images(t_game *data)
 {
 	data->display.grafics.wall = mlx_new_image(data->display.mlx, P_SIZE, P_SIZE);
 	data->display.grafics.player = mlx_new_image(data->display.mlx, 20, 20);
-	data->display.grafics.line_ray = mlx_new_image(data->display.mlx, 3, VISIBILITY);
 
-	if (!data->display.grafics.wall || !data->display.grafics.player || 
-		!data->display.grafics.line_ray )
+	if (!data->display.grafics.wall || !data->display.grafics.player)
 		return (exit_msg(mlx_strerror(mlx_errno), EXIT_FAILURE));
 	fill_color(data->display.grafics.wall, 255, 255, 255, 255);
 	fill_color(data->display.grafics.player, 30, 202, 75, 255);
-	fill_color(data->display.grafics.line_ray, 82, 255, 51, 255);
 	return (EXIT_SUCCESS);
 }
 
+void get_distance(void *param)
+{
+	t_game		*data;
+	mlx_image_t	* player;
+	size_t		distance;
+	int32_t		x;
+	int32_t		y;
 
-// void	draw_lines(void *param)
-// {
-// 	size_t	i;
-// 	t_game *data;
-
-// 	i = 0;
-// 	data = (t_game *)param;
-// 	while (i < VISIBILITY)
-// 	{
-// 		if (mlx_image_to_window(data->display.mlx, data->display.grafics.line_ray, data->display.grafics.player->instances[0].x, data->display.grafics.player->instances[0].y) == -1)
-// 			mlx_close_window(data->display.mlx);
-// 		i++;
-// 	}	
-// }
+	data = (t_game *)param;
+	player = data->display.grafics.player;
+	x = player->instances[0].x;
+	y = player->instances[0].y;
+	while (1)
+	{
+		if ()
+	}
+}
 
 int start_grafics(t_game *data)
 {
@@ -125,22 +98,12 @@ int start_grafics(t_game *data)
 		return (EXIT_FAILURE);
 	if (put_player(data))
 		return (EXIT_FAILURE);
-	// if (draw_lines(data, data->scene.player_x, data->scene.player_y, 1, 1))
-	// 	return (EXIT_FAILURE);
-		
 
-		
-	// mlx_key_hook(data->display.mlx, wasd_key_functions, data);
 	mlx_loop_hook(data->display.mlx, wasd_key_functions, data); // <--- Es mejor usar este
-	mlx_loop_hook(data->display.mlx, rotate_key_functions, data);
-	
+	mlx_loop_hook(data->display.mlx, get_distance, data);
+
 	mlx_loop(data->display.mlx);
 	mlx_terminate(data->display.mlx);
 	free_scene_info(&data->file);
 	return (EXIT_SUCCESS);
 }
-
-	// mlx_get_monitor_size(0, &data->display.width, &data->display.height);
-	// mlx_set_setting(MLX_FULLSCREEN, true);
-	// data->display.mlx = mlx_init(data->display.width, data->display.height,
-	// 	"cube3d", false);
