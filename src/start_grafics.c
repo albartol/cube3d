@@ -6,10 +6,12 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:44:53 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/07/17 18:04:48 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/07/22 17:17:05 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#define PI 3.1415926
+#define M_PI_2		1.57079632679489661923	
 #include <cube3d.h>
 
 // void	key_functions(mlx_key_data_t keydata, void *param)
@@ -67,6 +69,11 @@
 // 		data->display.grafics.line_ray->instances[0].x += SPEED;
 // 	}
 // }
+
+double c_radians(double angle)
+{
+	return ((angle * PI) / 180);
+}
 void	wasd_key_functions(void *param)
 {
 	t_player	*player;
@@ -76,32 +83,38 @@ void	wasd_key_functions(void *param)
 		mlx_close_window(player->mlx);
 
 	if (mlx_is_key_down(player->mlx, MLX_KEY_LEFT))
-		player->angle -= R_SPEED;
-	if (mlx_is_key_down(player->mlx, MLX_KEY_RIGHT))
+	{
 		player->angle += R_SPEED;
-
+		printf("Angulo --> %f\n", player->angle / (PI * 180));
+	}
+	if (mlx_is_key_down(player->mlx, MLX_KEY_RIGHT))
+	{
+		player->angle -= R_SPEED;
+		printf("Angulo --> %f\n", player->angle / (PI * 180));
+	}
+	
 
 	if (mlx_is_key_down(player->mlx, MLX_KEY_W)/*  || mlx_is_key_down(player->mlx, MLX_KEY_S) */)
 	{
-		player->x += cos(player->angle) * SPEED;
-		player->y += sin(player->angle) * SPEED;
+		player->x += cos(c_radians(player->angle)) * SPEED;
+		player->y += sin(c_radians(player->angle)) * SPEED;
 		// player->player->instances[0].x = ;
 		// player->player->instances[0].y = ;
 	}
 	if (mlx_is_key_down(player->mlx, MLX_KEY_S))
 	{
-		player->x -= cos(player->angle) * SPEED;
-		player->y -= sin(player->angle) * SPEED;
+		player->x -= cos(c_radians(player->angle)) * SPEED;
+		player->y -= sin(c_radians(player->angle)) * SPEED;
 	}
 	if (mlx_is_key_down(player->mlx, MLX_KEY_A))
 	{
-		player->x += cos(player->angle - M_PI_2) * SPEED;
-		player->y += sin(player->angle - M_PI_2) * SPEED;
+		player->x += cos(c_radians(player->angle) - M_PI_2) * SPEED;
+		player->y += sin(c_radians(player->angle) - M_PI_2) * SPEED;
 	}
 	if (mlx_is_key_down(player->mlx, MLX_KEY_D))
 	{
-		player->x += cos(player->angle + M_PI_2) * SPEED;
-		player->y += sin(player->angle + M_PI_2) * SPEED;
+		player->x += cos(c_radians(player->angle) + M_PI_2) * SPEED;
+		player->y += sin(c_radians(player->angle) + M_PI_2) * SPEED;
 	}
 	player->player->instances[0].x = player->x;
 	player->player->instances[0].y = player->y;
