@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:44:53 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/07/14 16:39:48 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/07/22 17:45:55 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,25 +47,13 @@ void	wasd_key_functions(void *param)
 	if (mlx_is_key_down(data->display.mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(data->display.mlx);
 	if (mlx_is_key_down(data->display.mlx, MLX_KEY_W))
-	{
 		data->display.grafics.player->instances[0].y -= SPEED;
-		data->display.grafics.line_ray->instances[0].y -= SPEED;
-	}
 	if (mlx_is_key_down(data->display.mlx, MLX_KEY_S))
-	{
 		data->display.grafics.player->instances[0].y += SPEED;
-		data->display.grafics.line_ray->instances[0].y += SPEED;
-	}
 	if (mlx_is_key_down(data->display.mlx, MLX_KEY_A))
-	{
 		data->display.grafics.player->instances[0].x -= SPEED;
-		data->display.grafics.line_ray->instances[0].x -= SPEED;
-	}
 	if (mlx_is_key_down(data->display.mlx, MLX_KEY_D))
-	{
 		data->display.grafics.player->instances[0].x += SPEED;
-		data->display.grafics.line_ray->instances[0].x += SPEED;
-	}
 }
 
 int	put_player(t_game *data)
@@ -74,9 +62,6 @@ int	put_player(t_game *data)
 
 	// orientation = data->file.map[data->scene.player_y, data->scene.player_y];
 	// if (orientation == 'N')
-
-	if (mlx_image_to_window(data->display.mlx, data->display.grafics.line_ray, data->scene.player_x * P_SIZE, data->scene.player_y * P_SIZE) == -1)
-		return (EXIT_FAILURE);
 	if (mlx_image_to_window(data->display.mlx, data->display.grafics.player, data->scene.player_x * P_SIZE, data->scene.player_y * P_SIZE) == -1)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
@@ -86,14 +71,11 @@ int	init_images(t_game *data)
 {
 	data->display.grafics.wall = mlx_new_image(data->display.mlx, P_SIZE, P_SIZE);
 	data->display.grafics.player = mlx_new_image(data->display.mlx, 20, 20);
-	data->display.grafics.line_ray = mlx_new_image(data->display.mlx, 3, VISIBILITY);
 
-	if (!data->display.grafics.wall || !data->display.grafics.player || 
-		!data->display.grafics.line_ray )
+	if (!data->display.grafics.wall || !data->display.grafics.player)
 		return (exit_msg(mlx_strerror(mlx_errno), EXIT_FAILURE));
 	fill_color(data->display.grafics.wall, 255, 255, 255, 255);
 	fill_color(data->display.grafics.player, 30, 202, 75, 255);
-	fill_color(data->display.grafics.line_ray, 82, 255, 51, 255);
 	return (EXIT_SUCCESS);
 }
 
