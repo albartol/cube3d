@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/07/29 17:08:27 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/07/29 17:36:09 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,12 @@
 # define YELLOW "\033[0;93m"
 # define RESET "\033[0m"
 # define P_SIZE 64
-# define SPEED 5
+# define SPEED 6
 # define VISIBILITY 100
 
+#define PI 3.1415926
+#define INIT_ANGLE 90
+#define ROTATION_SPEED 10
 # define PLAYER_COL YELLOW
 # define WALL_COL GREEN
 
@@ -117,6 +120,17 @@ struct s_game
 	t_display		display;
 };
 
+typedef	struct s_player
+{
+	mlx_t	*mlx;
+	float	x;
+	float	y;
+	float	angle;
+	float	rotation;
+	mlx_image_t	*img;
+}	t_player;
+
+
 int		read_scene_file(t_scene_file *scene_info, const char *file_path);
 int		extract_scene_info(t_scene_file *scene_info);
 int		check_scene_info(t_scene_file *scene_info, t_scene *scene);
@@ -126,6 +140,7 @@ void	free_scene_info(t_scene_file *info);
 
 //Grafics part
 int		start_grafics(t_game *data);
+void	movement(void *param);
 // int		put_map(char **map, t_display *display);
 // int		draw_line(t_game *data, size_t x1, size_t y1, size_t x2, size_t y2);
 int		put_map(char **map, t_display *display, mlx_image_t	*wall);
