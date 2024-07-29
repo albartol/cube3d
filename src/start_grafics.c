@@ -6,54 +6,30 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:44:53 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/07/22 15:53:36 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/07/29 16:21:34 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cube3d.h>
+#define PI 3.1415926
+#define INIT_ANGLE 60
+#define ROTATION_SPEED 0.5
+typedef	struct s_player
+{
+	mlx_t	*mlx;
+	float	x;
+	float	y;
+	float	angle;
+	float	rotation;
+	mlx_image_t	*img;
+}	t_player;
+
 void	print_pos(t_game *data)
 {
 	printf("=============================\n");
 	printf("Player pos (window)--> (%d, %d)\n", data->display.grafics.player->instances[0].x, data->display.grafics.player->instances[0].y);
 	printf("Player pos (  map )--> (%d, %d)\n", data->display.grafics.player->instances[0].x  / P_SIZE, data->display.grafics.player->instances[0].y  / P_SIZE);
 	printf("=============================\n");
-}
-
-void	wasd_key_functions(void *param)
-{
-	t_game	*data;
-
-	data = (t_game *)param;
-	if (mlx_is_key_down(data->display.mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(data->display.mlx);
-	if (mlx_is_key_down(data->display.mlx, MLX_KEY_W))
-	{
-		data->display.grafics.player->instances[0].y -= SPEED;
-		print_pos(data);
-	}
-	if (mlx_is_key_down(data->display.mlx, MLX_KEY_S))
-	{
-		data->display.grafics.player->instances[0].y += SPEED;
-		print_pos(data);
-	}
-	if (mlx_is_key_down(data->display.mlx, MLX_KEY_A))
-	{
-		data->display.grafics.player->instances[0].x -= SPEED;
-		print_pos(data);
-	}
-	if (mlx_is_key_down(data->display.mlx, MLX_KEY_D))
-	{
-		data->display.grafics.player->instances[0].x += SPEED;
-		print_pos(data);
-	}
-
-}
-
-int	put_player(t_game *data)
-{
-	if (mlx_image_to_window(data->display.mlx, data->display.grafics.player, data->scene.player_x * P_SIZE, data->scene.player_y * P_SIZE) == -1)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
 }
 
 int	init_images(t_game *data)
@@ -68,26 +44,80 @@ int	init_images(t_game *data)
 	return (EXIT_SUCCESS);
 }
 
-void get_distance(void *param)
+float	transform_angle(float angle)
 {
-	t_game		*data;
-	mlx_image_t	* player;
-	size_t		distance;
-	int32_t		x;
-	int32_t		y;
+	if (angle > 360)
+		return (angle - 360);
+	if (angle < 0)
+		return (angle + 360);
+	return (angle);
+}
 
-	data = (t_game *)param;
-	player = data->display.grafics.player;
-	x = player->instances[0].x;
-	y = player->instances[0].y;
-	while (1)
+float	convert_to_radian(int number)
+{
+	return ((number * PI) / 180);
+}
+
+void	wasd_key_functions(void *param)
+{
+	t_player *player;
+
+	player = (t_player *)param;
+	if (mlx_is_key_down(player->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(player->mlx);
+	//LEFT AND RIGHT
+	if (mlx_is_key_down(player->mlx, MLX_KEY_LEFT))
+		player->angle = transform_angle(player->angle - ROTATION_SPEED);
+	if (mlx_is_key_down(player->mlx, MLX_KEY_RIGHT))
+		player->angle = transform_angle(player->angle + ROTATION_SPEED);
+	//WASD
+	if (mlx_is_key_down(player->mlx, MLX_KEY_W))
 	{
-		if ()
+		player->x += cos(player->angle) * SPEED;
+		player->y -= sin(player->angle) * SPEED;
 	}
+	if (mlx_is_key_down(player->mlx, MLX_KEY_S))
+	{
+		player->x -= cos(player->angle) * SPEED;
+		player->y += sin(player->angle) * SPEED;
+	}
+	if (mlx_is_key_down(player->mlx, MLX_KEY_A))
+	{
+		player->x -= sin(player->angle) * SPEED;
+		player->y -= cos(player->angle) * SPEED;
+	}
+	if (mlx_is_key_down(player->mlx, MLX_KEY_D))
+	{
+		player->x += sin(player->angle) * SPEED;
+		player->y += cos(player->angle) * SPEED;
+	}
+	printf("Pos (%f, %f) --> %f \n", player->x, player->y, (player->angle * 180) / PI);
+	player->img->instances[0].x = player->x;
+	player->img->instances[0].y = player->y;
+}
+
+
+void init_player(t_player *player, t_game *data)
+{
+	player->mlx = data->display.mlx;
+	player->angle = convert_to_radian(INIT_ANGLE);
+	player->rotation = 0.5;
+	player->x = data->scene.player_x;
+	player->y = data->scene.player_y;
+	player->img = data->display.grafics.player;
+}
+
+int	put_player(t_player *player)
+{
+	if (mlx_image_to_window(player->mlx, player->img, player->x * P_SIZE, player->y * P_SIZE) == -1)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 int start_grafics(t_game *data)
 {
+	t_player	player;
+
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	data->display.mlx = mlx_init(data->scene.map_width * P_SIZE, data->scene.map_height * P_SIZE, "cube3d", true);
 	if (!data->display.mlx)
@@ -96,12 +126,15 @@ int start_grafics(t_game *data)
 		return (EXIT_FAILURE);
 	if (put_map(data->file.map, &data->display, data->display.grafics.wall))
 		return (EXIT_FAILURE);
-	if (put_player(data))
+	
+	init_player(&player, data);
+	
+	if (put_player(&player))
 		return (EXIT_FAILURE);
-
-	mlx_loop_hook(data->display.mlx, wasd_key_functions, data); // <--- Es mejor usar este
-	mlx_loop_hook(data->display.mlx, get_distance, data);
-
+	
+	mlx_loop_hook(data->display.mlx, wasd_key_functions, &player); // <--- Es mejor usar este
+	// mlx_loop_hook(data->display.mlx, get_distance, data);
+	
 	mlx_loop(data->display.mlx);
 	mlx_terminate(data->display.mlx);
 	free_scene_info(&data->file);
