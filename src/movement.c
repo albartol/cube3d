@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:14:48 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/07/29 17:17:17 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/07/29 18:30:39 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,51 @@ float	convert_to_radian(float number)
 	return (number * (PI / 180));
 }
 
+/* 
+Holaaa, este es un sistema de colisiones provisional (como el so_long)
+Tenemos el mismo problema con las colisiones que en tu versión anterior del
+ray casting (atraviesa esquinas) --> podemos hacer las colisiones tomando
+la distancia en la que se encuentra el jugador respecto a las paredes en lugar
+de hacerlo con el mapa
+Ej:
+	P --------------------------> WALL | Distancia = 20 (puede avanzar)
+	        P ------------------> WALL | Distancia = 15 (puede avanzar)
+	                 P ---------> WALL | Distancia = 8  (puede avanzar)
+	                     P -----> WALL | Distancia = 5  (puede avanzar) 
+	                          P > WALL | Distancia = 0  (no puede avanzar, se detecta colisión)
+:D
+o....
+Podríamos agarrarnos el width y height del mapa y controlar los segfaults
+(aunque creo que es mejor hacerlo de la 2da manera (distancias) como dijimos desde el principio)
+
+Edit:
+	le agregué un map[y][x] == 0 y al parecer ahora funciona....
+ */
+int	checker(int x, int y, char **map)
+{
+	printf("bef --> (%d, %d)\n", x, y);
+	y /= P_SIZE;
+	x /= P_SIZE;
+	printf("Aft --> (%d, %d)\n", x, y);
+	if (x < 0 || y < 0)
+		return (EXIT_FAILURE);
+	if (map[y][x] == 0 || map[y][x] == '1')
+	{
+		printf("Soy una pared\n");
+		return (EXIT_FAILURE);
+	}
+	return(EXIT_SUCCESS);
+}
+
 void	movement(void *param)
 {
-	t_player *player;
+	t_player	*player;
+	float		x;
+	float		y;
 
 	player = (t_player *)param;
+	x = player->x;
+	y = player->y;
 	if (mlx_is_key_down(player->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(player->mlx);
 	//LEFT AND RIGHT
@@ -41,24 +81,28 @@ void	movement(void *param)
 	//WASD
 	if (mlx_is_key_down(player->mlx, MLX_KEY_W))
 	{
-		player->x += cos(convert_to_radian(player->angle)) * SPEED;
-		player->y -= sin(convert_to_radian(player->angle)) * SPEED;
+		x += cos(convert_to_radian(player->angle)) * SPEED;
+		y -= sin(convert_to_radian(player->angle)) * SPEED;
 	}
 	if (mlx_is_key_down(player->mlx, MLX_KEY_S))
 	{
-		player->x -= cos(convert_to_radian(player->angle)) * SPEED;
-		player->y += sin(convert_to_radian(player->angle)) * SPEED;
+		x -= cos(convert_to_radian(player->angle)) * SPEED;
+		y += sin(convert_to_radian(player->angle)) * SPEED;
 	}
 	if (mlx_is_key_down(player->mlx, MLX_KEY_A))
 	{
-		player->x -= sin(convert_to_radian(player->angle)) * SPEED;
-		player->y -= cos(convert_to_radian(player->angle)) * SPEED;
+		x -= sin(convert_to_radian(player->angle)) * SPEED;
+		y -= cos(convert_to_radian(player->angle)) * SPEED;
 	}
 	if (mlx_is_key_down(player->mlx, MLX_KEY_D))
 	{
-		player->x += sin(convert_to_radian(player->angle)) * SPEED;
-		player->y += cos(convert_to_radian(player->angle)) * SPEED;
+		x += sin(convert_to_radian(player->angle)) * SPEED;
+		y += cos(convert_to_radian(player->angle)) * SPEED;
 	}
+	if (checker(x, y, player->map))
+		return ;
+	player->x = x;
+	player->y = y;
 	player->img->instances[0].x = player->x;
 	player->img->instances[0].y = player->y;
 }

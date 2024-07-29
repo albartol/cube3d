@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/07/29 17:36:09 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/07/29 18:02:30 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ typedef	struct s_player
 	float	y;
 	float	angle;
 	float	rotation;
+	char	**map;
 	mlx_image_t	*img;
 }	t_player;
 

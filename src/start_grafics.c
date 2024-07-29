@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:44:53 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/07/29 17:37:03 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/07/29 18:18:05 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,10 @@ void init_player(t_player *player, t_game *data)
 	player->mlx = data->display.mlx;
 	player->angle = INIT_ANGLE;
 	player->rotation = 0.5;
-	player->x = data->scene.player_x;
-	player->y = data->scene.player_y;
+	player->x = data->scene.player_x * P_SIZE;
+	player->y = data->scene.player_y * P_SIZE;
 	player->img = data->display.grafics.player;
+	player->map = data->file.map;
 }
 
 int start_grafics(t_game *data)
