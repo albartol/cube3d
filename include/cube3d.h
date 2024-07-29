@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/07/14 16:24:55 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/07/29 17:08:27 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@
 # define YELLOW "\033[0;93m"
 # define RESET "\033[0m"
 # define P_SIZE 64
-# define SPEED 10
+# define SPEED 5
 # define VISIBILITY 100
 
 # define PLAYER_COL YELLOW
