@@ -6,19 +6,11 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:44:53 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/07/29 18:18:05 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/07/30 17:13:57 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cube3d.h>
-
-// void	print_pos(t_game *data)
-// {
-// 	printf("=============================\n");
-// 	printf("Player pos (window)--> (%d, %d)\n", data->display.grafics.player->instances[0].x, data->display.grafics.player->instances[0].y);
-// 	printf("Player pos (  map )--> (%d, %d)\n", data->display.grafics.player->instances[0].x  / P_SIZE, data->display.grafics.player->instances[0].y  / P_SIZE);
-// 	printf("=============================\n");
-// }
 
 int	init_images(t_display *display)
 {
@@ -43,6 +35,25 @@ void init_player(t_player *player, t_game *data)
 	player->map = data->file.map;
 }
 
+
+void	print_pos(t_player *player)
+{
+	printf("=============================\n");
+	printf("Player pos (window)--> (%d, %d)\n", player->img->instances[0].x, player->img->instances[0].y);
+	printf("Player pos (  map )--> (%d, %d)\n", player->img->instances[0].x / P_SIZE, player->img->instances[0].y / P_SIZE);
+	printf("=============================\n");
+}
+void	get_distance(void *param)
+{
+	t_player	*player;
+	// float		distance;
+
+	player = (t_player *)param;
+	print_pos(player);
+
+	
+}
+
 int start_grafics(t_game *data)
 {
 	t_player	player;
@@ -63,6 +74,7 @@ int start_grafics(t_game *data)
 		return (EXIT_FAILURE);
 
 	mlx_loop_hook(data->display.mlx, movement, &player);
+	mlx_loop_hook(data->display.mlx, get_distance, &player);
 	mlx_loop(data->display.mlx);
 	mlx_terminate(data->display.mlx);
 	free_scene_info(&data->file);

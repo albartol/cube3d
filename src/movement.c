@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:14:48 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/07/29 18:30:39 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/07/30 16:30:46 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ Edit:
  */
 int	checker(int x, int y, char **map)
 {
-	printf("bef --> (%d, %d)\n", x, y);
+	// printf("bef --> (%d, %d)\n", x, y);
 	y /= P_SIZE;
 	x /= P_SIZE;
-	printf("Aft --> (%d, %d)\n", x, y);
+	// printf("Aft --> (%d, %d)\n", x, y);
 	if (x < 0 || y < 0)
 		return (EXIT_FAILURE);
 	if (map[y][x] == 0 || map[y][x] == '1')
