@@ -6,12 +6,20 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 15:34:41 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/07/14 16:08:46 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/07/31 17:41:03 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cube3d.h>
 
+/* 
+I need to implement the DDA or Bresenham Algorithm 
+DDA:
+	https://www.youtube.com/watch?v=W5P8GlaEOSI
+	https://www.youtube.com/watch?v=Q3qNXaIMIlY
+BRESENHAM:
+	https://www.youtube.com/watch?v=RGB-wlatStc
+ */
 int draw_line(t_game *data, size_t x1, size_t y1, size_t x2, size_t y2)
 {
 	size_t	i;
