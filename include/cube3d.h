@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/07/29 18:02:30 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/07/31 16:32:07 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ void	free_scene_info(t_scene_file *info);
 //Grafics part
 int		start_grafics(t_game *data);
 void	movement(void *param);
+float	convert_to_radian(float number);
 // int		put_map(char **map, t_display *display);
 // int		draw_line(t_game *data, size_t x1, size_t y1, size_t x2, size_t y2);
 int		put_map(char **map, t_display *display, mlx_image_t	*wall);

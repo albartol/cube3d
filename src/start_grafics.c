@@ -6,11 +6,13 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:44:53 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/07/30 17:13:57 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/07/31 16:33:17 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cube3d.h>
+
+#define LINE_SPEED 1
 
 int	init_images(t_display *display)
 {
@@ -43,15 +45,49 @@ void	print_pos(t_player *player)
 	printf("Player pos (  map )--> (%d, %d)\n", player->img->instances[0].x / P_SIZE, player->img->instances[0].y / P_SIZE);
 	printf("=============================\n");
 }
+
+double	calculate_distance(t_player *player, int x2, int y2)
+{
+	double	distance;
+	int		x1;
+	int		y1;
+
+	x1 = player->img->instances[0].x;
+	y1 = player->img->instances[0].y;
+	distance = sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+	if (distance < 0)
+		distance *= -1;
+	return (distance);
+}
+
 void	get_distance(void *param)
 {
 	t_player	*player;
-	// float		distance;
+	float		distance;
+	int			x2;
+	int			y2;
 
 	player = (t_player *)param;
+	distance = 0;
+	x2 = player->img->instances[0].x;
+	y2 = player->img->instances[0].y;
+	while (1)
+	{
+		if (player->map[y2 / P_SIZE][x2 / P_SIZE] == '1')
+			return ((void)printf("Distance --> %f\n", calculate_distance(player, x2, y2)));
+		x2 += cos(convert_to_radian(player->angle)) * LINE_SPEED;
+		y2 -= sin(convert_to_radian(player->angle)) * LINE_SPEED;
+	}
+	player = (t_player *)param;
 	print_pos(player);
+}
 
-	
+void	draw_escene(void *param)
+{
+	t_player *player;
+
+	player = (t_player *)param;
+	get_distance(player);
 }
 
 int start_grafics(t_game *data)
@@ -74,7 +110,7 @@ int start_grafics(t_game *data)
 		return (EXIT_FAILURE);
 
 	mlx_loop_hook(data->display.mlx, movement, &player);
-	mlx_loop_hook(data->display.mlx, get_distance, &player);
+	mlx_loop_hook(data->display.mlx, draw_escene, &player);
 	mlx_loop(data->display.mlx);
 	mlx_terminate(data->display.mlx);
 	free_scene_info(&data->file);
