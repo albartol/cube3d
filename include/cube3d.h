@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/07/31 16:32:07 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/01 13:16:30 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@
 # define SPEED 6
 # define VISIBILITY 100
 
-#define PI 3.1415926
+#define PI 3.14159265
 #define INIT_ANGLE 90
 #define ROTATION_SPEED 10
 # define PLAYER_COL YELLOW
