@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/08/02 14:55:42 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/02 16:37:08 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ struct s_player
 {
 	double	x;
 	double	y;
-	double	co;
-	double	ca;
+	double	offset_x;
+	double	offset_y;
 	int		angle;
 };
 
