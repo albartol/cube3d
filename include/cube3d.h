@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/08/01 13:16:30 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/02 14:55:42 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,6 @@
 # define SPEED 6
 # define VISIBILITY 100
 
-#define PI 3.14159265
-#define INIT_ANGLE 90
-#define ROTATION_SPEED 10
 # define PLAYER_COL YELLOW
 # define WALL_COL GREEN
 
@@ -70,6 +67,7 @@ typedef struct s_scene		t_scene;
 typedef struct s_scene_file	t_scene_file;
 typedef struct s_display	t_display;
 typedef struct s_grafics	t_grafics;
+typedef	struct s_player		t_player;
 
 struct s_scene_file
 {
@@ -95,22 +93,22 @@ struct s_scene
 	size_t			map_height;
 	size_t			player_x;
 	size_t			player_y;
-};
-
-struct s_grafics
-{
-	mlx_image_t	*wall;
-	mlx_image_t	*player;
-	mlx_image_t	*line_ray;
+	int				angle;
 };
 
 struct s_display
 {
 	mlx_t		*mlx;
 	mlx_image_t	*frames[2];
-	int32_t		width;
-	int32_t		height;
-	t_grafics	grafics;
+};
+
+struct s_player
+{
+	double	x;
+	double	y;
+	double	co;
+	double	ca;
+	int		angle;
 };
 
 struct s_game
@@ -118,19 +116,8 @@ struct s_game
 	t_scene_file	file;
 	t_scene			scene;
 	t_display		display;
+	t_player		player;
 };
-
-typedef	struct s_player
-{
-	mlx_t	*mlx;
-	float	x;
-	float	y;
-	float	angle;
-	float	rotation;
-	char	**map;
-	mlx_image_t	*img;
-}	t_player;
-
 
 int		read_scene_file(t_scene_file *scene_info, const char *file_path);
 int		extract_scene_info(t_scene_file *scene_info);
@@ -138,6 +125,7 @@ int		check_scene_info(t_scene_file *scene_info, t_scene *scene);
 
 //Utils
 void	free_scene_info(t_scene_file *info);
+int		free_and_exit(t_game *data, int exit);
 
 //Grafics part
 int		start_grafics(t_game *data);

@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/07/29 17:18:42 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/08/02 14:34:10 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,17 +57,18 @@ CHK := check_scene_info.c \
 		check_map.c \
 		check_colors.c
 
-GRAFICS := start_grafics.c \
-			put_map.c \
-			fill_color.c\
-			movement.c
+# GRAFICS := start_grafics.c \
+# 			put_map.c \
+# 			fill_color.c\
+# 			movement.c
 
 UTIL := print_error.c \
 		in_range.c \
 		create_color.c \
 		check_file_type.c \
 		exit_msg.c \
-		free_scene_info.c
+		free_scene_info.c \
+		free_and_exit.c
 		
 SOURCES := $(SRC) $(EXT) $(CHK) $(UTIL) $(GRAFICS)
 
