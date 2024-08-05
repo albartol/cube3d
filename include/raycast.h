@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:10:13 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/02 14:29:20 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/05 11:28:53 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,21 @@
 // # define INIT_ANGLE 90
 
 typedef struct s_ray t_ray;
+typedef struct s_cords t_cords;
 
 struct s_ray
 {
+	double	dx;
+	double	dy;
+	double	distance;
+};
+
+struct s_cords
+{
 	double	x;
 	double	y;
-	t_player	player[NUM_RAY];
 };
+
+
 
 #endif

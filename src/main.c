@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:18 by albartol          #+#    #+#             */
-/*   Updated: 2024/08/02 14:55:31 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/05 11:54:09 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,9 @@ int	main(int argc, char **argv)
 		return (free_and_exit(&data, EXIT_FAILURE));
 	print_info(&data);
 	print_map(data.file.map);
-	free_scene_info(&data.file);
 	printf("floor_color: %0X\n", data.scene.floor_color);
 	printf("celling_color: %0X\n", data.scene.celling_color);
+	raycast(&data);
+	free_scene_info(&data.file);
 	return (EXIT_SUCCESS);
 }

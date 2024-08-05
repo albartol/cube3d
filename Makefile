@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/08/02 14:34:10 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/08/05 11:27:28 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,8 @@ CHK := check_scene_info.c \
 # 			fill_color.c\
 # 			movement.c
 
+RAYCAST	:= raycast.c
+
 UTIL := print_error.c \
 		in_range.c \
 		create_color.c \
@@ -70,7 +72,7 @@ UTIL := print_error.c \
 		free_scene_info.c \
 		free_and_exit.c
 		
-SOURCES := $(SRC) $(EXT) $(CHK) $(UTIL) $(GRAFICS)
+SOURCES := $(SRC) $(EXT) $(CHK) $(UTIL) $(RAYCAST)
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SOURCES))
 
