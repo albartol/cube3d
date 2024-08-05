@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 09:28:31 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/05 14:32:59 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/05 16:59:20 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,46 +45,60 @@ double	get_h(double ca, double co)
 	return (sqrt(pow(ca, 2) + pow(co / ca, 2)));
 }
 
-void	set_offset(t_cords *offset, t_cords origin)
+void	set_offset(t_cords *offset, t_cords origin, t_cords dest)
 {
-	offset->x = 2 - origin.x;
-	offset->y = 2 - origin.y;
+	(void)dest;
+	offset->x = origin.x - 1;
+	offset->y = origin.y - 1;
 }
 
 void	move_cords(double *cord, int angle)
 {
-	if ((angle >= 0 && angle <= 90) || (angle >= 270 && angle <= 360))
+	if ((angle >= 0 && angle < 90) || (angle >= 270 && angle <= 360))
 		(*cord) += 1;
-	else if ((angle > 90 && angle <= 180) || (angle >= 180 && angle < 270))
+	else if ((angle >= 90 && angle <= 180) || (angle >= 180 && angle < 270))
 		(*cord) -= 1;
 }
 
-double	dda(t_cords origin, t_cords dest, int angle)
+double	dda(t_cords origin, t_cords dest, int angle, char **map)
 {
-	t_cords	ray;
+	double	distance;
 	t_cords	offset;
 	t_cords	movement;
 
-	// offset.x = 0.5;
-	offset.y = 0.5;
-	movement.x = 0;
-	movement.y = 0;
-	// while (42)
-	// {
-	// set_offset(&offset, origin);
-	printf("Angulo --> %d\n", angle);
-	(void)origin;
-	(void)dest;
-	ray.x = get_h(origin.x, 1);
-	ray.y = get_h(offset.y, 1);
-	printf("dx--> %f\ndy--> %f\n", ray.x, ray.y);
-	if (ray.x < ray.y)
-		move_cords(&movement.x, angle);
-	else
-		move_cords(&movement.y, angle);
+	(void)angle;
+	(void)map;
+	distance = 0;
+	set_offset(&offset, origin, dest);
+	printf("offset x--> %f -- offset y --> %f\n", offset.x , offset.y);
 	
-	printf("movimiento ---> (%f, %f)\n", movement.x, movement.y);
-	return (1);
+	movement.x = get_h(offset.x, offset.y);
+	movement.y = get_h(offset.y, offset.x);
+	while (1)
+	{
+		printf("dx--> %f\ndy--> %f\n", offset.x, offset.y);
+		if (movement.x < movement.y)
+		{
+			printf("Movimiento en x\n");
+			movement.x += 1;
+			movement.y = get_h(offset.y, offset.x);
+		}
+		else
+		{
+			printf("Movimiento en y\n");
+			movement.y += 1;
+			movement.x = get_h(offset.x, offset.y);
+		}
+	}
+	// ray.x = get_h(offset.x, offset.y);
+	// ray.y = get_h(offset.y, offset.x);
+	// // printf("dx--> %f\ndy--> %f\n", ray.x, ray.y);
+	// if (ray.x < ray.y)
+	// 	move_cords(&movement.x, angle);
+	// else
+	// 	move_cords(&movement.y, angle);
+	// printf("movimiento ---> (%f, %f)\n", movement.x, movement.y);
+	return (distance);
 }
 
 int	raycast(t_game *data)
@@ -96,6 +110,16 @@ int	raycast(t_game *data)
 	printf("origin (%f, %f)\n", origin.x, origin.y);
 	printf("dest (%f, %f)\n", dest.x, dest.y);
 
-	dda(origin, dest, data->scene.angle);
+
+	//Test
+	int init_angle = 0;
+	double distance;
+
+	// while (init_angle < data->scene.angle)
+	// {
+		distance = dda(origin, dest, init_angle, data->file.map);
+		printf("Distacia --> %f\n", distance);
+	// 	init_angle++;
+	// }
 	return (EXIT_SUCCESS);
 }
