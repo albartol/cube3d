@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:05:27 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/06 19:19:56 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/06 20:28:07 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,25 @@ int detect_colition(t_cords cords, char **map) {
 	return (0);
 }
 
+void	arreglo(t_cords *origin, t_cords * dest, t_cords *steps, t_cords *side_dist)
+{
+	if (dest->x == origin->x /* || dest->x == 0 */)
+	{
+		steps->x = 0;
+		side_dist->x = __DBL_MAX__;
+	}
+	if (dest->y == origin->y /* || dest->y == 0 */)
+	{
+		steps->y = 0;
+		side_dist->y = __DBL_MAX__;
+	}
+}
+
 /* Obtener y calcular los pasos y la distancia inicial de las
 posiciones x e y */
 void	get_steps_dist(t_cords *origin, t_cords *dest, t_cords *steps, t_cords *increment, t_cords *side_dist)
 {
-	if (dest->x < 0)	// Left
+	if (dest->x < origin->x /* < 0 */)	// Left
 	{
 		steps->x = -1;
 		side_dist->x = (origin->x - (int)origin->x) * increment->x;
@@ -43,7 +57,7 @@ void	get_steps_dist(t_cords *origin, t_cords *dest, t_cords *steps, t_cords *inc
 		steps->x = 1; 
 		side_dist->x = ((int)origin->x + 1 - origin->x) * increment->x;
 	}
-	if (dest->y < 0)	// Down
+	if (dest->y < origin->y /* < 0 */)	// Down
 	{
 		steps->y = -1;
 		side_dist->y = (origin->y - (int)origin->y) * increment->y;
@@ -53,6 +67,8 @@ void	get_steps_dist(t_cords *origin, t_cords *dest, t_cords *steps, t_cords *inc
 		steps->y = 1;
 		side_dist->y = ((int)origin->y + 1 - (int)origin->y) * increment->y;
 	}
+	// printf("\n\nprueba size_dist --> %f\n\n", side_dist->y);
+	arreglo(origin, dest, steps, side_dist);
 }
 
 
@@ -64,8 +80,14 @@ double	dda(t_cords origin, t_cords dest, char **map)
 	double	distance;
 
 	//Incremento en x e y (deltas)
+	// if (dest.x != 0 || dest.x != origin.x)
 	increment.x = fabs(1 / dest.x);
+	// else
+		// increment.x = __DBL_MAX__;
+	// if (dest.y != 0 || dest.x != origin.y)
 	increment.y = fabs(1 / dest.y);
+	// else 
+		// increment.y = __DBL_MAX__;
 	printf("Incremento en x --> %f\n", increment.x);
 	printf("Incremento en y --> %f\n", increment.y); // hay un problema aqui (da infinito si es 0 y lo que joe todo)
 
@@ -84,18 +106,18 @@ double	dda(t_cords origin, t_cords dest, char **map)
 	{
 		if (side_dist.x < side_dist.y)
 		{
+			distance += side_dist.x;
 			side_dist.x += increment.x;
 			origin.x += steps.x;
 			choque = 'x';
-			distance += side_dist.x;
 			printf("Me he movido en x %f pasos\n", steps.x);
 		}
 		else
 		{
+			distance += side_dist.y;
 			side_dist.y += increment.y;
 			origin.y += steps.y;
 			choque = 'y';
-			distance += side_dist.y;
 			printf("Me he movido en y %f pasos\n", steps.y);
 		}
 		if (detect_colition(origin, map))

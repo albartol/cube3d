@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 09:28:31 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/06 18:31:37 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/06 20:31:38 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	set_cords(t_cords *origin, t_cords *dest, t_game *data)
 	width_size = ft_strlen(data->file.map[data->scene.player_y]);
 	height_size = array_len((const char **)data->file.map);
 
-	dest->x = 0;
-	dest->y = 0;
+	dest->x = -1;
+	dest->y = -1;
 	if (data->scene.angle == 0)
 	{
 		dest->y = origin->y;
