@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:10:13 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/05 12:54:46 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/06 18:32:15 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define PI		3.14159265358979323846	/* pi */
 # define PI_2	1.57079632679489661923	/* pi/2 */
 # define PI_4	0.78539816339744830962	/* pi/4 */
-# define M_1_PI	0.31830988618379067154	/* 1/pi */
+# define _1_PI	0.31830988618379067154	/* 1/pi */
 
 # define ROTATION_SPEED 10
 
@@ -40,6 +40,6 @@ struct s_cords
 	double	y;
 };
 
-
+double	dda(t_cords origin, t_cords dest, char **map);
 
 #endif
