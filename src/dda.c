@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:05:27 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/06 20:28:07 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/07 12:06:39 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int detect_colition(t_cords cords, char **map) {
 
 	width = ft_strlen(map[(int)cords.y])/*  - 1 */;
 	height = array_len((const char **)map)/*  - 1 */;
-	
+
 	if ((cords.x < 0 || cords.y < 0) || (cords.x >= width || cords.y >= height) ||
 		(map[(int)cords.y][(int)cords.x] == WALL))
 		return (1);
@@ -71,58 +71,71 @@ void	get_steps_dist(t_cords *origin, t_cords *dest, t_cords *steps, t_cords *inc
 	arreglo(origin, dest, steps, side_dist);
 }
 
+/*	La fórmula más común para calcular la distancia 
+	entre dos puntos es la fórmula de distancia euclidiana.
+	y es válida para puntos en un plano euclidiano
+	d = √((x2 - x1)² + (y2 - y1)²)
+*/
+double	get_distance(t_cords P1, t_cords P2)
+{
+	double	distance;
+
+	distance = sqrt(pow(P2.x - P1.x, 2) + pow(P2.y - P1.y, 2));
+	return (distance);
+}
 
 double	dda(t_cords origin, t_cords dest, char **map)
 {
 	t_cords	increment;
 	t_cords	steps;
 	t_cords	side_dist;
-	double	distance;
+	t_cords movements;
 
+
+	movements.x = origin.x;
+	movements.y = origin.y;
 	//Incremento en x e y (deltas)
-	// if (dest.x != 0 || dest.x != origin.x)
-	increment.x = fabs(1 / dest.x);
-	// else
-		// increment.x = __DBL_MAX__;
-	// if (dest.y != 0 || dest.x != origin.y)
-	increment.y = fabs(1 / dest.y);
-	// else 
-		// increment.y = __DBL_MAX__;
+	if (!dest.x)
+		increment.x = __DBL_MAX__;
+	else
+		increment.x = fabs(1 / dest.x);
+	if (!dest.y)
+		increment.y = __DBL_MAX__;
+	else
+		increment.y = fabs(1 / dest.y);
+
 	printf("Incremento en x --> %f\n", increment.x);
-	printf("Incremento en y --> %f\n", increment.y); // hay un problema aqui (da infinito si es 0 y lo que joe todo)
+	printf("Incremento en y --> %f\n", increment.y);
 
 	//Calcular los pasos
 	get_steps_dist(&origin, &dest, &steps, &increment, &side_dist);
 
 	//DDA Loop
-	distance = 0;
 	char choque = 'n';
 
 	printf("size en x --> %f\n", side_dist.x);
 	printf("size en y --> %f\n", side_dist.y);
 	
 	printf("\n\n---------INICIO DDA----------\n\n");
-	while (42)
+	printf("Origin --> (%f, %f)\n", origin.x, origin.y);
+	while (!detect_colition(movements, map))
 	{
 		if (side_dist.x < side_dist.y)
 		{
-			distance += side_dist.x;
 			side_dist.x += increment.x;
-			origin.x += steps.x;
+			movements.x += steps.x;
 			choque = 'x';
 			printf("Me he movido en x %f pasos\n", steps.x);
 		}
 		else
 		{
-			distance += side_dist.y;
 			side_dist.y += increment.y;
-			origin.y += steps.y;
+			movements.y += steps.y;
 			choque = 'y';
 			printf("Me he movido en y %f pasos\n", steps.y);
 		}
-		if (detect_colition(origin, map))
-			break;
 	}
-	printf("Colition found in (%f, %f) hitted by %c\n", origin.x, origin.y, choque);
-	return (distance);
+	print_map(map);
+	printf("Colition found in (%f, %f) hitted by %c\n", movements.x, movements.y, choque);
+	return (get_distance(origin, movements));
 }

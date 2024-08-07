@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/08/05 11:29:06 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/07 11:09:40 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,10 +126,10 @@ int		check_scene_info(t_scene_file *scene_info, t_scene *scene);
 //Utils
 void	free_scene_info(t_scene_file *info);
 int		free_and_exit(t_game *data, int exit);
-
+void	print_map(char **map);
 
 //Ray casting
-int	raycast(t_game *data);
+int		raycast(t_game *data);
 
 //Grafics part
 int		start_grafics(t_game *data);
