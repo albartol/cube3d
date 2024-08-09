@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:05:27 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/07 12:06:39 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/09 16:25:22 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 
 // Función que determina si hay una pared en las coordenadas (x, y)
-int detect_colition(t_cords cords, char **map) {
+static int detect_colition(t_cords cords, char **map) {
 	
 	int	width;
 	int height;
