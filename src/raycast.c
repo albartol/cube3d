@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 09:28:31 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/09 21:18:55 by albartol         ###   ########.fr       */
+/*   Updated: 2024/08/09 21:48:48 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	set_ray_val(t_raycast *info, t_game *data)
 	if (info->ray_dir.y == 0)
 		info->delta_dist.y = DBL_MAX;
 	else
-		info->delta_dist.y = fabs(1 / info->ray_dir.x);
+		info->delta_dist.y = fabs(1 / info->ray_dir.y);
 	info->hit = 0;
 }
 
