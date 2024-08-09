@@ -6,39 +6,29 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 09:28:31 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/09 17:31:08 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/09 18:29:23 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <raycast.h>
 #include <check_scene.h>
 
-void	set_cords(t_cords *origin,/*  t_cords *dest,  */t_game *data)
+void	set_cords(t_cords *origin, t_cords *v_dir, t_game *data)
 {
-	// int	width_size;
-	// int	height_size;
-
 	origin->x = (data->scene.player_x) + 0.5;
 	origin->y = (data->scene.player_y) + 0.5;
-	// width_size = ft_strlen(data->file.map[data->scene.player_y]);
-	// height_size = array_len((const char **)data->file.map);
 
-	// dest->x = 0.1;
-	// dest->y = 0.1;
-	// if (data->scene.angle == 0)
-	// {
-	// 	dest->y = origin->y;
-	// 	dest->x = width_size - data->scene.player_x;
-	// }
-	// if (data->scene.angle == 90)
-	// 	dest->x = origin->x;
-	// if (data->scene.angle == 180)
-	// 	dest->y = origin->y;
-	// else if (data->scene.angle == 270)
-	// {
-	// 	dest->x = origin->x;
-	// 	dest->y = height_size - 1;
-	// }
+	(void)v_dir;
+	// v_dir->x = 0;
+	// v_dir->y = 0;
+	// if (data->scene.angle == 90) //North
+	// 	v_dir->y = -1;
+	// if (data->scene.angle == 270) // South
+	// 	v_dir->y = 1;
+	// if (data->scene.angle == 0) //East
+	// 	v_dir->x = 1;
+	// if (data->scene.angle == 180) // West
+	// 	v_dir->x = -1;
 }
 
 // Función que determina si hay una pared en las coordenadas (x, y)
@@ -64,12 +54,12 @@ int	raycast(t_game *data)
 	double	camera_x;		// Posicion x del plano de camara
 	int		x;
 
-	set_cords(&origin, data);
+	set_cords(&origin, &v_dir, data);
 	printf("origin (%f, %f)\n", origin.x, origin.y);
-
-	//Rayasting:
+	// //Rayasting:
 	v_dir.x = -1;
-	v_dir.x = 0;
+	v_dir.y = 0;
+	printf("Direction vector (%f, %f)\n", v_dir.x, v_dir.y);
 
 	camera_plane.x = 0;
 	camera_plane.y = 0.66;
@@ -78,7 +68,8 @@ int	raycast(t_game *data)
 	t_cords	delta_dist;		//Razon para calcular la hipotenusa
 	t_cords	side_dist;		//Distancia inicial de la hipotenusa de x e y
 	t_cords	step;			//Pasos a tomar en x e y
-	// int		side;
+	double	line_height;
+	int		side;			//0 for X and 1 for Y
 	int		map_pos_x;
 	int		map_pos_y;
 
@@ -87,9 +78,12 @@ int	raycast(t_game *data)
 	{
 		map_pos_x = (int)origin.x;
 		map_pos_y = (int)origin.y;
-		camera_x = 2 * x / WIN_WIDTH - 1;
+		camera_x = 2 * x / (double)WIN_WIDTH - 1;
 		ray_dir.x = v_dir.x + (camera_plane.x * camera_x); //Dirección del rayo
 		ray_dir.y = v_dir.y + (camera_plane.y * camera_x);
+
+		// printf("Camera x --> %f\n", camera_x);
+		// printf("Rayo de dirección --> (%f, %f)\n", ray_dir.x, ray_dir.y);
 
 		//DDA (Calculus)
 		//Calcular la razon
@@ -133,15 +127,28 @@ int	raycast(t_game *data)
 			{
 				side_dist.x += delta_dist.x;
 				map_pos_x += step.x;
+				side = 0;
 				printf("Me moví en x %f pasos, pos actual (%d, %d)\n", step.x, map_pos_x, map_pos_y);
 			}
 			else
 			{
 				side_dist.y += delta_dist.y;
 				map_pos_y += step.y;
+				side = 1;
 				printf("Me moví en y %f pasos, pos actual (%d, %d)\n", step.y, map_pos_x, map_pos_y);
 			}
 		}
+		
+		//Calcular por la distancia perpendicular segun el rayo de impacto x o y
+		double	per_wall_distance;
+		if (side == 0)
+			per_wall_distance = (side_dist.x - delta_dist.x);
+		else 
+			per_wall_distance = (side_dist.y - delta_dist.y);
+		
+		//Linea a dibujar en ventana:
+		line_height = WIN_HEIGHT / per_wall_distance;
+		printf("Linea a dibujar --> [%f]\n", line_height);
 		printf("\n__________________________\n");
 		x++;
 	}
