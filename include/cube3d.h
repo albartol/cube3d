@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/08/07 11:09:40 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/09 12:10:36 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,11 @@
 // all functions
 # include <MLX42.h>
 
-//Bool values
-#include <stdbool.h>
+// DBL_MAX
+# include <float.h>
+
+// bool values
+# include <stdbool.h>
 
 # include <libft.h>
 
@@ -68,6 +71,8 @@ typedef struct s_scene_file	t_scene_file;
 typedef struct s_display	t_display;
 typedef struct s_grafics	t_grafics;
 typedef	struct s_player		t_player;
+typedef struct s_coord_d	t_coord_d;
+typedef struct s_coord_i	t_coord_i;
 
 struct s_scene_file
 {
@@ -102,13 +107,23 @@ struct s_display
 	mlx_image_t	*frames[2];
 };
 
-struct s_player
+struct s_coord_d
 {
 	double	x;
 	double	y;
-	double	offset_x;
-	double	offset_y;
-	int		angle;
+};
+
+struct s_coord_i
+{
+	int	x;
+	int	y;
+};
+
+struct s_player
+{
+	t_coord_d	pos;
+	t_coord_d	dir;
+	t_coord_d	plane;
 };
 
 struct s_game

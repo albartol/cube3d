@@ -6,13 +6,13 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 17:10:21 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/14 00:13:48 by albartol         ###   ########.fr       */
+/*   Updated: 2024/08/09 12:20:08 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-char	*array_to_str(const char **array, const char spliter)
+char	*array_to_str(char **array, const char spliter)
 {
 	char	*str;
 	char	split[2];

@@ -6,13 +6,13 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 17:10:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/14 00:13:22 by albartol         ###   ########.fr       */
+/*   Updated: 2024/08/09 12:19:52 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-size_t	array_char_len(const char **array)
+size_t	array_char_len(char **array)
 {
 	size_t	len;
 	int		i;

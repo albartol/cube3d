@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:31:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/07/10 16:06:55 by albartol         ###   ########.fr       */
+/*   Updated: 2024/08/09 12:16:55 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@ static int	validate_color_str(const char *color, uint32_t *final_color)
 	temp = ft_split(color, ',');
 	if (!temp)
 		return (EXIT_FAILURE);
-	if (array_len((const char **)temp) != 3)
+	if (array_len(temp) != 3)
 	{
 		array_free(temp);
 		return (EXIT_FAILURE);
 	}
-	color_array = array_trim((const char **)temp, " ");
+	color_array = array_trim(temp, " ");
 	array_free(temp);
 	if (!color_array)
 		return (EXIT_FAILURE);

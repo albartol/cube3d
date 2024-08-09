@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   array_len.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 17:10:35 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/17 18:23:16 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/09 12:20:04 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	array_len(const char **array)
+int	array_len(char **array)
 {
 	int	i;
 

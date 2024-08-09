@@ -6,13 +6,13 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 16:33:53 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/14 00:15:37 by albartol         ###   ########.fr       */
+/*   Updated: 2024/08/09 12:19:58 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-char	**array_dup(const char **array)
+char	**array_dup(char **array)
 {
 	char	**copy;
 	int		len;

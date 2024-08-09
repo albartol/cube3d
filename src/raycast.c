@@ -3,61 +3,101 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 09:28:31 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/07 17:37:52 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/09 21:18:55 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <raycast.h>
 
-void	set_cords(t_cords *origin, t_cords *dest, t_game *data)
+static void	set_ray_val(t_raycast *info, t_game *data)
 {
-	int	width_size;
-	int	height_size;
+	info->ray_dir.x = data->player.dir.x + data->player.plane.x * info->camera_pos;
+	info->ray_dir.y = data->player.dir.y + data->player.plane.y * info->camera_pos;
+	info->map_pos.x = (int)data->player.pos.x;
+	info->map_pos.y = (int)data->player.pos.y;
+	if (info->ray_dir.x == 0)
+		info->delta_dist.x = DBL_MAX;
+	else
+		info->delta_dist.x = fabs(1 / info->ray_dir.x);
+	if (info->ray_dir.y == 0)
+		info->delta_dist.y = DBL_MAX;
+	else
+		info->delta_dist.y = fabs(1 / info->ray_dir.x);
+	info->hit = 0;
+}
 
-	origin->x = (data->scene.player_x) + 0.5;
-	origin->y = (data->scene.player_y) + 0.5;
-	width_size = ft_strlen(data->file.map[data->scene.player_y]);
-	height_size = array_len((const char **)data->file.map);
-
-	dest->x = 0.1;
-	dest->y = 0.1;
-	if (data->scene.angle == 0)
+static void	set_side_dist(t_raycast *info, t_game *data)
+{
+	if (info->ray_dir.x < 0)
 	{
-		dest->y = origin->y;
-		dest->x = width_size - data->scene.player_x;
+		info->step_dir.x = -1;
+		info->side_dist.x = (data->player.pos.x - info->map_pos.x) * info->delta_dist.x;
 	}
-	if (data->scene.angle == 90)
-		dest->x = origin->x;
-	if (data->scene.angle == 180)
-		dest->y = origin->y;
-	else if (data->scene.angle == 270)
+	else
 	{
-		dest->x = origin->x;
-		dest->y = height_size - 1;
+		info->step_dir.x = 1;
+		info->side_dist.x = (info->map_pos.x + 1.0 - data->player.pos.x) * info->delta_dist.x;
+	}
+	if (info->ray_dir.y < 0)
+	{
+		info->step_dir.y = -1;
+		info->side_dist.y = (data->player.pos.y - info->map_pos.y) * info->delta_dist.y;
+	}
+	else
+	{
+		info->step_dir.y = 1;
+		info->side_dist.y = (info->map_pos.y + 1.0 - data->player.pos.y) * info->delta_dist.y;
 	}
 }
 
 int	raycast(t_game *data)
 {
-	t_cords origin;
-	t_cords dest;
+	t_raycast		info;
+	unsigned int	ray_num;
+	unsigned int	total_ray;
+	data->player.pos.x = data->scene.player_x;
+	data->player.pos.y = data->scene.player_y;
+	data->player.dir.x = -1;
+	data->player.dir.y = 0;
+	data->player.plane.x = 0;
+	data->player.plane.y = 0.66;
 
-	set_cords(&origin, &dest, data);
-	printf("origin (%f, %f)\n", origin.x, origin.y);
-	printf("dest (%f, %f)\n", dest.x, dest.y);
+	printf("player pos (%f, %f)\n", data->player.pos.x,data->player.pos.y);
+	
+	ray_num = 0;
+	total_ray = RAY_NUM;
 
+	while (ray_num <= total_ray)
+	{
+		info.camera_pos = 2 * ray_num / (double)total_ray - 1;
+		set_ray_val(&info, data);
+		set_side_dist(&info, data);
 
-	//Test
-	double distance;
+		printf("-------------------------------------------------------------\n");
+		printf("camara pos %f \n", info.camera_pos);
+		printf("ray dir x %f \n", info.ray_dir.x);
+		printf("ray dir y %f \n", info.ray_dir.y);
+		printf("side dist x %f \n", info.side_dist.x);
+		printf("side dist y %f \n", info.side_dist.y);
+		printf("desta dist x %f \n", info.delta_dist.x);
+		printf("desta dist y %f \n", info.delta_dist.y);
+		printf("step x %i \n", info.step_dir.x);
+		printf("step y %i \n", info.step_dir.y);
+		printf("-------------------------------------------------------------\n");
 
-	// while (init_angle < data->scene.angle)
-	// {
-		distance = dda(origin, dest, data->file.map);
-		printf("Distacia --> %f\n", distance);
-	// 	init_angle++;
-	// }
+		dda(&info, data->file.map);
+
+		if(info.side_hit == 0)
+			info.dist_to_wall = (info.side_dist.x - info.delta_dist.x);
+		else
+			info.dist_to_wall = (info.side_dist.y - info.delta_dist.y);
+
+		printf("Distancia --> %f\n", info.dist_to_wall);
+		printf("-------------------------------------------------------------\n");
+		ray_num++;
+	}
 	return (EXIT_SUCCESS);
 }

@@ -6,13 +6,13 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 18:22:26 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/22 18:45:48 by albartol         ###   ########.fr       */
+/*   Updated: 2024/08/09 12:20:13 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-char	**array_trim(const char **array, const char *set)
+char	**array_trim(char **array, const char *set)
 {
 	char	**copy;
 	int		len;
