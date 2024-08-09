@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 09:28:31 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/09 16:56:28 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/09 17:31:08 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,10 @@ int	raycast(t_game *data)
 	int		map_pos_y;
 
 	x = 0;
-	map_pos_x = (int)origin.x;
-	map_pos_y = (int)origin.y;
 	while (x < WIN_WIDTH)
 	{
+		map_pos_x = (int)origin.x;
+		map_pos_y = (int)origin.y;
 		camera_x = 2 * x / WIN_WIDTH - 1;
 		ray_dir.x = v_dir.x + (camera_plane.x * camera_x); //Dirección del rayo
 		ray_dir.y = v_dir.y + (camera_plane.y * camera_x);
@@ -126,6 +126,7 @@ int	raycast(t_game *data)
 			side_dist.y = (origin.y - map_pos_y) *  delta_dist.y;
 		}
 		//DDA (Algoritmo)
+		printf("\n_________Ray #%d_(%f)_________\n", x + 1, camera_x);
 		while (!detect_colition(map_pos_x, map_pos_y, data->file.map))
 		{
 			if (side_dist.x < side_dist.y)
@@ -141,8 +142,8 @@ int	raycast(t_game *data)
 				printf("Me moví en y %f pasos, pos actual (%d, %d)\n", step.y, map_pos_x, map_pos_y);
 			}
 		}
-		break;
-
+		printf("\n__________________________\n");
+		x++;
 	}
 
 	//Test
