@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 09:28:31 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/10 17:43:39 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/10 17:53:43 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ int	fill_screen(mlx_image_t *img, double line_height, int side)
 		end = WIN_HEIGHT;
 
 	//Color
-	// color = ft_pixel(243, 133, 229, 255);
-	color = ft_pixel(244, 120, 120, 255);
+	color = ft_pixel(243, 133, 229, 255);
+	// color = ft_pixel(244, 120, 120, 255);
 	if (side == 0)
-		color = color / 2;
+		color = ft_pixel(167, 67, 154, 255);
 
 	//End
 	if (j > img->width)
