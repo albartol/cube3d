@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/08/13 15:48:02 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/08/13 16:20:30 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ CHK := check_scene_info.c \
 
 RAYCAST	:=	raycast.c \
 			dda.c \
-			win_keys.c
+			key_events.c
 
 UTIL := print_error.c \
 		in_range.c \

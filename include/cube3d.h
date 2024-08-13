@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/08/13 14:02:04 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/13 16:21:18 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef	struct s_player		t_player;
 
 //Raycast
 typedef struct s_raycast	t_raycast;
-typedef struct s_cords t_cords;
+typedef struct s_cords 		t_cords;
 
 struct s_scene_file
 {
@@ -106,14 +106,6 @@ struct s_display
 	mlx_image_t	*frames[2];
 };
 
-struct s_player
-{
-	double	x;
-	double	y;
-	double	offset_x;
-	double	offset_y;
-	int		angle;
-};
 
 //Raycast
 struct s_cords
@@ -128,6 +120,17 @@ struct s_raycast
 	t_cords	camera_plane;	// Plano de camara del jugador --> the FOV is 2 * atan(0.66/1.0)=66°
 	t_cords ray_dir;		// La dirección del rayo
 	double	camera_x;
+};
+
+struct s_player
+{
+	double	x;
+	double	y;
+	double	offset_x;
+	double	offset_y;
+	int		angle;
+	t_cords	camera_plane;
+	t_cords	dir_vector;
 };
 
 struct s_game

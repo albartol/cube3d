@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 09:28:31 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/13 15:49:37 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/13 16:19:33 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,26 @@ del archivo check_map.c
  */
 void	set_cords(t_raycast *r_data , t_game *data)
 {
+	//Cambiar la posición de origen según lo que tenga data
 	r_data->origin.x = data->player.x + 0.5;
 	r_data->origin.y = data->player.y + 0.5;
 
-	// r_data->v_dir.x = -1;
-	// r_data->v_dir.y = 0;
+	//Cambiar el plano de camara según lo que tenga data
+	r_data->camera_plane.x = data->player.camera_plane.x;
+	r_data->camera_plane.y = data->player.camera_plane.y;
 
-	r_data->v_dir.x = 0;
-	r_data->v_dir.y = 0;
-	if (data->player.angle == 90) //North
-		r_data->v_dir.y = -1;
-	if (data->player.angle == 270) // South
-		r_data->v_dir.y = 1;
-	if (data->player.angle == 0) //East
-		r_data->v_dir.x = 1;
-	if (data->player.angle == 180) // West
-		r_data->v_dir.x = -1;
+	//Cambiar el vector de dirección según lo que tenga data
+	r_data->v_dir.x = data->player.dir_vector.x;
+	r_data->v_dir.y = data->player.dir_vector.y;
+
+	// if (data->player.angle == 90) //North
+	// 	r_data->v_dir.y = -1;
+	// if (data->player.angle == 270) // South
+	// 	r_data->v_dir.y = 1;
+	// if (data->player.angle == 0) //East
+	// 	r_data->v_dir.x = 1;
+	// if (data->player.angle == 180) // West
+	// 	r_data->v_dir.x = -1;
 	printf(GREEN"\nDIRECTION VECTOR -> (%f, %f)\n"RESET, r_data->v_dir.x, r_data->v_dir.y);
 }
 
@@ -93,8 +97,6 @@ int	draw_img(t_game *data, mlx_image_t *img)
 	t_dda		dda_data;
 	
 	x = 0;
-	ray_data.camera_plane.x = 0;
-	ray_data.camera_plane.y = 0.66;
 	set_cords(&ray_data, data);
 	printf(YELLOW"origin (%f, %f)\n", ray_data.origin.x, ray_data.origin.y);
 	printf("Direction vector (%f, %f)\n"RESET, ray_data.v_dir.x, ray_data.v_dir.y);
@@ -131,52 +133,6 @@ void	draw_all(t_game *data)
 		frame = 0;
 }
 
-/* 
-Nota: las adiciones y restas tanto a x e y son segun el vector de direccion que funciona ahora
-W --> mira al Oeste
- */
-void	key_events(void *param)
-{
-	t_game		*data;
-
-	data = (t_game *)param;
-	if (mlx_is_key_down(data->display.mlx, MLX_KEY_ESCAPE))
-	{
-		mlx_close_window(data->display.mlx);
-		printf("Adiooooossss");
-	}
-	else if (mlx_is_key_down(data->display.mlx, MLX_KEY_W))
-	{
-		data->player.x -= 0.1;
-		printf(YELLOW"Mi posición es :(%d, %d)\n" RESET, (int)data->player.x, (int)data->player.y);
-		draw_all(data);
-	}
-	else if (mlx_is_key_down(data->display.mlx, MLX_KEY_S))
-	{
-		data->player.x += 0.1;
-		printf(YELLOW"Mi posición es :(%d, %d)\n" RESET, (int)data->player.x, (int)data->player.y);
-		draw_all(data);
-	}
-	else if (mlx_is_key_down(data->display.mlx, MLX_KEY_A))
-	{
-		data->player.y -= 0.1;
-		printf(YELLOW"Mi posición es :(%d, %d)\n" RESET, (int)data->player.x, (int)data->player.y);
-		draw_all(data);
-	}
-	else if (mlx_is_key_down(data->display.mlx, MLX_KEY_D))
-	{
-		data->player.y += 0.1;
-		printf(YELLOW"Mi posición es :(%d, %d)\n" RESET, (int)data->player.x, (int)data->player.y);
-		draw_all(data);
-	}
-	//Starting rotations
-	// else if (mlx_is_key_down(data->display.mlx, MLX_KEY_LEFT))
-	// {
-		
-	// }
-}
-
-
 int	raycast(t_game *data)
 {
 	//Raycasting:
@@ -184,6 +140,14 @@ int	raycast(t_game *data)
 	data->display.frames[0] = mlx_new_image(data->display.mlx, WIN_WIDTH, WIN_HEIGHT);
 	data->display.frames[1] = mlx_new_image(data->display.mlx, WIN_WIDTH, WIN_HEIGHT);
 
+	//Plano de camara inicial (FOV)
+	data->player.camera_plane.x = 0;
+	data->player.camera_plane.y = 0.66;
+	//Vector de dirección inicial
+	data->player.dir_vector.x = -1;
+	data->player.dir_vector.y = 0;
+
+	//Draw initial image
 	draw_img(data, data->display.frames[0]);
 
 	mlx_image_to_window(data->display.mlx, data->display.frames[0], 0, 0);
