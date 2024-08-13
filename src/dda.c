@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:05:27 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/10 17:23:33 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:03:45 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,14 +107,14 @@ double	dda(t_raycast *ray_data, t_dda *dda_data, char **map)
 			dda_data->side_dist.x += dda_data->delta_dist.x;
 			dda_data->map_pos_x += dda_data->step.x;
 			dda_data->side = 0;
-			printf("Me moví en x %f pasos, pos actual (%d, %d)\n", dda_data->step.x, dda_data->map_pos_x, dda_data->map_pos_y);
+			// printf("Me moví en x %f pasos, pos actual (%d, %d)\n", dda_data->step.x, dda_data->map_pos_x, dda_data->map_pos_y);
 		}
 		else
 		{
 			dda_data->side_dist.y += dda_data->delta_dist.y;
 			dda_data->map_pos_y += dda_data->step.y;
 			dda_data->side = 1;
-			printf("Me moví en y %f pasos, pos actual (%d, %d)\n", dda_data->step.y, dda_data->map_pos_x, dda_data->map_pos_y);
+			// printf("Me moví en y %f pasos, pos actual (%d, %d)\n", dda_data->step.y, dda_data->map_pos_x, dda_data->map_pos_y);
 		}
 	}
 
