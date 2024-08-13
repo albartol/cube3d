@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 09:28:31 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/13 18:09:33 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/13 19:05:00 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,6 @@ void	set_cords(t_raycast *r_data , t_game *data)
 	r_data->v_dir.x = data->player.dir_vector.x;
 	r_data->v_dir.y = data->player.dir_vector.y;
 
-	// if (data->player.angle == 90) //North
-	// 	r_data->v_dir.y = -1;
-	// if (data->player.angle == 270) // South
-	// 	r_data->v_dir.y = 1;
-	// if (data->player.angle == 0) //East
-	// 	r_data->v_dir.x = 1;
-	// if (data->player.angle == 180) // West
-	// 	r_data->v_dir.x = -1;
 	printf(GREEN"\nDIRECTION VECTOR -> (%f, %f)\n"RESET, r_data->v_dir.x, r_data->v_dir.y);
 }
 
@@ -143,7 +135,18 @@ int	raycast(t_game *data)
 	//Plano de camara inicial (FOV)
 	data->player.camera_plane.x = 0;
 	data->player.camera_plane.y = 0.66;
+
+	data->player.dir_vector.x = 0;
+	data->player.dir_vector.y = 0;
 	//Vector de dirección inicial
+	// if (data->player.angle == 90) //North
+	// 	data->player.dir_vector.y = -1;
+	// if (data->player.angle == 270) // South
+	// 	data->player.dir_vector.y = 1;
+	// if (data->player.angle == 0) //East
+	// 	data->player.dir_vector.x = 1;
+	// if (data->player.angle == 180) // West
+	// 	data->player.dir_vector.x = -1;
 	data->player.dir_vector.x = -1;
 	data->player.dir_vector.y = 0;
 
