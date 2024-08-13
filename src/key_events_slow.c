@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:13:52 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/13 18:08:27 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/13 17:42:30 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ float	convert_to_radian(float number)
 Nota: las adiciones y restas tanto a x e y son segun el vector de direccion que funciona ahora
 W --> mira al Oeste
  */
-// void	key_events(mlx_key_data_t keydata, void* param)
-void	key_events(void *param)
+// void	key_events(void *param)
+void	key_events(mlx_key_data_t keydata, void* param)
 {
 	t_game		*data;
 	t_cords		save;
@@ -40,27 +40,27 @@ void	key_events(void *param)
 	save.x = data->player.dir_vector.x;
 	save.y = data->player.dir_vector.y;
 
-	if (mlx_is_key_down(data->display.mlx,  MLX_KEY_ESCAPE))
+	if (keydata.key == MLX_KEY_ESCAPE)
 	{
 		mlx_close_window(data->display.mlx);
 		printf("Adiooooossss");
 	}
-	else if (mlx_is_key_down(data->display.mlx,  MLX_KEY_W))
+	else if (keydata.key == MLX_KEY_W)
 	{
 		new.x += cos(convert_to_radian(data->player.angle)) * MOVE_SPEED;
 		new.y -= sin(convert_to_radian(data->player.angle)) * MOVE_SPEED;
 	}
-	else if (mlx_is_key_down(data->display.mlx,  MLX_KEY_S))
+	else if (keydata.key == MLX_KEY_S)
 	{
 		new.x -= cos(convert_to_radian(data->player.angle)) * MOVE_SPEED;
 		new.y += sin(convert_to_radian(data->player.angle)) * MOVE_SPEED;
 	}
-	else if (mlx_is_key_down(data->display.mlx,  MLX_KEY_A))
+	else if (keydata.key == MLX_KEY_A)
 	{
 		new.x += sin(convert_to_radian(data->player.angle)) * MOVE_SPEED;
 		new.y += cos(convert_to_radian(data->player.angle)) * MOVE_SPEED;
 	}
-	else if (mlx_is_key_down(data->display.mlx,  MLX_KEY_D))
+	else if (keydata.key == MLX_KEY_D)
 	{
 		new.x -= sin(convert_to_radian(data->player.angle)) * MOVE_SPEED;
 		new.y -= cos(convert_to_radian(data->player.angle)) * MOVE_SPEED;
@@ -89,7 +89,7 @@ void	key_events(void *param)
 	//Esta ecuación matricial está hecha para coordenadas dirigidas a la izq 
 	(pero funciona igual si el angulo es negativo (para el otro lado(derecha)))
 	 */
-	if (mlx_is_key_down(data->display.mlx, MLX_KEY_LEFT))
+	if (keydata.key == MLX_KEY_LEFT)
 	{
 		data->player.dir_vector.x = save.x * cos(ROTATION_SPEED_R) - save.y * sin(ROTATION_SPEED_R);
 		data->player.dir_vector.y = save.x * sin(ROTATION_SPEED_R) + save.y * cos(ROTATION_SPEED_R);
@@ -97,7 +97,7 @@ void	key_events(void *param)
 		draw_all(data);
 		data->player.angle -= ROTATION_SPEED;
 	}
-	else if (mlx_is_key_down(data->display.mlx, MLX_KEY_RIGHT))
+	else if (keydata.key == MLX_KEY_RIGHT)
 	{
 		data->player.dir_vector.x = save.x * cos(-ROTATION_SPEED_R) - save.y * sin(-ROTATION_SPEED_R);
 		data->player.dir_vector.y = save.x * sin(-ROTATION_SPEED_R) + save.y * cos(-ROTATION_SPEED_R);
