@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:13:52 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/10 17:23:50 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/13 13:49:25 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,16 @@
 
 void	key_events(void *param)
 {
-	t_display	*game;
+	t_game		*data;
 
-	game = (t_display *)param;
-	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
+	data = (t_game *)param;
+	if (mlx_is_key_down(data->display.mlx, MLX_KEY_ESCAPE))
 	{
-		mlx_close_window(game->mlx);
+		mlx_close_window(data->display.mlx);
 		printf("Adiooooossss");
+	}
+	if (mlx_is_key_down(data->display.mlx, MLX_KEY_W))
+	{
+		printf(YELLOW"Mi posición es :(%d, %d)\n" RESET, (int)data->player.x, (int)data->player.y);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:31:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/08/02 14:52:51 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/13 13:57:05 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,19 @@ static int	check_inside_walls(char **map, size_t x, size_t y)
 	return (EXIT_SUCCESS);
 }
 
-void	get_view(t_scene *scene, char character)
+void	get_view(t_game *data, char character)
 {
 	if (character == PLAYER_EAST)
-		scene->angle = 0;
+		data->player.angle = 0;
 	else if (character == PLAYER_NORTH)
-		scene->angle = 90;
+		data->player.angle = 90;
 	else if (character == PLAYER_WEST)
-		scene->angle = 180;
+		data->player.angle = 180;
 	else if (character == PLAYER_SOUTH)
-		scene->angle = 270;
+		data->player.angle = 270;
 }
 
-static int	check_value(char **map, size_t x, size_t y, t_scene *scene)
+static int	check_value(char **map, size_t x, size_t y, t_game *data)
 {
 	static int	cant_player;
 
@@ -49,9 +49,9 @@ static int	check_value(char **map, size_t x, size_t y, t_scene *scene)
 	{
 		if (cant_player > 0)
 			return (exit_msg("Too many players\n", EXIT_FAILURE));
-		scene->player_x = x;
-		scene->player_y = y;
-		get_view(scene, map[y][x]);
+		data->player.x = x;
+		data->player.y = y;
+		get_view(data, map[y][x]);
 		cant_player++;
 		if (check_inside_walls(map, x, y))
 			return (exit_msg("Player position not valid\n", EXIT_FAILURE));
@@ -66,7 +66,7 @@ static int	check_value(char **map, size_t x, size_t y, t_scene *scene)
 	return (EXIT_SUCCESS);
 }
 
-int	check_map(char **map,  t_scene *scene)
+int	check_map(char **map,  t_game *data)
 {
 	size_t	y;
 	size_t	x;
@@ -83,13 +83,13 @@ int	check_map(char **map,  t_scene *scene)
 		{
 			if (x > max_x)
 				max_x = x;
-			if (check_value(map, x, y, scene))
+			if (check_value(map, x, y, data))
 				return (EXIT_FAILURE);
 			x++;
 		}
 		y++;
 	}
-	scene->map_height = y;
-	scene->map_width = max_x + 1;
+	data->scene.map_height = y;
+	data->scene.map_width = max_x + 1;
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:18 by albartol          #+#    #+#             */
-/*   Updated: 2024/08/05 11:54:09 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/13 13:52:54 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	main(int argc, char **argv)
 	// ft_lstiter(data.file.file_content, print);
 	if (extract_scene_info(&data.file))
 		return (free_and_exit(&data, EXIT_FAILURE));
-	if (check_scene_info(&data.file, &data.scene))
+	if (check_scene_info(&data))
 		return (free_and_exit(&data, EXIT_FAILURE));
 	print_info(&data);
 	print_map(data.file.map);

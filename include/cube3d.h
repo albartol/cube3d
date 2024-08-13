@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/08/10 17:24:16 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/13 14:02:04 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,10 @@ typedef struct s_display	t_display;
 typedef struct s_grafics	t_grafics;
 typedef	struct s_player		t_player;
 
+//Raycast
+typedef struct s_raycast	t_raycast;
+typedef struct s_cords t_cords;
+
 struct s_scene_file
 {
 	t_list	*file_content;
@@ -111,17 +115,35 @@ struct s_player
 	int		angle;
 };
 
+//Raycast
+struct s_cords
+{
+	double	x;
+	double	y;
+};
+struct s_raycast
+{
+	t_cords origin; 		// Initial position
+	t_cords	v_dir;			// Initial direction vector
+	t_cords	camera_plane;	// Plano de camara del jugador --> the FOV is 2 * atan(0.66/1.0)=66°
+	t_cords ray_dir;		// La dirección del rayo
+	double	camera_x;
+};
+
 struct s_game
 {
 	t_scene_file	file;
 	t_scene			scene;
 	t_display		display;
 	t_player		player;
+	t_raycast		raycast;
 };
+
+
 
 int		read_scene_file(t_scene_file *scene_info, const char *file_path);
 int		extract_scene_info(t_scene_file *scene_info);
-int		check_scene_info(t_scene_file *scene_info, t_scene *scene);
+int		check_scene_info(t_game *data);
 
 //Utils
 void	free_scene_info(t_scene_file *info);

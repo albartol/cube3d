@@ -6,42 +6,38 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 09:28:31 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/10 17:53:43 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/13 13:58:43 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <raycast.h>
 #include <check_scene.h>
 
-
 /* 
 Setea las cordenadas iniciales del player
 y determina el vector de dirección segun sea N, S, W o E
+el angulo se seteó anteriormente en la función get_view()
+del archivo check_map.c
  */
 void	set_cords(t_raycast *r_data , t_game *data)
 {
-	r_data->origin.x = (data->scene.player_x) + 0.5;
-	r_data->origin.y = (data->scene.player_y) + 0.5;
+	r_data->origin.x = data->player.x + 0.5;
+	r_data->origin.y = data->player.y + 0.5;
 
-	r_data->v_dir.x = -1;
-	r_data->v_dir.y = 0;
+	// r_data->v_dir.x = -1;
+	// r_data->v_dir.y = 0;
 
 	r_data->v_dir.x = 0;
 	r_data->v_dir.y = 0;
-	if (data->scene.angle == 90) //North
+	if (data->player.angle == 90) //North
 		r_data->v_dir.y = -1;
-	if (data->scene.angle == 270) // South
+	if (data->player.angle == 270) // South
 		r_data->v_dir.y = 1;
-	if (data->scene.angle == 0) //East
+	if (data->player.angle == 0) //East
 		r_data->v_dir.x = 1;
-	if (data->scene.angle == 180) // West
+	if (data->player.angle == 180) // West
 		r_data->v_dir.x = -1;
-	printf("\nDIRECTION VECTOR -> (%f, %f)\n", r_data->v_dir.x, r_data->v_dir.y);
-}
-
-uint32_t ft_pixel(uint32_t r, uint32_t g, uint32_t b, uint32_t t)
-{
-	return (r << 24 | g << 16 | b << 8 | t);
+	printf(GREEN"\nDIRECTION VECTOR -> (%f, %f)\n"RESET, r_data->v_dir.x, r_data->v_dir.y);
 }
 
 int	fill_screen(mlx_image_t *img, double line_height, int side)
@@ -64,10 +60,10 @@ int	fill_screen(mlx_image_t *img, double line_height, int side)
 		end = WIN_HEIGHT;
 
 	//Color
-	color = ft_pixel(243, 133, 229, 255);
-	// color = ft_pixel(244, 120, 120, 255);
+	color = create_color(243, 133, 229, 255);
+	// color = create_color(244, 120, 120, 255);
 	if (side == 0)
-		color = ft_pixel(167, 67, 154, 255);
+		color = create_color(167, 67, 154, 255);
 
 	//End
 	if (j > img->width)
@@ -118,8 +114,9 @@ int	raycast(t_game *data)
 		printf("\n__________________________\n");
 		x++;
 	}
+	
 	mlx_image_to_window(data->display.mlx, data->display.frames[0], 0, 0);
-	mlx_loop_hook(data->display.mlx, key_events, &data->display);
+	mlx_loop_hook(data->display.mlx, key_events, data);
 	mlx_loop(data->display.mlx);
 	return (EXIT_SUCCESS);
 }
