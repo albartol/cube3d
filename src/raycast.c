@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 09:28:31 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/13 16:19:33 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/13 17:31:55 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ int	raycast(t_game *data)
 	draw_img(data, data->display.frames[0]);
 
 	mlx_image_to_window(data->display.mlx, data->display.frames[0], 0, 0);
-	mlx_loop_hook(data->display.mlx, key_events, data);
+	mlx_key_hook(data->display.mlx, key_events, data);
 	mlx_loop(data->display.mlx);
 	return (EXIT_SUCCESS);
 }

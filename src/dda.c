@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:05:27 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/13 15:03:45 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/13 17:27:06 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include <check_scene.h>
 
 // Función que determina si hay una pared en las coordenadas (x, y)
-int detect_colition(int x, int y, char **map) {
+int detect_colition(int x, int y, char **map)
+{
 	
 	int	width;
 	int height;

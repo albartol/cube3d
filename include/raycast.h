@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:10:13 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/13 16:42:29 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/13 17:36:55 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@
 # define _1_PI	0.31830988618379067154	/* 1/pi */
 
 # define MOVE_SPEED 0.3
-# define ROTATION_SPEED 0.3
-# define ROTATION_SPEED_R 0.3 * PI / 180 //Radians
+# define ROTATION_SPEED 2.0
+# define MOVE_SPEED_R (MOVE_SPEED * PI / 180)
+# define ROTATION_SPEED_R (ROTATION_SPEED * PI / 180) //Radians
 
 # define WIN_WIDTH	800
 # define WIN_HEIGHT	600
