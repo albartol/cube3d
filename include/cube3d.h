@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/08/13 18:08:36 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/13 19:48:47 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,8 +157,8 @@ void	print_map(char **map);
 int		raycast(t_game *data);
 
 //Grafics part
-// void	key_events(mlx_key_data_t keydata, void* param);
-void	key_events(void *param);
+void	key_events(mlx_key_data_t keydata, void* param);
+// void	key_events(void *param);
 // int		start_grafics(t_game *data);
 // void	movement(void *param);
 

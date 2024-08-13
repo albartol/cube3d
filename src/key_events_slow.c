@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:13:52 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/13 17:42:30 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/13 18:55:50 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,12 @@ float	convert_to_radian(float number)
 Nota: las adiciones y restas tanto a x e y son segun el vector de direccion que funciona ahora
 W --> mira al Oeste
  */
-// void	key_events(void *param)
-void	key_events(mlx_key_data_t keydata, void* param)
+// void	key_events(mlx_key_data_t keydata, void* param)
+void	key_events(void *param)
 {
 	t_game		*data;
-	t_cords		save;
+	t_cords		save_pos;
+	t_cords		save_plane;
 	t_cords		new;
 
 	data = (t_game *)param;
@@ -37,30 +38,34 @@ void	key_events(mlx_key_data_t keydata, void* param)
 	new.y = data->player.y;
 
 	//For the rotation
-	save.x = data->player.dir_vector.x;
-	save.y = data->player.dir_vector.y;
+	save_pos.x = data->player.dir_vector.x;
+	save_pos.y = data->player.dir_vector.y;
 
-	if (keydata.key == MLX_KEY_ESCAPE)
+	//For the plane of the camera
+	save_plane.x = data->player.camera_plane.x;
+	save_plane.y = data->player.camera_plane.y;
+
+	if (mlx_is_key_down(data->display.mlx,  MLX_KEY_ESCAPE))
 	{
 		mlx_close_window(data->display.mlx);
 		printf("Adiooooossss");
 	}
-	else if (keydata.key == MLX_KEY_W)
+	else if (mlx_is_key_down(data->display.mlx,  MLX_KEY_W))
 	{
 		new.x += cos(convert_to_radian(data->player.angle)) * MOVE_SPEED;
 		new.y -= sin(convert_to_radian(data->player.angle)) * MOVE_SPEED;
 	}
-	else if (keydata.key == MLX_KEY_S)
+	else if (mlx_is_key_down(data->display.mlx,  MLX_KEY_S))
 	{
 		new.x -= cos(convert_to_radian(data->player.angle)) * MOVE_SPEED;
 		new.y += sin(convert_to_radian(data->player.angle)) * MOVE_SPEED;
 	}
-	else if (keydata.key == MLX_KEY_A)
+	else if (mlx_is_key_down(data->display.mlx,  MLX_KEY_A))
 	{
 		new.x += sin(convert_to_radian(data->player.angle)) * MOVE_SPEED;
 		new.y += cos(convert_to_radian(data->player.angle)) * MOVE_SPEED;
 	}
-	else if (keydata.key == MLX_KEY_D)
+	else if (mlx_is_key_down(data->display.mlx,  MLX_KEY_D))
 	{
 		new.x -= sin(convert_to_radian(data->player.angle)) * MOVE_SPEED;
 		new.y -= cos(convert_to_radian(data->player.angle)) * MOVE_SPEED;
@@ -89,18 +94,30 @@ void	key_events(mlx_key_data_t keydata, void* param)
 	//Esta ecuación matricial está hecha para coordenadas dirigidas a la izq 
 	(pero funciona igual si el angulo es negativo (para el otro lado(derecha)))
 	 */
-	if (keydata.key == MLX_KEY_LEFT)
+	if (mlx_is_key_down(data->display.mlx, MLX_KEY_LEFT))
 	{
-		data->player.dir_vector.x = save.x * cos(ROTATION_SPEED_R) - save.y * sin(ROTATION_SPEED_R);
-		data->player.dir_vector.y = save.x * sin(ROTATION_SPEED_R) + save.y * cos(ROTATION_SPEED_R);
+		//Rotate the direction vector
+		data->player.dir_vector.x = save_pos.x * cos(ROTATION_SPEED_R) - save_pos.y * sin(ROTATION_SPEED_R);
+		data->player.dir_vector.y = save_pos.x * sin(ROTATION_SPEED_R) + save_pos.y * cos(ROTATION_SPEED_R);
+
+		//Rotate the camera plane
+		data->player.camera_plane.x = save_plane.x * cos(ROTATION_SPEED_R) - save_plane.y * sin(ROTATION_SPEED_R);
+		data->player.camera_plane.y = save_plane.x * sin(ROTATION_SPEED_R) + save_plane.y * cos(ROTATION_SPEED_R);
+		
 		printf(YELLOW"Rotando %f grados (right)\n" RESET, ROTATION_SPEED);
 		draw_all(data);
 		data->player.angle -= ROTATION_SPEED;
 	}
-	else if (keydata.key == MLX_KEY_RIGHT)
+	else if (mlx_is_key_down(data->display.mlx, MLX_KEY_RIGHT))
 	{
-		data->player.dir_vector.x = save.x * cos(-ROTATION_SPEED_R) - save.y * sin(-ROTATION_SPEED_R);
-		data->player.dir_vector.y = save.x * sin(-ROTATION_SPEED_R) + save.y * cos(-ROTATION_SPEED_R);
+		//Rotate the direction vector
+		data->player.dir_vector.x = save_pos.x * cos(-ROTATION_SPEED_R) - save_pos.y * sin(-ROTATION_SPEED_R);
+		data->player.dir_vector.y = save_pos.x * sin(-ROTATION_SPEED_R) + save_pos.y * cos(-ROTATION_SPEED_R);
+
+		//Rotate the camera plane
+		data->player.camera_plane.x = save_plane.x * cos(-ROTATION_SPEED_R) - save_plane.y * sin(-ROTATION_SPEED_R);
+		data->player.camera_plane.y = save_plane.x * sin(-ROTATION_SPEED_R) + save_plane.y * cos(-ROTATION_SPEED_R);
+
 		printf(YELLOW"Rotando %f grados (right)\n" RESET, ROTATION_SPEED);
 		draw_all(data);
 		data->player.angle += ROTATION_SPEED;
