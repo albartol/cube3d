@@ -1,39 +1,86 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_events.c                                       :+:      :+:    :+:   */
+/*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:13:52 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/13 20:10:28 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/16 00:13:13 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <raycast.h>
 
 void	draw_all(t_game *data);
-int detect_colition(int x, int y, char **map);
 
-float	transform_angle(float angle)
+float transform_angle(float angle)
 {
-	if (angle > 360)
-		return (angle - 360);
-	if (angle < 0)
-		return (angle + 360);
-	return (angle);
+    float two_pi = 2.0f * M_PI;
+    
+    if (angle > two_pi)
+        return (angle - two_pi);
+    if (angle < 0)
+        return (angle + two_pi);
+    return (angle);
+}
+
+// float	transform_angle(float angle)
+// {
+// 	if (angle > 360)
+// 		return (angle - 360);
+// 	if (angle < 0)
+// 		return (angle + 360);
+// 	return (angle);
+// }
+
+/* 
+Holaaa, este es un sistema de colisiones provisional (como el so_long)
+Tenemos el mismo problema con las colisiones que en tu versión anterior del
+ray casting (atraviesa esquinas) --> podemos hacer las colisiones tomando
+la distancia en la que se encuentra el jugador respecto a las paredes en lugar
+de hacerlo con el mapa
+Ej:
+	P --------------------------> WALL | Distancia = 20 (puede avanzar)
+	        P ------------------> WALL | Distancia = 15 (puede avanzar)
+	                 P ---------> WALL | Distancia = 8  (puede avanzar)
+	                     P -----> WALL | Distancia = 5  (puede avanzar) 
+	                          P > WALL | Distancia = 0  (no puede avanzar, se detecta colisión)
+:D
+o....
+Podríamos agarrarnos el width y height del mapa y controlar los segfaults
+(aunque creo que es mejor hacerlo de la 2da manera (distancias) como dijimos desde el principio)
+
+Edit:
+	le agregué un map[y][x] == 0 y al parecer ahora funciona....
+ */
+int	checker(int x, int y, char **map)
+{
+	// printf("bef --> (%d, %d)\n", x, y);
+	y /= P_SIZE;
+	x /= P_SIZE;
+	// printf("Aft --> (%d, %d)\n", x, y);
+	if (x < 0 || y < 0)
+		return (EXIT_FAILURE);
+	if (map[y][x] == 0 || map[y][x] == '1')
+	{
+		printf("Soy una pared\n");
+		return (EXIT_FAILURE);
+	}
+	return(EXIT_SUCCESS);
 }
 
 float	convert_to_radian(float number)
 {
 	return (number * (PI / 180));
 }
+
 /* 
 Nota: las adiciones y restas tanto a x e y son segun el vector de direccion que funciona ahora
 W --> mira al Oeste
  */
 // void	key_events(void *param)
-void	key_events(mlx_key_data_t keydata, void* param)
+void	movement(mlx_key_data_t keydata, void* param)
 {
 	t_game		*data;
 	t_cords		save_pos;
@@ -57,29 +104,29 @@ void	key_events(mlx_key_data_t keydata, void* param)
 	if (keydata.key == MLX_KEY_ESCAPE)
 	{
 		mlx_close_window(data->display.mlx);
-		printf("Adiooooossss");
+		printf("Thanks for playing");
 	}
 	else if (keydata.key == MLX_KEY_W)
 	{
-		new.x += cos(convert_to_radian(data->player.angle)) * MOVE_SPEED;
-		new.y -= sin(convert_to_radian(data->player.angle)) * MOVE_SPEED;
+		new.x += cos(data->player.angle) * MOVE_SPEED;
+		new.y -= sin(data->player.angle) * MOVE_SPEED;
 	}
 	else if (keydata.key == MLX_KEY_S)
 	{
-		new.x -= cos(convert_to_radian(data->player.angle)) * MOVE_SPEED;
-		new.y += sin(convert_to_radian(data->player.angle)) * MOVE_SPEED;
+		new.x -= cos(data->player.angle) * MOVE_SPEED;
+		new.y += sin(data->player.angle) * MOVE_SPEED;
 	}
 	else if (keydata.key == MLX_KEY_A)
 	{
-		new.x += sin(convert_to_radian(data->player.angle)) * MOVE_SPEED;
-		new.y += cos(convert_to_radian(data->player.angle)) * MOVE_SPEED;
+		new.x += sin(data->player.angle) * MOVE_SPEED;
+		new.y += cos(data->player.angle) * MOVE_SPEED;
 	}
 	else if (keydata.key == MLX_KEY_D)
 	{
-		new.x -= sin(convert_to_radian(data->player.angle)) * MOVE_SPEED;
-		new.y -= cos(convert_to_radian(data->player.angle)) * MOVE_SPEED;
+		new.x -= sin(data->player.angle) * MOVE_SPEED;
+		new.y -= cos(data->player.angle) * MOVE_SPEED;
 	}
-	if (!detect_colition((int)new.x, (int)new.y, data->file.map))
+	if (checker((int)new.x, (int)new.y, data->file.map))
 	{
 		data->player.x = new.x;
 		data->player.y = new.y;
@@ -114,8 +161,8 @@ void	key_events(mlx_key_data_t keydata, void* param)
 		data->player.camera_plane.y = save_plane.x * sin(ROTATION_SPEED_R) + save_plane.y * cos(ROTATION_SPEED_R);
 		
 		printf(YELLOW"Rotando %f grados (right)\n" RESET, ROTATION_SPEED);
+		data->player.angle -= transform_angle(convert_to_radian(ROTATION_SPEED_R));
 		draw_all(data);
-		data->player.angle = transform_angle(data->player.angle - ROTATION_SPEED);
 	}
 	else if (keydata.key == MLX_KEY_RIGHT)
 	{
@@ -128,8 +175,8 @@ void	key_events(mlx_key_data_t keydata, void* param)
 		data->player.camera_plane.y = save_plane.x * sin(-ROTATION_SPEED_R) + save_plane.y * cos(-ROTATION_SPEED_R);
 
 		printf(YELLOW"Rotando %f grados (right)\n" RESET, ROTATION_SPEED);
+		data->player.angle += transform_angle(convert_to_radian(ROTATION_SPEED_R));
 		draw_all(data);
-		data->player.angle = transform_angle(data->player.angle + ROTATION_SPEED);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:10:13 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/15 20:10:04 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/15 23:43:27 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define ROTATION_SPEED 5.0
 # define MOVE_SPEED_R (MOVE_SPEED * PI / 180)
 # define ROTATION_SPEED_R (ROTATION_SPEED * PI / 180) //Radians
+
+# define ROTATION_SPEED_R (ROTATION_SPEED * PI / 180) //cos movement
 
 # define WIN_WIDTH	800
 # define WIN_HEIGHT	600
@@ -67,6 +69,7 @@ struct s_dda
 
 // double	dda(t_cords origin, t_cords dest, char **map);
 double	dda(t_raycast *ray_data, t_dda *dda_data, char **map);
-void	init_ray_values(t_game *data);
+void	movement(mlx_key_data_t keydata, void* param);
+int		init_ray_values(t_game *data);
 int		draw_img(t_game *data, mlx_image_t *img);
 #endif

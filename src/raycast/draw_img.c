@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 20:09:46 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/15 20:25:23 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/15 23:46:02 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ int	draw_img(t_game *data, mlx_image_t *img)
 	t_dda		dda_data;
 	
 	set_cords(&ray_data, data);
-	printf(RED"Player angle --> %d\n"RESET, data->player.angle);
-	printf(YELLOW"origin (%f, %f)\n", ray_data.origin.x, ray_data.origin.y);
-	printf("Direction vector (%f, %f)\n"RESET, ray_data.v_dir.x, ray_data.v_dir.y);
-	printf(GREEN"Camera plane: (%f, %f)\n"RESET, ray_data.camera_plane.x, ray_data.camera_plane.y);
+	// printf(RED"Player angle --> %f\n"RESET, data->player.angle * 180 / PI);
+	// printf(YELLOW"origin (%f, %f)\n", ray_data.origin.x, ray_data.origin.y);
+	// printf("Direction vector (%f, %f)\n"RESET, ray_data.v_dir.x, ray_data.v_dir.y);
+	// printf(GREEN"Camera plane: (%f, %f)\n"RESET, ray_data.camera_plane.x, ray_data.camera_plane.y);
 	x = 0;
 	while (x < WIN_WIDTH)
 	{
@@ -94,8 +94,10 @@ int	draw_img(t_game *data, mlx_image_t *img)
 		// DDA
 		line_height = dda(&ray_data, &dda_data, data->file.map);
 		if (fill_frame(img, line_height, dda_data.side, data))
-			return (EXIT_SUCCESS);
+			break;
 		x++;
 	}
-	return (EXIT_FAILURE);
+	if (mlx_image_to_window(data->display.mlx, data->display.frames[0], 0, 0) == -1)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }

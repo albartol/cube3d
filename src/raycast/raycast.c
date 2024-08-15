@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 09:28:31 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/15 20:25:18 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/15 23:36:47 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	draw_all(t_game *data)
 	static int	frame;
 
 	draw_img(data, data->display.frames[0]);
-	mlx_image_to_window(data->display.mlx, data->display.frames[0], 0, 0);
 	frame = !frame;
 }
 
@@ -26,16 +25,19 @@ int	raycast(t_game *data)
 {
 	//Raycasting:
 	data->display.mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cube 3D", false);
-	data->display.frames[0] = mlx_new_image(data->display.mlx, WIN_WIDTH, WIN_HEIGHT);
-	data->display.frames[1] = mlx_new_image(data->display.mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (!data->display.mlx)
+		return (exit_msg(mlx_strerror(mlx_errno), EXIT_FAILURE));
 
-	init_ray_values(data);
+	if (init_ray_values(data))
+		return (exit_msg(mlx_strerror(mlx_errno), EXIT_FAILURE));
 
 	//Draw initial image
-	draw_img(data, data->display.frames[0]);
-	mlx_image_to_window(data->display.mlx, data->display.frames[0], 0, 0);
+	if (draw_img(data, data->display.frames[0]))
+		return (exit_msg(mlx_strerror(mlx_errno), EXIT_FAILURE));
 
-	mlx_key_hook(data->display.mlx, key_events, data);
+	data->player.angle *= (PI / 180);
+	
+	mlx_key_hook(data->display.mlx, movement, data);
 	mlx_loop(data->display.mlx);
 	return (EXIT_SUCCESS);
 }

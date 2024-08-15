@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/08/15 20:24:29 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/08/15 21:25:48 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,8 +49,7 @@ YELLOW := \033[0;93m
 RESET := \033[0m
 
 # ---------- MANDATORY ----------
-SRC :=	main.c \
-		key_events.c
+SRC :=	main.c
 
 # Parse
 CHK :=	check_colors.c \
@@ -68,7 +67,8 @@ PARSE := $(CHK) $(EXT)
 RAYCAST	:=	dda.c \
 			draw_img.c \
 			init_ray_values.c \
-			raycast.c			
+			movement.c \
+			raycast.c
 
 UTIL := in_range.c \
 		print_error.c \
