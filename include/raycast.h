@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:10:13 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/15 17:55:22 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/15 20:10:04 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ struct s_dda
 
 // double	dda(t_cords origin, t_cords dest, char **map);
 double	dda(t_raycast *ray_data, t_dda *dda_data, char **map);
-
+void	init_ray_values(t_game *data);
+int		draw_img(t_game *data, mlx_image_t *img);
 #endif

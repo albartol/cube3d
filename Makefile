@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/08/13 16:20:30 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/08/15 20:24:29 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ CFLAGS := -Wall -Wextra -Werror -O2 $(INCLUDE)
 LIBFT := lib/libft/libft.a
 LIBFT_DIR := lib/libft
 FT := -L$(LIBFT_DIR) -lft
+MKDIR := mkdir -p
 
 MLX42 :=	lib/MLX42/build/libmlx42.a
 MLX42_DIR := lib/MLX42
@@ -33,8 +34,11 @@ MLX :=	-L$(MLX42_BUILD) -lmlx42 -ldl -lglfw -pthread -lm
 
 LIBS := $(FT) $(MLX)
 
-SRC_DIR	:= src
-OBJ_DIR	:= obj
+SRC_DIR		:= src
+OBJ_DIR		:= obj
+PARSE_DIR	:= parse
+UTILS_DIR	:= utils
+RAYCAST_DIR	:= raycast
 
 RED := \033[0;91m
 GREEN := \033[0;92m
@@ -46,39 +50,44 @@ RESET := \033[0m
 
 # ---------- MANDATORY ----------
 SRC :=	main.c \
-		read_scene_file.c
-		
-EXT := extract_scene_info.c \
-		extract_elements.c \
-		extract_map.c
+		key_events.c
 
-CHK := check_scene_info.c \
+# Parse
+CHK :=	check_colors.c \
 		check_elements.c \
 		check_map.c \
-		check_colors.c
+		check_scene_info.c \
+		
+EXT :=	extract_elements.c \
+		extract_map.c \
+		extract_scene_info.c \
+		read_scene_file.c
 
-# GRAFICS := start_grafics.c \
-# 			put_map.c \
-# 			fill_color.c\
-# 			movement.c
+PARSE := $(CHK) $(EXT)
 
-RAYCAST	:=	raycast.c \
-			dda.c \
-			key_events.c
+RAYCAST	:=	dda.c \
+			draw_img.c \
+			init_ray_values.c \
+			raycast.c			
 
-UTIL := print_error.c \
-		in_range.c \
+UTIL := in_range.c \
+		print_error.c \
 		create_color.c \
 		check_file_type.c \
 		exit_msg.c \
 		free_scene_info.c \
-		free_and_exit.c
-		
-SOURCES := $(SRC) $(EXT) $(CHK) $(UTIL) $(RAYCAST)
+		free_and_exit.c \
+		print_map.c
+
+# Add prefixes:
+UTIL := $(addprefix $(UTILS_DIR)/, $(UTIL))
+PARSE := $(addprefix $(PARSE_DIR)/, $(PARSE))
+RAYCAST := $(addprefix $(RAYCAST_DIR)/, $(RAYCAST))
+
+SOURCES := $(SRC) $(PARSE) $(UTIL) $(RAYCAST)
+OBJS := $(SOURCES:%.c=$(OBJ_DIR)/%.o)
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SOURCES))
-
-OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 NAME := cube3D
 # ---------- MANDATORY END ----------
@@ -113,7 +122,12 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 $(OBJ_DIR):
 	@echo "$(YELLOW)Creating object directories...$(RESET)"
-	mkdir -p $(OBJ_DIR)
+	$(MKDIR) $(OBJ_DIR)
+	$(MKDIR) $(OBJ_DIR)/$(SRC_DIR)
+	$(MKDIR) $(OBJ_DIR)/$(OBJ_DIR)
+	$(MKDIR) $(OBJ_DIR)/$(PARSE_DIR)
+	$(MKDIR) $(OBJ_DIR)/$(UTILS_DIR)
+	$(MKDIR) $(OBJ_DIR)/$(RAYCAST_DIR)
 
 $(LIBFT):
 	@echo "$(YELLOW)Compiling libft...$(RESET)"

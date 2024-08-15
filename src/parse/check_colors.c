@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_colors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:31:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/07/10 16:06:55 by albartol         ###   ########.fr       */
+/*   Updated: 2024/08/15 20:02:17 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int	validate_color_str(const char *color, uint32_t *final_color)
 	if (!in_range(rgb[0], 0, 255) || !in_range(rgb[1], 0, 255)
 		|| !in_range(rgb[2], 0, 255))
 		return (EXIT_FAILURE);
-	*final_color = create_color(0, rgb[0], rgb[1], rgb[2]);
+	*final_color = create_color(255, rgb[0], rgb[1], rgb[2]);
 	return (EXIT_SUCCESS);
 }
 
