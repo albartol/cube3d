@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   create_color.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 18:22:04 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/22 18:22:12 by albartol         ###   ########.fr       */
+/*   Updated: 2024/08/15 19:12:34 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	create_color(const int t, const int r, const int g, const int b)
 {
-	return (t << 24 | r << 16 | g << 8 | b);
+	return (r << 24 | g << 16 | b << 8 | t);
 }

@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 09:28:31 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/13 19:48:59 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/15 19:11:21 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,48 +36,42 @@ void	set_cords(t_raycast *r_data , t_game *data)
 	printf(GREEN"\nDIRECTION VECTOR -> (%f, %f)\n"RESET, r_data->v_dir.x, r_data->v_dir.y);
 }
 
-int	fill_screen(mlx_image_t *img, double line_height, int side)
+int	fill_frame(mlx_image_t *img, double line_height, int side)
 {
-	static	uint32_t	j;
+	static	uint32_t	x;
+	int					y;
 	uint32_t			color;
-	uint32_t			color_background;
 	int					start;
 	int					end;
+
+	//End
+	if (x > img->width)
+	{
+		x = 0;
+		return (EXIT_FAILURE);
+	}
 
 	start = (-line_height / 2) + (WIN_HEIGHT / 2);
 	end = (line_height / 2) + (WIN_HEIGHT / 2);
 
-	//Segfault controled
-	if (start < 0)
-		start = 0;
-	if (end > WIN_HEIGHT)
-		end = WIN_HEIGHT;
-
-	//End
-	if (j > img->width)
-	{
-		j = 0;
-		return (EXIT_FAILURE);
-	}
-
-	//Color
-	color_background = create_color(0, 0, 0, 255);
-	color = create_color(243, 133, 229, 255);
-	// color = create_color(244, 120, 120, 255);
-	if (side == 0)
-		color = create_color(167, 67, 154, 255);
-
 	//Fill
-	int	i = 0;
-	while (i < (int)img->height)
+	y = 0;
+	while (y < (int)img->height)
 	{
-		if (i >= start && i <= end)
-			mlx_put_pixel(img, j, i, color);
-		else
-			mlx_put_pixel(img, j, i, color_background);
-		i++;
+		if (y < start)//Sky
+			color = create_color(255, 145, 13, 85);
+		else if (y >= start && y <= end)//walls
+		{
+			color = create_color(255, 13, 123, 145);
+			if (!side)
+				color /= 2;
+		}
+		else if (y >= end)//chao
+			color = create_color(255, 51, 222, 131);
+		mlx_put_pixel(img, x, y, color);
+		y++;
 	}
-	j++;
+	x++;
 	return (EXIT_SUCCESS);
 }
 
@@ -90,8 +84,10 @@ int	draw_img(t_game *data, mlx_image_t *img)
 	
 	x = 0;
 	set_cords(&ray_data, data);
+	printf(RED"Player angle --> %d\n"RESET, data->player.angle);
 	printf(YELLOW"origin (%f, %f)\n", ray_data.origin.x, ray_data.origin.y);
 	printf("Direction vector (%f, %f)\n"RESET, ray_data.v_dir.x, ray_data.v_dir.y);
+	printf(GREEN"Camera plane: (%f, %f)\n"RESET, ray_data.camera_plane.x, ray_data.camera_plane.y);
 	while (x < WIN_WIDTH)
 	{
 		dda_data.map_pos_x = (int)ray_data.origin.x;
@@ -101,12 +97,9 @@ int	draw_img(t_game *data, mlx_image_t *img)
 		ray_data.ray_dir.y = ray_data.v_dir.y + (ray_data.camera_plane.y * ray_data.camera_x);
 
 		// DDA
-		// printf("\n_________Ray #%d_(%f)_________\n", x + 1, ray_data.camera_x);
 		line_height = dda(&ray_data, &dda_data, data->file.map);
-		if (fill_screen(img, line_height, dda_data.side))
+		if (fill_frame(img, line_height, dda_data.side))
 			return (EXIT_SUCCESS);
-		// printf("Linea a dibujar --> [%f] hitted by (%d)\n", line_height, dda_data.side);
-		// printf("\n__________________________\n");
 		x++;
 	}
 	return (EXIT_FAILURE);
@@ -116,13 +109,34 @@ void	draw_all(t_game *data)
 {
 	static int	frame;
 
-	frame = 0;
-	draw_img(data, data->display.frames[frame]);
-	mlx_image_to_window(data->display.mlx, data->display.frames[frame], 0, 0);
-	if (!frame)
-		frame = 1;
-	else
-		frame = 0;
+	draw_img(data, data->display.frames[0]);
+	mlx_image_to_window(data->display.mlx, data->display.frames[0], 0, 0);
+	frame = !frame;
+}
+
+void	init_ray_values(t_game *data)
+{
+	//Vector de dirección inicial
+	if (data->player.angle == 90) //North
+	{
+		data->player.dir_vector.y = -1;
+		data->player.camera_plane.x = -FOV;
+	}
+	else if (data->player.angle == 270) // South
+	{
+		data->player.dir_vector.y = 1;
+		data->player.camera_plane.x = FOV;
+	}
+	else if (data->player.angle == 0) //East
+	{
+		data->player.dir_vector.x = 1;
+		data->player.camera_plane.y = -FOV;
+	}
+	if (data->player.angle == 180) // West
+	{
+		data->player.dir_vector.x = -1;
+		data->player.camera_plane.y = FOV;
+	}
 }
 
 int	raycast(t_game *data)
@@ -132,23 +146,7 @@ int	raycast(t_game *data)
 	data->display.frames[0] = mlx_new_image(data->display.mlx, WIN_WIDTH, WIN_HEIGHT);
 	data->display.frames[1] = mlx_new_image(data->display.mlx, WIN_WIDTH, WIN_HEIGHT);
 
-	//Plano de camara inicial (FOV)
-	data->player.camera_plane.x = 0;
-	data->player.camera_plane.y = 0.66;
-
-	data->player.dir_vector.x = 0;
-	data->player.dir_vector.y = 0;
-	//Vector de dirección inicial
-	// if (data->player.angle == 90) //North
-	// 	data->player.dir_vector.y = -1;
-	// if (data->player.angle == 270) // South
-	// 	data->player.dir_vector.y = 1;
-	// if (data->player.angle == 0) //East
-	// 	data->player.dir_vector.x = 1;
-	// if (data->player.angle == 180) // West
-	// 	data->player.dir_vector.x = -1;
-	data->player.dir_vector.x = -1;
-	data->player.dir_vector.y = 0;
+	init_ray_values(data);
 
 	//Draw initial image
 	draw_img(data, data->display.frames[0]);

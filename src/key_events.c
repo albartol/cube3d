@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:13:52 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/13 19:48:31 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/13 20:10:28 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 
 void	draw_all(t_game *data);
 int detect_colition(int x, int y, char **map);
+
+float	transform_angle(float angle)
+{
+	if (angle > 360)
+		return (angle - 360);
+	if (angle < 0)
+		return (angle + 360);
+	return (angle);
+}
 
 float	convert_to_radian(float number)
 {
@@ -106,7 +115,7 @@ void	key_events(mlx_key_data_t keydata, void* param)
 		
 		printf(YELLOW"Rotando %f grados (right)\n" RESET, ROTATION_SPEED);
 		draw_all(data);
-		data->player.angle -= ROTATION_SPEED;
+		data->player.angle = transform_angle(data->player.angle - ROTATION_SPEED);
 	}
 	else if (keydata.key == MLX_KEY_RIGHT)
 	{
@@ -120,7 +129,7 @@ void	key_events(mlx_key_data_t keydata, void* param)
 
 		printf(YELLOW"Rotando %f grados (right)\n" RESET, ROTATION_SPEED);
 		draw_all(data);
-		data->player.angle += ROTATION_SPEED;
+		data->player.angle = transform_angle(data->player.angle + ROTATION_SPEED);
 	}
 }
 
