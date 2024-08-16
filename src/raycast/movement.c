@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:13:52 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/16 00:13:13 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/16 16:56:38 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ void	movement(mlx_key_data_t keydata, void* param)
 	//Esta ecuación matricial está hecha para coordenadas dirigidas a la izq 
 	(pero funciona igual si el angulo es negativo (para el otro lado(derecha)))
 	 */
-	if (keydata.key == MLX_KEY_LEFT)
+	if (keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_Q)
 	{
 		//Rotate the direction vector
 		data->player.dir_vector.x = save_pos.x * cos(ROTATION_SPEED_R) - save_pos.y * sin(ROTATION_SPEED_R);
@@ -160,11 +160,11 @@ void	movement(mlx_key_data_t keydata, void* param)
 		data->player.camera_plane.x = save_plane.x * cos(ROTATION_SPEED_R) - save_plane.y * sin(ROTATION_SPEED_R);
 		data->player.camera_plane.y = save_plane.x * sin(ROTATION_SPEED_R) + save_plane.y * cos(ROTATION_SPEED_R);
 		
-		printf(YELLOW"Rotando %f grados (right)\n" RESET, ROTATION_SPEED);
-		data->player.angle -= transform_angle(convert_to_radian(ROTATION_SPEED_R));
+		printf(YELLOW"Rotando %f grados (right)\n" RESET, ROTATION_SPEED_R);
+		data->player.angle -= transform_angle(ROTATION_SPEED_R);
 		draw_all(data);
 	}
-	else if (keydata.key == MLX_KEY_RIGHT)
+	else if (keydata.key == MLX_KEY_RIGHT || keydata.key == MLX_KEY_E)
 	{
 		//Rotate the direction vector
 		data->player.dir_vector.x = save_pos.x * cos(-ROTATION_SPEED_R) - save_pos.y * sin(-ROTATION_SPEED_R);
@@ -175,7 +175,7 @@ void	movement(mlx_key_data_t keydata, void* param)
 		data->player.camera_plane.y = save_plane.x * sin(-ROTATION_SPEED_R) + save_plane.y * cos(-ROTATION_SPEED_R);
 
 		printf(YELLOW"Rotando %f grados (right)\n" RESET, ROTATION_SPEED);
-		data->player.angle += transform_angle(convert_to_radian(ROTATION_SPEED_R));
+		data->player.angle += transform_angle(ROTATION_SPEED_R);
 		draw_all(data);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/08/15 21:26:19 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/16 16:35:51 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ struct s_player
 	double	y;
 	double	offset_x;
 	double	offset_y;
-	int		angle;
+	float	angle;
 	t_cords	camera_plane;
 	t_cords	dir_vector;
 };
