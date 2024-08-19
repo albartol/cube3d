@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/08/15 21:25:48 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/08/19 14:55:10 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,19 @@ CC := cc
 
 INCLUDE := -Iinclude -Ilib/libft/include -Ilib/MLX42/include/MLX42
 
-CFLAGS := -Wall -Wextra -Werror -O2 $(INCLUDE)
+CFLAGS := -Wall -Wextra -Werror -O3 $(INCLUDE)
 # CFLAGS := -Wall -Wextra -Werror -ggdb $(INCLUDE) -fsanitize=address
 
 LIBFT := lib/libft/libft.a
 LIBFT_DIR := lib/libft
 FT := -L$(LIBFT_DIR) -lft
 MKDIR := mkdir -p
-
+LIBRARIES := check_scene.h \
+			 cube3d.h \
+			 extract_scene.h \
+			 raycast.h \
+			 utils.h
+			
 MLX42 :=	lib/MLX42/build/libmlx42.a
 MLX42_DIR := lib/MLX42
 MLX42_BUILD := lib/MLX42/build
@@ -39,6 +44,7 @@ OBJ_DIR		:= obj
 PARSE_DIR	:= parse
 UTILS_DIR	:= utils
 RAYCAST_DIR	:= raycast
+LIB_DIR		:= include
 
 RED := \033[0;91m
 GREEN := \033[0;92m
@@ -47,6 +53,7 @@ BLUE := \033[0;34m
 PURPLE := \033[0;35m
 YELLOW := \033[0;93m
 RESET := \033[0m
+
 
 # ---------- MANDATORY ----------
 SRC :=	main.c
@@ -83,6 +90,7 @@ UTIL := in_range.c \
 UTIL := $(addprefix $(UTILS_DIR)/, $(UTIL))
 PARSE := $(addprefix $(PARSE_DIR)/, $(PARSE))
 RAYCAST := $(addprefix $(RAYCAST_DIR)/, $(RAYCAST))
+LIBRARIES := $(addprefix $(LIB_DIR)/, $(LIBRARIES))
 
 SOURCES := $(SRC) $(PARSE) $(UTIL) $(RAYCAST)
 OBJS := $(SOURCES:%.c=$(OBJ_DIR)/%.o)
@@ -116,15 +124,13 @@ $(BONUS): $(BNS_OBJS) $(LIBFT) $(MLX42)
 	$(CC) $(CFLAGS) $(BNS_OBJS) $(LIBS) -o $@
 	@echo "$(GREEN)Program $(BONUS) created ✅$(RESET)"
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(LIBRARIES)
 	@echo "$(YELLOW)Compiling...$(RESET)"
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
 	@echo "$(YELLOW)Creating object directories...$(RESET)"
 	$(MKDIR) $(OBJ_DIR)
-	$(MKDIR) $(OBJ_DIR)/$(SRC_DIR)
-	$(MKDIR) $(OBJ_DIR)/$(OBJ_DIR)
 	$(MKDIR) $(OBJ_DIR)/$(PARSE_DIR)
 	$(MKDIR) $(OBJ_DIR)/$(UTILS_DIR)
 	$(MKDIR) $(OBJ_DIR)/$(RAYCAST_DIR)

@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 09:28:31 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/15 23:36:47 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:46:45 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int	raycast(t_game *data)
 
 	data->player.angle *= (PI / 180);
 	
-	mlx_key_hook(data->display.mlx, movement, data);
+	mlx_loop_hook(data->display.mlx, movement, data);
+	// mlx_key_hook(data->display.mlx, movement, data);
 	mlx_loop(data->display.mlx);
 	return (EXIT_SUCCESS);
 }

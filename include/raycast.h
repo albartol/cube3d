@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:10:13 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/15 23:43:27 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:55:41 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # define PI_4	0.78539816339744830962	/* pi/4 */
 # define _1_PI	0.31830988618379067154	/* 1/pi */
 
-# define MOVE_SPEED 0.3
-# define ROTATION_SPEED 5.0
+# define MOVE_SPEED 0.1
+# define ROTATION_SPEED 3.0
 # define MOVE_SPEED_R (MOVE_SPEED * PI / 180)
 # define ROTATION_SPEED_R (ROTATION_SPEED * PI / 180) //Radians
 
@@ -69,7 +69,8 @@ struct s_dda
 
 // double	dda(t_cords origin, t_cords dest, char **map);
 double	dda(t_raycast *ray_data, t_dda *dda_data, char **map);
-void	movement(mlx_key_data_t keydata, void* param);
+// void	movement(mlx_key_data_t keydata, void* param);
+void	movement(void* param);
 int		init_ray_values(t_game *data);
 int		draw_img(t_game *data, mlx_image_t *img);
 #endif
