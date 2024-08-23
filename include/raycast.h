@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:10:13 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/19 14:55:41 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/23 17:41:56 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define WIN_WIDTH	800
 # define WIN_HEIGHT	600
 # define FOV		0.66
+# define LIMIT_UP_DOWN (WIN_HEIGHT / 2)
 
 # define RAY_WIDTH 4
 
