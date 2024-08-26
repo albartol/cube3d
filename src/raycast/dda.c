@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:05:27 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/26 14:45:50 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/26 16:51:36 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,12 @@ void	get_distance(double *line, t_dda *dda_data, t_raycast *ray_data)
 	if (dda_data->side == 0)
 	{
 		per_wall_distance = (dda_data->side_dist.x - dda_data->delta_dist.x);
-		dda_data->x_hit = per_wall_distance * ray_data->v_dir.y + ray_data->origin.y;
+		dda_data->x_hit = per_wall_distance * ray_data->ray_dir.y + ray_data->origin.y;
 	}
 	else
 	{
 		per_wall_distance = (dda_data->side_dist.y - dda_data->delta_dist.y);
-		dda_data->x_hit = per_wall_distance * ray_data->v_dir.x + ray_data->origin.x;
+		dda_data->x_hit = per_wall_distance * ray_data->ray_dir.x + ray_data->origin.x;
 	}
 	// dda_data->x_hit = (double)(dda_data->x_hit - (int)dda_data->x_hit);
 	dda_data->x_hit -= floor(dda_data->x_hit);
@@ -125,7 +125,6 @@ double	dda(t_raycast *ray_data, t_dda *dda_data, char **map)
 			// printf("Me moví en y %f pasos, pos actual (%d, %d)\n", dda_data->step.y, dda_data->map_pos_x, dda_data->map_pos_y);
 		}
 	}
-
 	get_distance(&line_height, dda_data, ray_data);
 	return (line_height);
 }

@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 20:09:46 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/26 14:40:43 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/26 16:59:53 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,10 @@ uint32_t	get_textured_color(int y_col, double line_h, float x_hit, mlx_texture_t
 
 	if (colum < 0)
 		colum *= -1;
-	// if (colum < 0)
-	// 	colum *= -1;
 	// printf(PURPLE"Texturass %d - %d\n"RESET, texture->width, texture->height);
 	//  printf("Colum ==> %d\n", colum);
 	//  printf("row ==> %d\n", row);
 	result = &texture->pixels[((row * texture->width) + colum ) * texture->bytes_per_pixel];
-	// for (int i = 0; i < texture->bytes_per_pixel; i++)
-	// {
-	// 	result <<= 8;
-	// 	result += texture->pixels[index + i];
-	// }
 	return (*(uint32_t *)result);
 }
 
@@ -59,10 +52,12 @@ static int	fill_frame(mlx_image_t *img, double line_h, t_dda dda_data, t_game *d
 			color = data->scene.celling_color;
 		else if (y >= start && y < end)//walls
 		{
+			// if (dda_data.side == 0)
+			// 	dda_data.x_hit = 
 			color = get_textured_color (y - start, line_h, dda_data.x_hit, data->scene.north_texture);
+			if (!dda_data.side)
+				color /= 2;
 			// color = create_color(255, 13, 123, 145);
-			// if (!side)
-			// 	color /= 2;
 		}
 		else if (y >= end)//chao
 			color = data->scene.floor_color;

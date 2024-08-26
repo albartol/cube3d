@@ -1,7 +1,7 @@
 NO ./textures/hola.png
 SO ./textures/bluestone.png
 WE ./textures/redbrick.png
-EA ./textures/hola.png
+EA ./textures/eagle.png
 
 F 145,13,85
 C 51,222,131
