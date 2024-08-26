@@ -1,10 +1,10 @@
-NO ./textures/hola.png
-SO ./textures/bluestone.png
-WE ./textures/redbrick.png
-EA ./textures/eagle.png
+NO ./textures/redbrick.png
+SO ./textures/eagle.png
+WE ./textures/hola.png
+EA ./textures/bluestone.png
 
-F 145,13,85
-C 51,222,131
+C 78, 55, 19
+F 30, 30, 30
 
 1111111111111111111111111
 100000000110000000000001 1

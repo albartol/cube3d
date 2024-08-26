@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 20:09:46 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/26 16:59:53 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/26 17:41:48 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,22 @@ uint32_t	get_textured_color(int y_col, double line_h, float x_hit, mlx_texture_t
 {
 	int			colum;
 	int			row;
-	void		*result;
+	uint32_t	result;
 
 	colum = texture->width * x_hit;
 	row = (texture->height / line_h) * y_col;
 
 	if (colum < 0)
 		colum *= -1;
-	// printf(PURPLE"Texturass %d - %d\n"RESET, texture->width, texture->height);
-	//  printf("Colum ==> %d\n", colum);
-	//  printf("row ==> %d\n", row);
-	result = &texture->pixels[((row * texture->width) + colum ) * texture->bytes_per_pixel];
-	return (*(uint32_t *)result);
+	if (row < 0)
+		row *= -1;
+	result = 0;
+	for (int i = 0; i < 4; i++)
+	{
+		result <<= 8;
+		result |= texture->pixels[((row * texture->width) + colum ) * texture->bytes_per_pixel + i];
+	}
+	return (result);
 }
 
 static int	fill_frame(mlx_image_t *img, double line_h, t_dda dda_data, t_game *data)
@@ -56,7 +60,7 @@ static int	fill_frame(mlx_image_t *img, double line_h, t_dda dda_data, t_game *d
 			// 	dda_data.x_hit = 
 			color = get_textured_color (y - start, line_h, dda_data.x_hit, data->scene.north_texture);
 			if (!dda_data.side)
-				color /= 2;
+				color = get_textured_color (y - start, line_h, dda_data.x_hit, data->scene.south_texture);;
 			// color = create_color(255, 13, 123, 145);
 		}
 		else if (y >= end)//chao

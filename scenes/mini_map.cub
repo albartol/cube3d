@@ -1,10 +1,11 @@
-NO ./textures/north_wall.xpm
-SO ./textures/south_wall.xpm
-WE ./textures/west_wall.xpm
-EA ./textures/east_wall.xpm
+NO ./textures/sand_1.png
+SO ./textures/sand_2.png
+WE ./textures/bricks.png
+EA ./textures/mossy.png
 
-F 220,100,0
-C 225,30,0
+
+F 50, 150, 20
+C 10, 54, 55
 
  1
 1W1

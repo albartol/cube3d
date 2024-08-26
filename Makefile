@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/08/26 10:55:48 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/08/26 17:26:55 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ CC := cc
 
 INCLUDE := -Iinclude -Ilib/libft/include -Ilib/MLX42/include/MLX42
 
-# CFLAGS := -Wall -Wextra -Werror -O3 -g3 $(INCLUDE)
-CFLAGS := -Wall -Wextra -Werror -O3 -g3 $(INCLUDE) -fsanitize=address
+CFLAGS := -Wall -Wextra -Werror -O3 -g3 $(INCLUDE)
+# CFLAGS := -Wall -Wextra -Werror -O3 -g3 $(INCLUDE) -fsanitize=address
 
 LIBFT := lib/libft/libft.a
 LIBFT_DIR := lib/libft
