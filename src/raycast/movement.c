@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:13:52 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/19 15:20:46 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/26 12:53:40 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ Nota: las adiciones y restas tanto a x e y son segun el vector de direccion que 
 W --> mira al Oeste
  */
 // void	key_events(void *param)
-void	movement(void* param)
+void	movement(mlx_key_data_t keydata, void* param)
 {
 	t_game		*data;
 	t_cords		save_pos;
@@ -101,83 +101,83 @@ void	movement(void* param)
 	save_plane.x = data->player.camera_plane.x;
 	save_plane.y = data->player.camera_plane.y;
 
-	if (mlx_is_key_down(data->display.mlx, MLX_KEY_ESCAPE))
+	if (keydata.key == MLX_KEY_ESCAPE)
 	{
 		mlx_close_window(data->display.mlx);
 		printf("Thanks for playing");
 	}
-	// else if (mlx_is_key_down(data->display.mlx, MLX_KEY_W))
-	// {
-	// 	new.x += cos(data->player.angle) * MOVE_SPEED;
-	// 	new.y -= sin(data->player.angle) * MOVE_SPEED;
-	// }
-	// else if (mlx_is_key_down(data->display.mlx, MLX_KEY_S))
-	// {
-	// 	new.x -= cos(data->player.angle) * MOVE_SPEED;
-	// 	new.y += sin(data->player.angle) * MOVE_SPEED;
-	// }
-	// else if (mlx_is_key_down(data->display.mlx, MLX_KEY_A))
-	// {
-	// 	new.x += sin(data->player.angle) * MOVE_SPEED;
-	// 	new.y += cos(data->player.angle) * MOVE_SPEED;
-	// }
-	// else if (mlx_is_key_down(data->display.mlx, MLX_KEY_D))
-	// {
-	// 	new.x -= sin(data->player.angle) * MOVE_SPEED;
-	// 	new.y -= cos(data->player.angle) * MOVE_SPEED;
-	// }
-	// if (checker((int)new.x, (int)new.y, data->file.map))
-	// {
-	// 	data->player.x = new.x;
-	// 	data->player.y = new.y;
-	// 	draw_all(data);
-	// 	printf(YELLOW"Mi posición es :(%d, %d)\n" RESET, (int)data->player.x, (int)data->player.y);
-	// }
-	// else
-	// 	printf(RED"COLISION DETECTED YOUUU WILL NOTT PASSSS 🧙🏻‍♂️\n"RESET);
-	// //Rotation
-	// /* 
-	// Dada la matriz de rotacion:
-	// [cos( θ )	- 	sin( θ )]
-	// [sin( θ )	+ 	cos( θ )]
+	else if (keydata.key == MLX_KEY_W)
+	{
+		new.x += cos(data->player.angle) * MOVE_SPEED;
+		new.y -= sin(data->player.angle) * MOVE_SPEED;
+	}
+	else if (keydata.key == MLX_KEY_S)
+	{
+		new.x -= cos(data->player.angle) * MOVE_SPEED;
+		new.y += sin(data->player.angle) * MOVE_SPEED;
+	}
+	else if (keydata.key == MLX_KEY_A)
+	{
+		new.x += sin(data->player.angle) * MOVE_SPEED;
+		new.y += cos(data->player.angle) * MOVE_SPEED;
+	}
+	else if (keydata.key == MLX_KEY_D)
+	{
+		new.x -= sin(data->player.angle) * MOVE_SPEED;
+		new.y -= cos(data->player.angle) * MOVE_SPEED;
+	}
+	if (checker((int)new.x, (int)new.y, data->file.map))
+	{
+		data->player.x = new.x;
+		data->player.y = new.y;
+		draw_all(data);
+		printf(YELLOW"Mi posición es :(%d, %d)\n" RESET, (int)data->player.x, (int)data->player.y);
+	}
+	else
+		printf(RED"COLISION DETECTED YOUUU WILL NOTT PASSSS 🧙🏻‍♂️\n"RESET);
+	//Rotation
+	/* 
+	Dada la matriz de rotacion:
+	[cos( θ )	- 	sin( θ )]
+	[sin( θ )	+ 	cos( θ )]
 
-	// podemos hacer una ecuación matricial donde: x0, y0 son las coordenadas originales del player
-	// y θ el angulo de movimiento (rotation speed)
+	podemos hacer una ecuación matricial donde: x0, y0 son las coordenadas originales del player
+	y θ el angulo de movimiento (rotation speed)
 	
-	// [cos( θ )	- 	sin( θ )] [x0] = [xResult]
-	// [sin( θ )	+ 	cos( θ )] [y0] = [yResult]
+	[cos( θ )	- 	sin( θ )] [x0] = [xResult]
+	[sin( θ )	+ 	cos( θ )] [y0] = [yResult]
 
-	// //Esta ecuación matricial está hecha para coordenadas dirigidas a la izq 
-	// (pero funciona igual si el angulo es negativo (para el otro lado(derecha)))
-	//  */
-	// if ( mlx_is_key_down(data->display.mlx, MLX_KEY_LEFT)  ||  mlx_is_key_down(data->display.mlx, MLX_KEY_Q) )
-	// {
-	// 	//Rotate the direction vector
-	// 	data->player.dir_vector.x = save_pos.x * cos(ROTATION_SPEED_R) - save_pos.y * sin(ROTATION_SPEED_R);
-	// 	data->player.dir_vector.y = save_pos.x * sin(ROTATION_SPEED_R) + save_pos.y * cos(ROTATION_SPEED_R);
+	//Esta ecuación matricial está hecha para coordenadas dirigidas a la izq 
+	(pero funciona igual si el angulo es negativo (para el otro lado(derecha)))
+	 */
+	if (keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_Q)
+	{
+		//Rotate the direction vector
+		data->player.dir_vector.x = save_pos.x * cos(ROTATION_SPEED_R) - save_pos.y * sin(ROTATION_SPEED_R);
+		data->player.dir_vector.y = save_pos.x * sin(ROTATION_SPEED_R) + save_pos.y * cos(ROTATION_SPEED_R);
 
-	// 	//Rotate the camera plane
-	// 	data->player.camera_plane.x = save_plane.x * cos(ROTATION_SPEED_R) - save_plane.y * sin(ROTATION_SPEED_R);
-	// 	data->player.camera_plane.y = save_plane.x * sin(ROTATION_SPEED_R) + save_plane.y * cos(ROTATION_SPEED_R);
+		//Rotate the camera plane
+		data->player.camera_plane.x = save_plane.x * cos(ROTATION_SPEED_R) - save_plane.y * sin(ROTATION_SPEED_R);
+		data->player.camera_plane.y = save_plane.x * sin(ROTATION_SPEED_R) + save_plane.y * cos(ROTATION_SPEED_R);
 		
-	// 	printf(YELLOW"Rotando %f grados (right)\n" RESET, ROTATION_SPEED_R);
-	// 	data->player.angle -= transform_angle(ROTATION_SPEED_R);
-	// 	draw_all(data);
-	// }
-	// else if ( mlx_is_key_down(data->display.mlx, MLX_KEY_RIGHT)  ||  mlx_is_key_down(data->display.mlx, MLX_KEY_E) )
-	// {
-	// 	//Rotate the direction vector
-	// 	data->player.dir_vector.x = save_pos.x * cos(-ROTATION_SPEED_R) - save_pos.y * sin(-ROTATION_SPEED_R);
-	// 	data->player.dir_vector.y = save_pos.x * sin(-ROTATION_SPEED_R) + save_pos.y * cos(-ROTATION_SPEED_R);
+		printf(YELLOW"Rotando %f grados (right)\n" RESET, ROTATION_SPEED_R);
+		data->player.angle -= transform_angle(ROTATION_SPEED_R);
+		draw_all(data);
+	}
+	else if (keydata.key == MLX_KEY_RIGHT || keydata.key == MLX_KEY_E)
+	{
+		//Rotate the direction vector
+		data->player.dir_vector.x = save_pos.x * cos(-ROTATION_SPEED_R) - save_pos.y * sin(-ROTATION_SPEED_R);
+		data->player.dir_vector.y = save_pos.x * sin(-ROTATION_SPEED_R) + save_pos.y * cos(-ROTATION_SPEED_R);
 
-	// 	//Rotate the camera plane
-	// 	data->player.camera_plane.x = save_plane.x * cos(-ROTATION_SPEED_R) - save_plane.y * sin(-ROTATION_SPEED_R);
-	// 	data->player.camera_plane.y = save_plane.x * sin(-ROTATION_SPEED_R) + save_plane.y * cos(-ROTATION_SPEED_R);
+		//Rotate the camera plane
+		data->player.camera_plane.x = save_plane.x * cos(-ROTATION_SPEED_R) - save_plane.y * sin(-ROTATION_SPEED_R);
+		data->player.camera_plane.y = save_plane.x * sin(-ROTATION_SPEED_R) + save_plane.y * cos(-ROTATION_SPEED_R);
 
-	// 	printf(YELLOW"Rotando %f grados (right)\n" RESET, ROTATION_SPEED);
-	// 	data->player.angle += transform_angle(ROTATION_SPEED_R);
-	// 	draw_all(data);
-	// }
+		printf(YELLOW"Rotando %f grados (right)\n" RESET, ROTATION_SPEED);
+		data->player.angle += transform_angle(ROTATION_SPEED_R);
+		draw_all(data);
+	}
 }
 
 

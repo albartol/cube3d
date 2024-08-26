@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/08/19 17:21:09 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/08/26 10:55:48 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ CC := cc
 
 INCLUDE := -Iinclude -Ilib/libft/include -Ilib/MLX42/include/MLX42
 
-CFLAGS := -Wall -Wextra -Werror -O3 -g3 $(INCLUDE)
-# CFLAGS := -Wall -Wextra -Werror -ggdb $(INCLUDE) -fsanitize=address
+# CFLAGS := -Wall -Wextra -Werror -O3 -g3 $(INCLUDE)
+CFLAGS := -Wall -Wextra -Werror -O3 -g3 $(INCLUDE) -fsanitize=address
 
 LIBFT := lib/libft/libft.a
 LIBFT_DIR := lib/libft
@@ -75,6 +75,7 @@ RAYCAST	:=	dda.c \
 			draw_img.c \
 			init_ray_values.c \
 			movement.c \
+			preload_textures.c \
 			raycast.c
 
 UTIL := in_range.c \

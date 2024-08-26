@@ -1,7 +1,7 @@
-NO ./textures/north_wall.xpm
-SO ./textures/south_wall.xpm
-WE ./textures/west_wall.xpm
-EA ./textures/east_wall.xpm
+NO ./textures/bluestone.png
+SO ./textures/greystone.png
+WE ./textures/redbrick.png
+EA ./textures/hola.png
 
 F 145,13,85
 C 51,222,131

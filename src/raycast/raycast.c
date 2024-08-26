@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 09:28:31 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/19 18:42:02 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/26 12:43:15 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,25 +65,12 @@ int	raycast(t_game *data)
 	if (init_ray_values(data))
 		return (exit_msg(mlx_strerror(mlx_errno), EXIT_FAILURE));
 
-	// //Draw initial image
-	// if (draw_img(data, data->display.frames[0]))
-	// 	return (exit_msg(mlx_strerror(mlx_errno), EXIT_FAILURE));
-
-	// data->player.angle *= (PI / 180);
-
-///pruebaaaaa
-	mlx_texture_t *texture = mlx_load_png("./textures/hola.png");
-	if (!texture)
+	//Draw initial image
+	if (draw_img(data, data->display.frames[0]))
 		return (exit_msg(mlx_strerror(mlx_errno), EXIT_FAILURE));
 
-	printf("Texture width  ---> %d\n", texture->width);
-	printf("Texture height ---> %d\n", texture->height);
-
-	fill_image_prueba(texture, data->display.frames[0]);
-	mlx_image_to_window(data->display.mlx, data->display.frames[0], 0, 0);
-
-	mlx_loop_hook(data->display.mlx, movement, data);
-	// mlx_key_hook(data->display.mlx, movement, data);
+	// mlx_loop_hook(data->display.mlx, movement, data);
+	mlx_key_hook(data->display.mlx, movement, data);
 	mlx_loop(data->display.mlx);
 	return (EXIT_SUCCESS);
 }

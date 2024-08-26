@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:31:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/23 00:41:33 by albartol         ###   ########.fr       */
+/*   Updated: 2024/08/26 10:30:18 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ static int	check_texture_path(const char *texture_path)
 {
 	int	fd;
 
-	if (check_file_type(texture_path, ".xpm"))
+	if (/* check_file_type(texture_path, ".xpm") &&  */check_file_type(texture_path, ".png"))
 	{
 		print_error(texture_path);
-		ft_putstr_fd(": The texture must be a *.xpm file\n", STDERR_FILENO);
+		ft_putstr_fd(": The texture must be an *.png file\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	fd = open(texture_path, O_RDONLY);

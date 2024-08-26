@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:18 by albartol          #+#    #+#             */
-/*   Updated: 2024/08/15 19:57:11 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/26 12:46:55 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@ void	game_data_init(t_game *data)
 	data = ft_memset(data, 0, sizeof(t_game));
 }
 
+void	free_scene(t_scene *scena)
+{
+	mlx_delete_texture (scena->north_texture);
+	mlx_delete_texture (scena->south_texture);
+	mlx_delete_texture (scena->east_texture);
+	mlx_delete_texture (scena->west_texture);
+}
+
 int	main(int argc, char **argv)
 {
 	t_game	data;
@@ -53,7 +61,10 @@ int	main(int argc, char **argv)
 	print_map(data.file.map);
 	printf("floor_color: %X\n", data.scene.floor_color);
 	printf("celling_color: %X\n", data.scene.celling_color);
+	if (preload_textures(&data))
+		return (free_and_exit(&data, EXIT_FAILURE));
 	raycast(&data);
 	free_scene_info(&data.file);
+	free_scene(&data.scene);
 	return (EXIT_SUCCESS);
 }

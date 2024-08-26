@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:13:52 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/19 12:50:13 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/26 12:22:41 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ Nota: las adiciones y restas tanto a x e y son segun el vector de direccion que 
 W --> mira al Oeste
  */
 // void	key_events(void *param)
-void	movement(mlx_key_data_t keydata, void* param)
+void	movement(void* param)
 {
 	t_game		*data;
 	t_cords		save_pos;
@@ -101,27 +101,27 @@ void	movement(mlx_key_data_t keydata, void* param)
 	save_plane.x = data->player.camera_plane.x;
 	save_plane.y = data->player.camera_plane.y;
 
-	if (keydata.key == MLX_KEY_ESCAPE)
+	if (mlx_is_key_down(data->display.mlx, MLX_KEY_ESCAPE))
 	{
 		mlx_close_window(data->display.mlx);
 		printf("Thanks for playing");
 	}
-	else if (keydata.key == MLX_KEY_W)
+	else if (mlx_is_key_down(data->display.mlx, MLX_KEY_W))
 	{
 		new.x += cos(data->player.angle) * MOVE_SPEED;
 		new.y -= sin(data->player.angle) * MOVE_SPEED;
 	}
-	else if (keydata.key == MLX_KEY_S)
+	else if (mlx_is_key_down(data->display.mlx, MLX_KEY_S))
 	{
 		new.x -= cos(data->player.angle) * MOVE_SPEED;
 		new.y += sin(data->player.angle) * MOVE_SPEED;
 	}
-	else if (keydata.key == MLX_KEY_A)
+	else if (mlx_is_key_down(data->display.mlx, MLX_KEY_A))
 	{
 		new.x += sin(data->player.angle) * MOVE_SPEED;
 		new.y += cos(data->player.angle) * MOVE_SPEED;
 	}
-	else if (keydata.key == MLX_KEY_D)
+	else if (mlx_is_key_down(data->display.mlx, MLX_KEY_D))
 	{
 		new.x -= sin(data->player.angle) * MOVE_SPEED;
 		new.y -= cos(data->player.angle) * MOVE_SPEED;
@@ -150,7 +150,7 @@ void	movement(mlx_key_data_t keydata, void* param)
 	//Esta ecuación matricial está hecha para coordenadas dirigidas a la izq 
 	(pero funciona igual si el angulo es negativo (para el otro lado(derecha)))
 	 */
-	if (keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_Q)
+	if ( mlx_is_key_down(data->display.mlx, MLX_KEY_LEFT)  ||  mlx_is_key_down(data->display.mlx, MLX_KEY_Q) )
 	{
 		//Rotate the direction vector
 		data->player.dir_vector.x = save_pos.x * cos(ROTATION_SPEED_R) - save_pos.y * sin(ROTATION_SPEED_R);
@@ -164,7 +164,7 @@ void	movement(mlx_key_data_t keydata, void* param)
 		data->player.angle -= transform_angle(ROTATION_SPEED_R);
 		draw_all(data);
 	}
-	else if (keydata.key == MLX_KEY_RIGHT || keydata.key == MLX_KEY_E)
+	else if ( mlx_is_key_down(data->display.mlx, MLX_KEY_RIGHT)  ||  mlx_is_key_down(data->display.mlx, MLX_KEY_E) )
 	{
 		//Rotate the direction vector
 		data->player.dir_vector.x = save_pos.x * cos(-ROTATION_SPEED_R) - save_pos.y * sin(-ROTATION_SPEED_R);

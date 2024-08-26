@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:10:13 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/19 14:55:41 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/26 12:43:05 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,13 @@ struct s_dda
 	int		side;			//0 for X and 1 for Y
 	int		map_pos_x;
 	int		map_pos_y;
+	float	x_hit;
 };
 
 // double	dda(t_cords origin, t_cords dest, char **map);
 double	dda(t_raycast *ray_data, t_dda *dda_data, char **map);
-// void	movement(mlx_key_data_t keydata, void* param);
-void	movement(void* param);
+void	movement(mlx_key_data_t keydata, void* param);
+// void	movement(void* param);
 int		init_ray_values(t_game *data);
 int		draw_img(t_game *data, mlx_image_t *img);
 #endif

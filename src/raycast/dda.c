@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:05:27 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/15 20:21:17 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/26 11:43:00 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,22 @@ static void	get_deltas(t_raycast *r_data, t_dda *dda_data)
 		dda_data->delta_dist.y = fabs(1 / r_data->ray_dir.y);
 }
 
-void	get_distance(double *line, t_dda *dda_data)
+void	get_distance(double *line, t_dda *dda_data, t_raycast *ray_data)
 {
 	double	per_wall_distance; //Distancia perpendicular de la pared con la camara
 
 	//Calcular por la distancia perpendicular segun el rayo de impacto x o y
 	if (dda_data->side == 0)
+	{
 		per_wall_distance = (dda_data->side_dist.x - dda_data->delta_dist.x);
-	else 
+		dda_data->x_hit = per_wall_distance * ray_data->v_dir.y + ray_data->origin.y;
+	}
+	else
+	{
 		per_wall_distance = (dda_data->side_dist.y - dda_data->delta_dist.y);
-	
+		dda_data->x_hit = per_wall_distance * ray_data->v_dir.x + ray_data->origin.x;
+	}
+	dda_data->x_hit = (float)(dda_data->x_hit - (int)dda_data->x_hit);
 	//Tamaño de la linea a dibujar en la ventana ahre:
 	*line = WIN_HEIGHT / per_wall_distance;
 }
@@ -119,6 +125,6 @@ double	dda(t_raycast *ray_data, t_dda *dda_data, char **map)
 		}
 	}
 
-	get_distance(&line_height, dda_data);
+	get_distance(&line_height, dda_data, ray_data);
 	return (line_height);
 }

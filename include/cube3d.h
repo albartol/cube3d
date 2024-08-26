@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/08/16 16:35:51 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/26 11:07:28 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ void	print_map(char **map);
 
 //Ray casting
 int		raycast(t_game *data);
+int		preload_textures(t_game *data);
 
 //Grafics part
 // void	key_events(mlx_key_data_t keydata, void* param);

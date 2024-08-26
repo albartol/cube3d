@@ -6,13 +6,38 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 20:09:46 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/16 16:36:12 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/26 12:52:45 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <raycast.h>
 
-static int	fill_frame(mlx_image_t *img, double line_h, int side, t_game *data)
+uint32_t	get_textured_color(int y_col, double line_h, float x_hit, mlx_texture_t *texture)
+{
+	int		result = 0;
+	int			colum;
+	int			row;
+
+	colum = texture->width * x_hit;
+	row = (texture->height / line_h) * y_col;
+
+	if (colum < 0)
+		colum *= -1;
+	// if (colum < 0)
+	// 	colum *= -1;
+	// printf(PURPLE"Texturass %d - %d\n"RESET, texture->width, texture->height);
+	//  printf("Colum ==> %d\n", colum);
+	//  printf("row ==> %d\n", row);
+	int index = texture->pixels[((row * texture->width) + colum ) * texture->bytes_per_pixel];
+	for (int i = 0; i < texture->bytes_per_pixel; i++)
+	{
+		result <<= 8;
+		result += texture->pixels[index + i];
+	}
+	return (result);
+}
+
+static int	fill_frame(mlx_image_t *img, double line_h, t_dda dda_data, t_game *data)
 {
 	static	uint32_t	x;
 	int					y;
@@ -32,11 +57,12 @@ static int	fill_frame(mlx_image_t *img, double line_h, int side, t_game *data)
 	{
 		if (y < start)//Sky
 			color = data->scene.celling_color;
-		else if (y >= start && y <= end)//walls
+		else if (y >= start && y < end)//walls
 		{
-			color = create_color(255, 13, 123, 145);
-			if (!side)
-				color /= 2;
+			color = get_textured_color (y - start, line_h, dda_data.x_hit, data->scene.north_texture);
+			// color = create_color(255, 13, 123, 145);
+			// if (!side)
+			// 	color /= 2;
 		}
 		else if (y >= end)//chao
 			color = data->scene.floor_color;
@@ -93,7 +119,7 @@ int	draw_img(t_game *data, mlx_image_t *img)
 
 		// DDA
 		line_height = dda(&ray_data, &dda_data, data->file.map);
-		if (fill_frame(img, line_height, dda_data.side, data))
+		if (fill_frame(img, line_height, dda_data, data))
 			break;
 		x++;
 	}
