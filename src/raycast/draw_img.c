@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 20:09:46 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/26 12:52:45 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/26 14:40:43 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 uint32_t	get_textured_color(int y_col, double line_h, float x_hit, mlx_texture_t *texture)
 {
-	int		result = 0;
 	int			colum;
 	int			row;
+	void		*result;
 
 	colum = texture->width * x_hit;
 	row = (texture->height / line_h) * y_col;
@@ -28,13 +28,13 @@ uint32_t	get_textured_color(int y_col, double line_h, float x_hit, mlx_texture_t
 	// printf(PURPLE"Texturass %d - %d\n"RESET, texture->width, texture->height);
 	//  printf("Colum ==> %d\n", colum);
 	//  printf("row ==> %d\n", row);
-	int index = texture->pixels[((row * texture->width) + colum ) * texture->bytes_per_pixel];
-	for (int i = 0; i < texture->bytes_per_pixel; i++)
-	{
-		result <<= 8;
-		result += texture->pixels[index + i];
-	}
-	return (result);
+	result = &texture->pixels[((row * texture->width) + colum ) * texture->bytes_per_pixel];
+	// for (int i = 0; i < texture->bytes_per_pixel; i++)
+	// {
+	// 	result <<= 8;
+	// 	result += texture->pixels[index + i];
+	// }
+	return (*(uint32_t *)result);
 }
 
 static int	fill_frame(mlx_image_t *img, double line_h, t_dda dda_data, t_game *data)
@@ -50,8 +50,8 @@ static int	fill_frame(mlx_image_t *img, double line_h, t_dda dda_data, t_game *d
 		x = 0;
 		return (EXIT_FAILURE);
 	}
-	start = (-line_h / 2) + (WIN_HEIGHT / 2);
-	end = (line_h / 2) + (WIN_HEIGHT / 2);
+	start = (-line_h / 2) + (WIN_HEIGHT / 2) + data->player.move_y;
+	end = (line_h / 2) + (WIN_HEIGHT / 2) + data->player.move_y;
 	y = 0;
 	while (y < (int)img->height)
 	{

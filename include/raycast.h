@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:10:13 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/26 12:43:05 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/26 14:46:27 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define WIN_WIDTH	800
 # define WIN_HEIGHT	600
 # define FOV		0.66
+# define LIMIT_UP_DOWN (WIN_HEIGHT / 2)
 
 # define RAY_WIDTH 4
 
@@ -65,7 +66,7 @@ struct s_dda
 	int		side;			//0 for X and 1 for Y
 	int		map_pos_x;
 	int		map_pos_y;
-	float	x_hit;
+	double	x_hit;
 };
 
 // double	dda(t_cords origin, t_cords dest, char **map);

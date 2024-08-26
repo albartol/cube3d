@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 20:07:51 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/15 21:08:38 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/26 14:21:49 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	init_dir_vector(t_game *data)
 		data->player.dir_vector.x = -1;
 		data->player.camera_plane.y = FOV;
 	}
+	data->player.angle *= (PI / 180);
 }
 
 int	init_ray_values(t_game *data)

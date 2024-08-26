@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:13:52 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/26 12:53:40 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/26 14:16:59 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,50 +24,22 @@ float transform_angle(float angle)
         return (angle + two_pi);
     return (angle);
 }
-
-// float	transform_angle(float angle)
-// {
-// 	if (angle > 360)
-// 		return (angle - 360);
-// 	if (angle < 0)
-// 		return (angle + 360);
-// 	return (angle);
-// }
-
 /* 
-Holaaa, este es un sistema de colisiones provisional (como el so_long)
-Tenemos el mismo problema con las colisiones que en tu versión anterior del
-ray casting (atraviesa esquinas) --> podemos hacer las colisiones tomando
-la distancia en la que se encuentra el jugador respecto a las paredes en lugar
-de hacerlo con el mapa
-Ej:
-	P --------------------------> WALL | Distancia = 20 (puede avanzar)
-	        P ------------------> WALL | Distancia = 15 (puede avanzar)
-	                 P ---------> WALL | Distancia = 8  (puede avanzar)
-	                     P -----> WALL | Distancia = 5  (puede avanzar) 
-	                          P > WALL | Distancia = 0  (no puede avanzar, se detecta colisión)
-:D
-o....
-Podríamos agarrarnos el width y height del mapa y controlar los segfaults
-(aunque creo que es mejor hacerlo de la 2da manera (distancias) como dijimos desde el principio)
-
-Edit:
-	le agregué un map[y][x] == 0 y al parecer ahora funciona....
+Returns true if its no colitions
+and false si hay colisiones
  */
-int	checker(int x, int y, char **map)
+int	checker(float x, float y, char **map)
 {
-	// printf("bef --> (%d, %d)\n", x, y);
-	y /= P_SIZE;
-	x /= P_SIZE;
-	// printf("Aft --> (%d, %d)\n", x, y);
-	if (x < 0 || y < 0)
-		return (EXIT_FAILURE);
-	if (map[y][x] == 0 || map[y][x] == '1')
-	{
-		printf("Soy una pared\n");
-		return (EXIT_FAILURE);
-	}
-	return(EXIT_SUCCESS);
+	int new_x;
+	int new_y;
+
+	new_x = (int)x;
+	new_y = (int)y;
+	if (new_x < 0 || new_y < 0)	
+		return (0);
+	if (map[new_y][new_x] == '1')
+		return (0);
+	return (1);
 }
 
 float	convert_to_radian(float number)
@@ -126,7 +98,7 @@ void	movement(mlx_key_data_t keydata, void* param)
 		new.x -= sin(data->player.angle) * MOVE_SPEED;
 		new.y -= cos(data->player.angle) * MOVE_SPEED;
 	}
-	if (checker((int)new.x, (int)new.y, data->file.map))
+	if (checker(new.x, new.y, data->file.map))
 	{
 		data->player.x = new.x;
 		data->player.y = new.y;
@@ -150,7 +122,7 @@ void	movement(mlx_key_data_t keydata, void* param)
 	//Esta ecuación matricial está hecha para coordenadas dirigidas a la izq 
 	(pero funciona igual si el angulo es negativo (para el otro lado(derecha)))
 	 */
-	if (keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_Q)
+	if ( mlx_is_key_down(data->display.mlx, MLX_KEY_LEFT)  ||  mlx_is_key_down(data->display.mlx, MLX_KEY_Q) )
 	{
 		//Rotate the direction vector
 		data->player.dir_vector.x = save_pos.x * cos(ROTATION_SPEED_R) - save_pos.y * sin(ROTATION_SPEED_R);
@@ -164,7 +136,7 @@ void	movement(mlx_key_data_t keydata, void* param)
 		data->player.angle -= transform_angle(ROTATION_SPEED_R);
 		draw_all(data);
 	}
-	else if (keydata.key == MLX_KEY_RIGHT || keydata.key == MLX_KEY_E)
+	else if ( mlx_is_key_down(data->display.mlx, MLX_KEY_RIGHT)  ||  mlx_is_key_down(data->display.mlx, MLX_KEY_E) )
 	{
 		//Rotate the direction vector
 		data->player.dir_vector.x = save_pos.x * cos(-ROTATION_SPEED_R) - save_pos.y * sin(-ROTATION_SPEED_R);
@@ -176,6 +148,22 @@ void	movement(mlx_key_data_t keydata, void* param)
 
 		printf(YELLOW"Rotando %f grados (right)\n" RESET, ROTATION_SPEED);
 		data->player.angle += transform_angle(ROTATION_SPEED_R);
+		draw_all(data);
+	}
+	else if ( mlx_is_key_down(data->display.mlx, MLX_KEY_UP))
+	{
+		printf(YELLOW"Rotando %f grados (up)\n" RESET, ROTATION_SPEED);
+		data->player.move_y += ROTATION_SPEED * PI;
+		if (data->player.move_y > LIMIT_UP_DOWN)
+			data->player.move_y = LIMIT_UP_DOWN;
+		draw_all(data);
+	}
+	else if ( mlx_is_key_down(data->display.mlx, MLX_KEY_DOWN))
+	{
+		printf(YELLOW"Rotando %f grados (down)\n" RESET, ROTATION_SPEED * PI);
+		data->player.move_y -= ROTATION_SPEED * PI;
+		if (data->player.move_y < -LIMIT_UP_DOWN)
+			data->player.move_y = -LIMIT_UP_DOWN;
 		draw_all(data);
 	}
 }
