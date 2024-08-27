@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:13:52 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/26 14:16:59 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/27 16:45:49 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,6 @@ int	checker(float x, float y, char **map)
 	if (map[new_y][new_x] == '1')
 		return (0);
 	return (1);
-}
-
-float	convert_to_radian(float number)
-{
-	return (number * (PI / 180));
 }
 
 /* 
@@ -131,8 +126,8 @@ void	movement(mlx_key_data_t keydata, void* param)
 		//Rotate the camera plane
 		data->player.camera_plane.x = save_plane.x * cos(ROTATION_SPEED_R) - save_plane.y * sin(ROTATION_SPEED_R);
 		data->player.camera_plane.y = save_plane.x * sin(ROTATION_SPEED_R) + save_plane.y * cos(ROTATION_SPEED_R);
-		
-		printf(YELLOW"Rotando %f grados (right)\n" RESET, ROTATION_SPEED_R);
+
+		// printf(YELLOW"Rotando %f grados (right)\n" RESET, ROTATION_SPEED_R);
 		data->player.angle -= transform_angle(ROTATION_SPEED_R);
 		draw_all(data);
 	}
@@ -146,13 +141,13 @@ void	movement(mlx_key_data_t keydata, void* param)
 		data->player.camera_plane.x = save_plane.x * cos(-ROTATION_SPEED_R) - save_plane.y * sin(-ROTATION_SPEED_R);
 		data->player.camera_plane.y = save_plane.x * sin(-ROTATION_SPEED_R) + save_plane.y * cos(-ROTATION_SPEED_R);
 
-		printf(YELLOW"Rotando %f grados (right)\n" RESET, ROTATION_SPEED);
+		// printf(YELLOW"Rotando %f grados (right)\n" RESET, ROTATION_SPEED);
 		data->player.angle += transform_angle(ROTATION_SPEED_R);
 		draw_all(data);
 	}
 	else if ( mlx_is_key_down(data->display.mlx, MLX_KEY_UP))
 	{
-		printf(YELLOW"Rotando %f grados (up)\n" RESET, ROTATION_SPEED);
+		// printf(YELLOW"Rotando %f grados (up)\n" RESET, ROTATION_SPEED);
 		data->player.move_y += ROTATION_SPEED * PI;
 		if (data->player.move_y > LIMIT_UP_DOWN)
 			data->player.move_y = LIMIT_UP_DOWN;
@@ -160,7 +155,7 @@ void	movement(mlx_key_data_t keydata, void* param)
 	}
 	else if ( mlx_is_key_down(data->display.mlx, MLX_KEY_DOWN))
 	{
-		printf(YELLOW"Rotando %f grados (down)\n" RESET, ROTATION_SPEED * PI);
+		// printf(YELLOW"Rotando %f grados (down)\n" RESET, ROTATION_SPEED * PI);
 		data->player.move_y -= ROTATION_SPEED * PI;
 		if (data->player.move_y < -LIMIT_UP_DOWN)
 			data->player.move_y = -LIMIT_UP_DOWN;

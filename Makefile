@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/08/26 17:26:55 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/08/27 16:43:06 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ CC := cc
 
 INCLUDE := -Iinclude -Ilib/libft/include -Ilib/MLX42/include/MLX42
 
-CFLAGS := -Wall -Wextra -Werror -O3 -g3 $(INCLUDE)
-# CFLAGS := -Wall -Wextra -Werror -O3 -g3 $(INCLUDE) -fsanitize=address
+# CFLAGS := -Wall -Wextra -Werror -O3 -g3 $(INCLUDE)
+CFLAGS := -Wall -Wextra -Werror -O3 -g3 $(INCLUDE) -fsanitize=address
 
 LIBFT := lib/libft/libft.a
 LIBFT_DIR := lib/libft
@@ -42,6 +42,7 @@ LIBS := $(FT) $(MLX)
 SRC_DIR		:= src
 OBJ_DIR		:= obj
 PARSE_DIR	:= parse
+HOOKS_DIR	:= hooks
 UTILS_DIR	:= utils
 RAYCAST_DIR	:= raycast
 LIB_DIR		:= include
@@ -59,15 +60,15 @@ RESET := \033[0m
 SRC :=	main.c
 
 # Parse
-CHK :=	check_colors.c \
-		check_elements.c \
-		check_map.c \
-		check_scene_info.c \
+CHK :=		check_colors.c \
+			check_elements.c \
+			check_map.c \
+			check_scene_info.c \
 		
-EXT :=	extract_elements.c \
-		extract_map.c \
-		extract_scene_info.c \
-		read_scene_file.c
+EXT :=		extract_elements.c \
+			extract_map.c \
+			extract_scene_info.c \
+			read_scene_file.c
 
 PARSE := $(CHK) $(EXT)
 
@@ -78,22 +79,27 @@ RAYCAST	:=	dda.c \
 			preload_textures.c \
 			raycast.c
 
-UTIL := in_range.c \
-		print_error.c \
-		create_color.c \
-		check_file_type.c \
-		exit_msg.c \
-		free_scene_info.c \
-		free_and_exit.c \
-		print_map.c
+UTIL :=		in_range.c \
+			print_error.c \
+			create_color.c \
+			check_file_type.c \
+			exit_msg.c \
+			free_scene_info.c \
+			free_and_exit.c \
+			print_map.c
+
+HOOKS :=	hooks.c \
+			keys_hook.c \
+			wasd_movement.c
 
 # Add prefixes:
+HOOKS := $(addprefix $(HOOKS_DIR)/, $(HOOKS))
 UTIL := $(addprefix $(UTILS_DIR)/, $(UTIL))
 PARSE := $(addprefix $(PARSE_DIR)/, $(PARSE))
 RAYCAST := $(addprefix $(RAYCAST_DIR)/, $(RAYCAST))
 LIBRARIES := $(addprefix $(LIB_DIR)/, $(LIBRARIES))
 
-SOURCES := $(SRC) $(PARSE) $(UTIL) $(RAYCAST)
+SOURCES := $(SRC) $(PARSE) $(UTIL) $(RAYCAST) $(HOOKS)
 OBJS := $(SOURCES:%.c=$(OBJ_DIR)/%.o)
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SOURCES))
@@ -135,6 +141,7 @@ $(OBJ_DIR):
 	$(MKDIR) $(OBJ_DIR)/$(PARSE_DIR)
 	$(MKDIR) $(OBJ_DIR)/$(UTILS_DIR)
 	$(MKDIR) $(OBJ_DIR)/$(RAYCAST_DIR)
+	$(MKDIR) $(OBJ_DIR)/$(HOOKS_DIR)
 
 $(LIBFT):
 	@echo "$(YELLOW)Compiling libft...$(RESET)"

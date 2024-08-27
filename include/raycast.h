@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:10:13 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/26 14:46:27 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/27 16:45:55 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,13 @@ double	dda(t_raycast *ray_data, t_dda *dda_data, char **map);
 void	movement(mlx_key_data_t keydata, void* param);
 // void	movement(void* param);
 int		init_ray_values(t_game *data);
+void	hooks(void *param);
 int		draw_img(t_game *data, mlx_image_t *img);
+void	draw_all(t_game *data);
+
+//Hooks
+void	hooks(void *param);
+void	wasd_movement(mlx_t *mlx, t_player *player, char **map);
+void	keys_hook(t_game *data);
+
 #endif
