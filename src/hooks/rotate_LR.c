@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:42:06 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/28 14:33:37 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/28 14:38:23 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static float transform_angle(float angle)
 	return (angle);
 }
 
-void    rotate_LR(t_player *player, double rotation_val, double lr)
+void	rotate_LR(t_player *player, double rotation_val, double lr, int *draw)
 {
 	t_cords cos_sin;
 	t_cords save_pos;
@@ -49,4 +49,5 @@ void    rotate_LR(t_player *player, double rotation_val, double lr)
 		player->angle += transform_angle(rotation_val);
 	else
 		player->angle -= transform_angle(rotation_val);
+	*draw = 1;
 }

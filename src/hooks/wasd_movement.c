@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:40:42 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/28 12:59:16 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/28 14:40:39 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ int	wasd_movement(mlx_t *mlx, t_player *player, char **map)
 	draw = 0;
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
 		draw = checker(new.x + const_sin.x, new.y - const_sin.y, player, map);
-	else if (mlx_is_key_down(mlx, MLX_KEY_S))
+	if (mlx_is_key_down(mlx, MLX_KEY_S))
 		draw = checker(new.x - const_sin.x, new.y + const_sin.y, player, map);
-	else if (mlx_is_key_down(mlx, MLX_KEY_A))
+	if (mlx_is_key_down(mlx, MLX_KEY_A))
 		draw = checker(new.x + const_sin.y, new.y + const_sin.x, player, map);
-	else if (mlx_is_key_down(mlx, MLX_KEY_D))
+	if (mlx_is_key_down(mlx, MLX_KEY_D))
 		draw = checker(new.x - const_sin.y, new.y - const_sin.x, player, map);
 	return (draw);
 }

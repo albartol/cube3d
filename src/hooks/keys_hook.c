@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:56:01 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/28 14:17:57 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/28 14:39:16 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ int	keys_hook(t_game *data)
 
 	//Left && Right
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT) || mlx_is_key_down(mlx, MLX_KEY_Q))
-		rotate_LR(&data->player, ROTATION_SPEED_R, 1.0);
+		rotate_LR(&data->player, ROTATION_SPEED_R, 1.0, &draw);
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT)|| mlx_is_key_down(mlx, MLX_KEY_E))
-		rotate_LR(&data->player, ROTATION_SPEED_R, -1.0);
+		rotate_LR(&data->player, ROTATION_SPEED_R, -1.0, &draw);
 	if (mlx_is_key_down(mlx, MLX_KEY_UP))
 
 	//Up && Down
 	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		rotate_UD(&data->player, ROTATION_SPEED);
+		rotate_UD(&data->player, ROTATION_SPEED, &draw);
 	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		rotate_UD(&data->player, -ROTATION_SPEED);
+		rotate_UD(&data->player, -ROTATION_SPEED, &draw);
 	return (draw);
 }
