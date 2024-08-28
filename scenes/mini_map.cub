@@ -1,12 +1,16 @@
-NO ./textures/sand_1.png
-SO ./textures/sand_2.png
-WE ./textures/bricks.png
-EA ./textures/mossy.png
+NO ./textures/cobblestone_1.png
+SO ./textures/vermelho_city1.png
+WE ./textures/grass_3.png
+EA ./textures/sand_2.png
 
 
 F 50, 150, 20
 C 10, 54, 55
 
- 1
-1W1
- 1
+ 111
+10001
+10001
+10N01
+10001
+10001
+ 111

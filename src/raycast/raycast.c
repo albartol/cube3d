@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 09:28:31 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/27 16:44:01 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/28 14:47:46 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	draw_all(t_game *data)
 {
 	static int	frame;
 
-	draw_img(data, data->display.frames[0]);
+	draw_img(data, data->display.frames[0]);//This part need protection
 	frame = !frame;
 }
 
@@ -35,8 +35,6 @@ int	raycast(t_game *data)
 	if (draw_img(data, data->display.frames[0]))
 		return (exit_msg(mlx_strerror(mlx_errno), EXIT_FAILURE));
 
-	// mlx_loop_hook(data->display.mlx, movement, data);
-	// mlx_key_hook(data->display.mlx, movement, data);
 	mlx_loop_hook(data->display.mlx, hooks, data);
 	mlx_loop(data->display.mlx);
 	return (EXIT_SUCCESS);

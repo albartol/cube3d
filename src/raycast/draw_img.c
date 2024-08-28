@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 20:09:46 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/28 14:07:54 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/28 18:08:51 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static int	fill_frame(mlx_image_t *img, double line_h, t_dda dda_data, t_game *d
 	uint32_t			color;
 	int					start;
 	int					end;
+	// mlx_texture_t		*texture;
 
 	if (x > img->width)
 	{
@@ -56,12 +57,20 @@ static int	fill_frame(mlx_image_t *img, double line_h, t_dda dda_data, t_game *d
 			color = data->scene.celling_color;
 		else if (y >= start && y < end)//walls
 		{
-			// if (dda_data.side == 0)
-			// 	dda_data.x_hit = 
-			color = get_textured_color (y - start, line_h, dda_data.x_hit, data->scene.north_texture);
 			if (!dda_data.side)
-				color = get_textured_color (y - start, line_h, dda_data.x_hit, data->scene.south_texture);;
-			// color = create_color(255, 13, 123, 145);
+			{
+				if (data->player.dir_vector.x < 0)
+					color = get_textured_color (y - start, line_h, dda_data.x_hit, data->scene.west_texture);
+				else
+					color = get_textured_color (y - start, line_h, dda_data.x_hit, data->scene.east_texture);
+			}
+			else
+			{
+				if (data->player.dir_vector.y <= 0)
+					color = get_textured_color (y - start, line_h, dda_data.x_hit, data->scene.north_texture);
+				else
+					color = get_textured_color (y - start, line_h, dda_data.x_hit, data->scene.south_texture);
+			}
 		}
 		else if (y >= end)//chao
 			color = data->scene.floor_color;
@@ -78,7 +87,7 @@ y determina el vector de dirección segun sea N, S, W o E
 el angulo se seteó anteriormente en la función get_view()
 del archivo check_map.c
  */
-void	set_cords(t_raycast *r_data , t_game *data)
+static void	set_cords(t_raycast *r_data , t_game *data)
 {
 	//Cambiar la posición de origen según lo que tenga data
 	r_data->origin.x = data->player.x + 0.5;
@@ -105,7 +114,8 @@ int	draw_img(t_game *data, mlx_image_t *img)
 	set_cords(&ray_data, data);
 	printf(CYAN"Player angle --------_> %f\n" RESET, data->player.angle);
 	printf(GREEN"Player eje y--------_> %f\n" RESET, data->player.move_y);
-	printf(YELLOW"origin (%f, %f)\n", ray_data.origin.x, ray_data.origin.y);
+	printf(YELLOW"Vector de dirección--------_> (%f, %f)\n" RESET, data->player.dir_vector.x, data->player.dir_vector.y);
+	// printf(YELLOW"origin (%f, %f)\n", ray_data.origin.x, ray_data.origin.y);
 	// printf("Direction vector (%f, %f)\n"RESET, ray_data.v_dir.x, ray_data.v_dir.y);
 	// printf(GREEN"Camera plane: (%f, %f)\n"RESET, ray_data.camera_plane.x, ray_data.camera_plane.y);
 	x = 0;
