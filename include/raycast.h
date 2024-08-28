@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:10:13 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/27 16:45:55 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/28 14:29:09 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@
 # define ROTATION_SPEED 3.0
 # define MOVE_SPEED_R (MOVE_SPEED * PI / 180)
 # define ROTATION_SPEED_R (ROTATION_SPEED * PI / 180) //Radians
-
-# define ROTATION_SPEED_R (ROTATION_SPEED * PI / 180) //cos movement
 
 # define WIN_WIDTH	800
 # define WIN_HEIGHT	600
@@ -80,7 +78,10 @@ void	draw_all(t_game *data);
 
 //Hooks
 void	hooks(void *param);
-void	wasd_movement(mlx_t *mlx, t_player *player, char **map);
-void	keys_hook(t_game *data);
+int		wasd_movement(mlx_t *mlx, t_player *player, char **map);
+int		keys_hook(t_game *data);
+// void	rotate_LR(t_player *player, double rotation_val);
+void    rotate_LR(t_player *player, double rotation_val, double lr);
+void	rotate_UD(t_player *player, double rotation_val);
 
 #endif

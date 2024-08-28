@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 20:09:46 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/26 17:41:48 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/28 14:07:54 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	set_cords(t_raycast *r_data , t_game *data)
 	r_data->v_dir.x = data->player.dir_vector.x;
 	r_data->v_dir.y = data->player.dir_vector.y;
 
-	printf(GREEN"\nDIRECTION VECTOR -> (%f, %f)\n"RESET, r_data->v_dir.x, r_data->v_dir.y);
+	// printf(GREEN"\nDIRECTION VECTOR -> (%f, %f)\n"RESET, r_data->v_dir.x, r_data->v_dir.y);
 }
 
 int	draw_img(t_game *data, mlx_image_t *img)
@@ -103,8 +103,9 @@ int	draw_img(t_game *data, mlx_image_t *img)
 	t_dda		dda_data;
 	
 	set_cords(&ray_data, data);
-	printf(RED"Player angle --> %f\n"RESET, data->player.angle);
-	// printf(YELLOW"origin (%f, %f)\n", ray_data.origin.x, ray_data.origin.y);
+	printf(CYAN"Player angle --------_> %f\n" RESET, data->player.angle);
+	printf(GREEN"Player eje y--------_> %f\n" RESET, data->player.move_y);
+	printf(YELLOW"origin (%f, %f)\n", ray_data.origin.x, ray_data.origin.y);
 	// printf("Direction vector (%f, %f)\n"RESET, ray_data.v_dir.x, ray_data.v_dir.y);
 	// printf(GREEN"Camera plane: (%f, %f)\n"RESET, ray_data.camera_plane.x, ray_data.camera_plane.y);
 	x = 0;
