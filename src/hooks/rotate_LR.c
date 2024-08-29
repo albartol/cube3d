@@ -6,12 +6,11 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:42:06 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/28 14:38:23 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/29 14:30:59 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <raycast.h>
-
 
 static float transform_angle(float angle)
 {

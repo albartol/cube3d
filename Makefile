@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/08/28 12:45:10 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/08/29 14:42:55 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,6 +90,7 @@ UTIL :=		in_range.c \
 
 HOOKS :=	hooks.c \
 			keys_hook.c \
+			mouse_hook.c \
 			rotate_LR.c \
 			rotate_UD.c \
 			wasd_movement.c

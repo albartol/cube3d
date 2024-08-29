@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:10:13 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/28 14:38:42 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/29 14:43:39 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ int		keys_hook(t_game *data);
 // void    rotate_LR(t_player *player, double rotation_val, double lr);
 void	rotate_LR(t_player *player, double rotation_val, double lr, int *draw);
 void	rotate_UD(t_player *player, double rotation_val, int *draw);
+int		mouse_hook(t_game *data);
 
 #endif

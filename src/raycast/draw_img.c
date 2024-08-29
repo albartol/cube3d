@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 20:09:46 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/28 18:08:51 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/29 14:59:15 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ uint32_t	get_textured_color(int y_col, double line_h, float x_hit, mlx_texture_t
 	return (result);
 }
 
-static int	fill_frame(mlx_image_t *img, double line_h, t_dda dda_data, t_game *data)
+static int	fill_frame(mlx_image_t *img, double line_h, t_dda dda_data, t_game *data, t_raycast *ray_data)
 {
 	static	uint32_t	x;
 	int					y;
@@ -59,14 +59,14 @@ static int	fill_frame(mlx_image_t *img, double line_h, t_dda dda_data, t_game *d
 		{
 			if (!dda_data.side)
 			{
-				if (data->player.dir_vector.x < 0)
+				if (ray_data->ray_dir.x < 0)
 					color = get_textured_color (y - start, line_h, dda_data.x_hit, data->scene.west_texture);
 				else
 					color = get_textured_color (y - start, line_h, dda_data.x_hit, data->scene.east_texture);
 			}
 			else
 			{
-				if (data->player.dir_vector.y <= 0)
+				if (ray_data->ray_dir.y <= 0)
 					color = get_textured_color (y - start, line_h, dda_data.x_hit, data->scene.north_texture);
 				else
 					color = get_textured_color (y - start, line_h, dda_data.x_hit, data->scene.south_texture);
@@ -129,8 +129,10 @@ int	draw_img(t_game *data, mlx_image_t *img)
 
 		// DDA
 		line_height = dda(&ray_data, &dda_data, data->file.map);
-		if (fill_frame(img, line_height, dda_data, data))
+		if (fill_frame(img, line_height, dda_data, data, &ray_data))
 			break;
+		if (x == 0 || x == WIN_WIDTH -1 )
+			printf("Direccion del rayo en la linea %d --> (%f, %f)\n", x, ray_data.ray_dir.x, ray_data.ray_dir.y);
 		x++;
 	}
 	if (mlx_image_to_window(data->display.mlx, data->display.frames[0], 0, 0) == -1)

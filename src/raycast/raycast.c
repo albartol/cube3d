@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 09:28:31 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/28 18:39:11 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/29 14:36:34 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	raycast(t_game *data)
 	if (draw_img(data, data->display.frames[0]))
 		return (exit_msg(mlx_strerror(mlx_errno), EXIT_FAILURE));
 
+	mlx_set_cursor_mode(data->display.mlx, MLX_MOUSE_HIDDEN);
 	mlx_loop_hook(data->display.mlx, hooks, data);
 	mlx_loop(data->display.mlx);
 	return (EXIT_SUCCESS);
