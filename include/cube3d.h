@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/08/26 14:16:31 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/08/29 16:18:37 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct s_grafics	t_grafics;
 typedef	struct s_player		t_player;
 
 //Raycast
-typedef struct s_raycast	t_raycast;
+typedef struct s_dda		t_dda;
 typedef struct s_cords 		t_cords;
 
 struct s_scene_file
@@ -113,13 +113,25 @@ struct s_cords
 	double	x;
 	double	y;
 };
-struct s_raycast
+struct s_dda
 {
-	t_cords origin; 		// Initial position
-	t_cords	v_dir;			// Initial direction vector
-	t_cords	camera_plane;	// Plano de camara del jugador --> the FOV is 2 * atan(0.66/1.0)=66°
-	t_cords ray_dir;		// La dirección del rayo
-	double	camera_x;
+	t_cords 		origin;			// Initial position
+	t_cords			v_dir;			// Initial direction vector
+	t_cords			camera_plane;	// Plano de camara del jugador --> the FOV is 2 * atan(0.66/1.0)=66°
+	t_cords 		ray_dir;		// La dirección del rayo
+	double			camera_x;
+
+	// DDA DATA
+	t_cords			delta_dist;		//Razon para calcular la hipotenusa
+	t_cords			side_dist;		//Distancia inicial de la hipotenusa de x e y
+	t_cords			step;			//Pasos a tomar en x e y
+	int				side;			//0 for X and 1 for Y
+	int				map_pos_x;
+	int				map_pos_y;
+
+	//For Draw
+	double	x_hit;
+	mlx_texture_t	*texture;
 };
 
 struct s_player
@@ -140,7 +152,6 @@ struct s_game
 	t_scene			scene;
 	t_display		display;
 	t_player		player;
-	t_raycast		raycast;
 };
 
 
