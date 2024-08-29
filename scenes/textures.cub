@@ -1,6 +1,6 @@
 NO ./textures/grass_3.png
 SO ./textures/cobblestone_1.png
-WE ./textures/bricks.png
+WE ./textures/wood.png
 EA ./textures/mossy.png
 
 F 19, 64, 65
