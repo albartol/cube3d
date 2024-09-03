@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:10:13 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/29 15:26:17 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/03 16:36:26 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,29 @@
 # define PI_4 0.78539816339744830962  /* pi/4 */
 # define _1_PI 0.31830988618379067154 /* 1/pi */
 
+
+// Speed and sensibility
 # define MOVE_SPEED 0.1
 # define ROTATION_SPEED 3.0
 # define MOVE_SPEED_R (MOVE_SPEED * PI / 180)
 # define ROTATION_SPEED_R (ROTATION_SPEED * PI / 180) // Radians
 
+// Screen Size
 # define WIN_WIDTH 800
 # define WIN_HEIGHT 600
+
+// Map Size
+# define MAP_WIN_HEIGHT (WIN_HEIGHT / 5)
+# define MAP_WIN_WIDTH (WIN_WIDTH / 5)
+# define P_SIZE (MAP_WIN_WIDTH / 10)
+
+// Map colors
+# define WALL_COLOR 0xa8dadcff
+# define PLAYER_COLOR 0xe63946ff
+# define FLOOR_COLOR 0xf1faeeff
+# define OUTSIDE_COLOR 0x1d3557ff
+
+
 # define FOV 0.66
 # define LIMIT_UP_DOWN (WIN_HEIGHT / 2)
 
@@ -43,7 +59,7 @@ void    movement(mlx_key_data_t keydata, void *param);
 int	    init_ray_values(t_game *data);
 void    hooks(void *param);
 int	    draw_img(t_game *data, mlx_image_t *img);
-void    draw_all(t_game *data);
+int     draw_all(t_game *data);
 
 // Hooks
 void    hooks(void *param);
@@ -52,5 +68,8 @@ int		keys_hook(t_game *data);
 void	rotate_LR(t_player *player, double rotation_val, double lr, int *draw);
 void	rotate_UD(t_player *player, double rotation_val, int *draw);
 int		mouse_hook(t_game *data);
+
+// Map
+int draw_map(t_game *game, mlx_image_t *img);
 
 #endif

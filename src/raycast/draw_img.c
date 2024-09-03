@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 20:09:46 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/29 16:28:04 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/03 17:05:58 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,8 @@ int	draw_img(t_game *game, mlx_image_t *img)
 	
 	set_cords(&dda_info, &game->player);
 	printf(CYAN"Player angle --------_> %f\n" RESET, game->player.angle);
-	printf(GREEN"Player eje y--------_> %f\n" RESET, game->player.move_y);
+	// printf(GREEN"Player eje y--------_> %f\n" RESET, game->player.move_y);
+	printf(GREEN"Player eje x y--------_> (%f, %f)\n" RESET, game->player.x, game->player.y);
 	printf(YELLOW"Vector de dirección--------_> (%f, %f)\n" RESET, game->player.dir_vector.x, game->player.dir_vector.y);
 	// printf(YELLOW"origin (%f, %f)\n", ray_data.origin.x, ray_data.origin.y);
 	// printf("Direction vector (%f, %f)\n"RESET, ray_data.v_dir.x, ray_data.v_dir.y);
@@ -139,7 +140,7 @@ int	draw_img(t_game *game, mlx_image_t *img)
 			printf("Direccion del rayo en la linea %d --> (%f, %f)\n", x, dda_info.ray_dir.x, dda_info.ray_dir.y);
 		x++;
 	}
-	if (mlx_image_to_window(game->display.mlx, game->display.frames[0], 0, 0) == -1)
+	if (mlx_image_to_window(game->display.mlx, img, 0, 0) == -1)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

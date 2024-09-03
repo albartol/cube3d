@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/08/29 16:18:37 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/03 15:52:58 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@
 # define PURPLE "\033[0;35m"
 # define YELLOW "\033[0;93m"
 # define RESET "\033[0m"
-# define P_SIZE 64
 # define SPEED 6
 # define VISIBILITY 100
 
@@ -104,6 +103,7 @@ struct s_display
 {
 	mlx_t		*mlx;
 	mlx_image_t	*frames[2];
+	mlx_image_t	*map[2];
 };
 
 

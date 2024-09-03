@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 20:07:51 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/26 14:21:49 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:55:37 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ int	init_ray_values(t_game *data)
 	mlx = data->display.mlx;
 	data->display.frames[0] = mlx_new_image(mlx, WIN_WIDTH, WIN_HEIGHT);
 	data->display.frames[1] = mlx_new_image(mlx, WIN_WIDTH, WIN_HEIGHT);
-	if (!data->display.frames[0] || !data->display.frames[0])
+	data->display.map[0] = mlx_new_image(mlx, MAP_WIN_WIDTH, MAP_WIN_HEIGHT);
+	data->display.map[1] = mlx_new_image(mlx, MAP_WIN_WIDTH, MAP_WIN_HEIGHT);
+	if (!data->display.frames[0] || !data->display.frames[0] ||
+		!data->display.map[0] || !data->display.map[1])
 		return (EXIT_FAILURE);
 	init_dir_vector(data);
 	return (EXIT_SUCCESS);

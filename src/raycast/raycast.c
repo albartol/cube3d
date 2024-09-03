@@ -6,19 +6,22 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 09:28:31 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/29 14:36:34 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:39:38 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <raycast.h>
 #include <check_scene.h>
 
-void	draw_all(t_game *data)
+int	draw_all(t_game *data)
 {
 	static int	frame;
 
+	draw_map(data, data->display.map[0]);
 	draw_img(data, data->display.frames[0]);//This part need protection
+	draw_map(data, data->display.map[0]);
 	frame = !frame;
+	return (EXIT_SUCCESS);
 }
 
 int	raycast(t_game *data)
@@ -32,7 +35,7 @@ int	raycast(t_game *data)
 		return (exit_msg(mlx_strerror(mlx_errno), EXIT_FAILURE));
 
 	//Draw initial image
-	if (draw_img(data, data->display.frames[0]))
+	if (draw_all(data))
 		return (exit_msg(mlx_strerror(mlx_errno), EXIT_FAILURE));
 
 	mlx_set_cursor_mode(data->display.mlx, MLX_MOUSE_HIDDEN);
