@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:10:13 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/04 12:32:40 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/04 13:46:07 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int     draw_all(t_game *data);
 void    hooks(void *param);
 int		wasd_movement(mlx_t *mlx, t_player *player, char **map);
 int		keys_hook(t_game *data);
-void	rotate_LR(t_player *player, double lr, int *draw);
+void	rotate_LR(t_player *player, double rotation_val, double lr, int *draw);
 void	rotate_UD(t_player *player, double rotation_val, int *draw);
 int		mouse_hook(t_game *data);
 

@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:11:53 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/29 14:42:08 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/04 15:27:09 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	hooks(void *param)
 	t_game  *data;
 
 	data = (t_game *)param;
-	if (keys_hook(data))
+	if (keys_hook(data)/*  || mouse_hook(data) */)
 		draw_all(data);
 	if (mouse_hook(data))
 		draw_all(data);

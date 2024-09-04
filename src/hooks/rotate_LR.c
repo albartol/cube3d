@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:42:06 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/04 13:18:34 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/04 13:49:43 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static float transform_angle(float angle)
 	return (angle);
 }
 
-void	rotate_LR(t_player *player, double lr, int *draw)
+void	rotate_LR(t_player *player, double rotation_val, double lr, int *draw)
 {
 	t_cords_d cos_sin;
 	t_cords_d save_pos;
@@ -33,8 +33,8 @@ void	rotate_LR(t_player *player, double lr, int *draw)
 	save_plane.y = player->camera_plane.y;
 	save_pos.x = player->dir_vector.x;
 	save_pos.y = player->dir_vector.y;
-	cos_sin.x = cos(ROTATION_SPEED_R * lr);
-	cos_sin.y = sin(ROTATION_SPEED_R * lr);
+	cos_sin.x = cos(rotation_val * lr);
+	cos_sin.y = sin(rotation_val * lr);
 
 	//Rotate the direction vector
 	player->dir_vector.x = (save_pos.x * cos_sin.x ) - (save_pos.y * cos_sin.y);
@@ -45,8 +45,8 @@ void	rotate_LR(t_player *player, double lr, int *draw)
 	player->camera_plane.y = (save_plane.x * cos_sin.y) + (save_plane.y * cos_sin.x);
 
 	if (lr < 0)
-		player->angle += transform_angle(ROTATION_SPEED_R);
+		player->angle += transform_angle(rotation_val);
 	else
-		player->angle -= transform_angle(ROTATION_SPEED_R);
+		player->angle -= transform_angle(rotation_val);
 	*draw = 1;
 }

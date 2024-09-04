@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:44:19 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/28 14:39:24 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/04 15:28:27 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,4 @@ void	rotate_UD(t_player *player, double rotation_val, int *draw)
 	else if (player->move_y < -LIMIT_UP_DOWN)
 		player->move_y = -LIMIT_UP_DOWN;
 	*draw = 1;
-	printf(YELLOW"Rotando arriba / abajo %f grados \n"RESET, player->move_y);
 }
