@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/09/03 12:54:05 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/09/04 11:35:47 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ SRC :=	main.c
 # Parse
 CHK :=		check_colors.c \
 			check_elements.c \
+			check_inside_walls.c \
 			check_map.c \
 			check_scene_info.c \
 		

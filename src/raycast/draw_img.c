@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 20:09:46 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/04 11:24:38 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/04 12:35:58 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int	draw_img(t_game *game, mlx_image_t *img)
 	set_cords(&dda_info, &game->player);
 	printf(CYAN"Player angle --------_> %f\n" RESET, game->player.angle);
 	// printf(GREEN"Player eje y--------_> %f\n" RESET, game->player.move_y);
-	printf(GREEN"Player eje x y--------_> (%f, %f)\n" RESET, game->player.x, game->player.y);
+	printf(GREEN"Player eje (x, y)--------_> (%f, %f)\n" RESET, game->player.x, game->player.y);
 	printf(YELLOW"Vector de dirección--------_> (%f, %f)\n" RESET, game->player.dir_vector.x, game->player.dir_vector.y);
 	// printf(YELLOW"origin (%f, %f)\n", ray_data.origin.x, ray_data.origin.y);
 	// printf("Direction vector (%f, %f)\n"RESET, ray_data.v_dir.x, ray_data.v_dir.y);
