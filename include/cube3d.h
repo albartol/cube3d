@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/09/03 15:52:58 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/04 13:24:50 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ typedef	struct s_player		t_player;
 
 //Raycast
 typedef struct s_dda		t_dda;
-typedef struct s_cords 		t_cords;
+typedef struct s_cords_i 	t_cords_i;
+typedef struct s_cords_d 	t_cords_d;
 
 struct s_scene_file
 {
@@ -103,31 +104,35 @@ struct s_display
 {
 	mlx_t		*mlx;
 	mlx_image_t	*frames[2];
-	mlx_image_t	*map[2];
+	mlx_image_t	*map;
 };
 
-
 //Raycast
-struct s_cords
+struct s_cords_i
+{
+	int	x;
+	int	y;
+};
+
+struct s_cords_d
 {
 	double	x;
 	double	y;
 };
 struct s_dda
 {
-	t_cords 		origin;			// Initial position
-	t_cords			v_dir;			// Initial direction vector
-	t_cords			camera_plane;	// Plano de camara del jugador --> the FOV is 2 * atan(0.66/1.0)=66°
-	t_cords 		ray_dir;		// La dirección del rayo
+	t_cords_d 		origin;			// Initial position
+	t_cords_d		v_dir;			// Initial direction vector
+	t_cords_d		camera_plane;	// Plano de camara del jugador --> the FOV is 2 * atan(0.66/1.0)=66°
+	t_cords_d 		ray_dir;		// La dirección del rayo
 	double			camera_x;
 
 	// DDA DATA
-	t_cords			delta_dist;		//Razon para calcular la hipotenusa
-	t_cords			side_dist;		//Distancia inicial de la hipotenusa de x e y
-	t_cords			step;			//Pasos a tomar en x e y
+	t_cords_d		delta_dist;		//Razon para calcular la hipotenusa
+	t_cords_d		side_dist;		//Distancia inicial de la hipotenusa de x e y
+	t_cords_d		step;			//Pasos a tomar en x e y
 	int				side;			//0 for X and 1 for Y
-	int				map_pos_x;
-	int				map_pos_y;
+	t_cords_i		map_pos;
 
 	//For Draw
 	double	x_hit;
@@ -136,14 +141,11 @@ struct s_dda
 
 struct s_player
 {
-	double	x;
-	double	y;
-	double	move_y;
-	double	offset_x;
-	double	offset_y;
-	float	angle;
-	t_cords	camera_plane;
-	t_cords	dir_vector;
+	t_cords_d	pos;
+	double		move_y;
+	float		angle;
+	t_cords_d	camera_plane;
+	t_cords_d	dir_vector;
 };
 
 struct s_game

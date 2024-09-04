@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:05:27 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/04 12:32:13 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/04 13:35:50 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int detect_colition(int x, int y, char **map)
 	int height;
 
 	width = ft_strlen(map[y]);
-	height = array_len((const char **)map);
+	height = array_len(map);
 
 	if ((x < 0 || y < 0) || (x >= width || y >= height) || (map[y][x] == WALL))
 		return (1);
@@ -38,22 +38,22 @@ static void	get_steps_dist(t_dda *dda)
 	if (dda->ray_dir.x > 0)
 	{
 		dda->step.x = 1;
-		dda->side_dist.x = (dda->map_pos_x + 1 - dda->origin.x) * dda->delta_dist.x;
+		dda->side_dist.x = (dda->map_pos.x + 1 - dda->origin.x) * dda->delta_dist.x;
 	}
 	else
 	{
 		dda->step.x = -1;
-		dda->side_dist.x = (dda->origin.x - dda->map_pos_x) *  dda->delta_dist.x;
+		dda->side_dist.x = (dda->origin.x - dda->map_pos.x) *  dda->delta_dist.x;
 	}
 	if (dda->ray_dir.y > 0)
 	{
 		dda->step.y = 1;
-		dda->side_dist.y = (dda->map_pos_y + 1 - dda->origin.y) * dda->delta_dist.y;
+		dda->side_dist.y = (dda->map_pos.y + 1 - dda->origin.y) * dda->delta_dist.y;
 	}
 	else
 	{
 		dda->step.y = -1;
-		dda->side_dist.y = (dda->origin.y - dda->map_pos_y) *  dda->delta_dist.y;
+		dda->side_dist.y = (dda->origin.y - dda->map_pos.y) *  dda->delta_dist.y;
 	}
 }
 
@@ -108,18 +108,18 @@ double	dda(t_dda *dda_info, char **map)
 	get_steps_dist(dda_info);
 
 	//DDA (Algoritmo)
-	while (!detect_colition(dda_info->map_pos_x, dda_info->map_pos_y, map))
+	while (!detect_colition(dda_info->map_pos.x, dda_info->map_pos.y, map))
 	{
 		if (dda_info->side_dist.x < dda_info->side_dist.y)
 		{
 			dda_info->side_dist.x += dda_info->delta_dist.x;
-			dda_info->map_pos_x += dda_info->step.x;
+			dda_info->map_pos.x += dda_info->step.x;
 			dda_info->side = 0;
 		}
 		else
 		{
 			dda_info->side_dist.y += dda_info->delta_dist.y;
-			dda_info->map_pos_y += dda_info->step.y;
+			dda_info->map_pos.y += dda_info->step.y;
 			dda_info->side = 1;
 		}
 	}

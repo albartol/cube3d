@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   movement.c                                         :+:      :+:    :+:   */
+/*   nu_movement.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:13:52 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/26 12:22:41 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/04 13:21:58 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,15 @@ W --> mira al Oeste
 void	movement(void* param)
 {
 	t_game		*data;
-	t_cords		save_pos;
-	t_cords		save_plane;
-	t_cords		new;
+	t_cords_d		save_pos;
+	t_cords_d		save_plane;
+	t_cords_d		new;
 
 	data = (t_game *)param;
 
 	// For the panzer movement
-	new.x = data->player.x;
-	new.y = data->player.y;
+	new.x = data->player.pos.x;
+	new.y = data->player.pos.y;
 
 	//For the rotation
 	save_pos.x = data->player.dir_vector.x;
@@ -128,10 +128,10 @@ void	movement(void* param)
 	}
 	if (checker((int)new.x, (int)new.y, data->file.map))
 	{
-		data->player.x = new.x;
-		data->player.y = new.y;
+		data->player.pos.x = new.x;
+		data->player.pos.y = new.y;
 		draw_all(data);
-		printf(YELLOW"Mi posición es :(%d, %d)\n" RESET, (int)data->player.x, (int)data->player.y);
+		printf(YELLOW"Mi posición es :(%d, %d)\n" RESET, (int)data->player.pos.x, (int)data->player.pos.y);
 	}
 	else
 		printf(RED"COLISION DETECTED YOUUU WILL NOTT PASSSS 🧙🏻‍♂️\n"RESET);
@@ -193,7 +193,7 @@ void	movement(void* param)
 // 	}
 // 	if (mlx_is_key_down(data->display.mlx, MLX_KEY_W))
 // 	{
-// 		data->player.x += 0.5;
-// 		printf(YELLOW"Mi posición es :(%d, %d)\n" RESET, (int)data->player.x, (int)data->player.y);
+// 		data->player.pos.x += 0.5;
+// 		printf(YELLOW"Mi posición es :(%d, %d)\n" RESET, (int)data->player.pos.x, (int)data->player.pos.y);
 // 	}
 // }

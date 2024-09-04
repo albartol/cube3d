@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 11:53:14 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/22 18:47:09 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/04 13:36:22 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,11 @@ void				merge_sort(int *list, int i, int *list_temp);
 char				*charjoin(const char *str, const char c);
 long				ft_atol(const char *str);
 long long			ft_atoll(const char *str);
-int					array_len(const char **array);
+int					array_len(char **array);
 void				array_free(char **array);
-char				**array_dup(const char **array);
-size_t				array_char_len(const char **array);
-char				*array_to_str(const char **array, const char spliter);
-char				**array_trim(const char **array, const char *set);
+char				**array_dup(char **array);
+size_t				array_char_len(char **array);
+char				*array_to_str(char **array, const char spliter);
+char				**array_trim(char **array, const char *set);
 
 #endif

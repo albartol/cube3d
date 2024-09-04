@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 12:40:41 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/04 10:41:36 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/04 13:21:58 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ uint32_t give_color(t_game *game, int x, int y)
 	uint32_t	player_x;
 	uint32_t	player_y;
 
-	player_x = game->player.x;
-	player_y = game->player.y;
+	player_x = game->player.pos.x;
+	player_y = game->player.pos.y;
 	map = game->file.map;
 
 	if (x <= 0 || y <= 0 || x >= (int)ft_strlen(map[y]) - 1)

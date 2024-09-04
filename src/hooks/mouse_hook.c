@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 14:42:12 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/04 11:38:58 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/04 13:32:32 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	mouse_hook(t_game *data)
 	mlx_get_mouse_pos(data->display.mlx, &x, &y);
 	if (x < WIN_WIDTH / 2)
 		rotate_LR(&data->player, 1.0, &draw);
-	else if (x > WIN_WIDTH / 2)
+	if (x > WIN_WIDTH / 2)
 		rotate_LR(&data->player, -1.0, &draw);
 	if (y < WIN_HEIGHT / 2)
 		rotate_UD(&data->player, ROTATION_SPEED, &draw);

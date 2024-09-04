@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   array_dup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 16:33:53 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/14 00:15:37 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/04 13:36:34 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-char	**array_dup(const char **array)
+char	**array_dup(char **array)
 {
 	char	**copy;
 	int		len;

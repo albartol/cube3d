@@ -1,14 +1,14 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   start_grafics.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/03 14:44:53 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/07/31 16:33:17 by flopez-r         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    nu_start_grafics                                   :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/07/03 14:44:53 by flopez-r          #+#    #+#              #
+#    Updated: 2024/09/04 13:22:31 by flopez-r         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 #include <cube3d.h>
 
@@ -31,8 +31,8 @@ void init_player(t_player *player, t_game *data)
 	player->mlx = data->display.mlx;
 	player->angle = INIT_ANGLE;
 	player->rotation = 0.5;
-	player->x = data->scene.player_x * P_SIZE;
-	player->y = data->scene.player_y * P_SIZE;
+	player->pos.x = data->scene.player_x * P_SIZE;
+	player->pos.y = data->scene.player_y * P_SIZE;
 	player->img = data->display.grafics.player;
 	player->map = data->file.map;
 }
@@ -105,8 +105,8 @@ int start_grafics(t_game *data)
 		return (EXIT_FAILURE);
 	init_player(&player, data);
 
-	// printf("Player pos --> (%f, %f)\n", player.x, player.y);
-	if (mlx_image_to_window(player.mlx, player.img, player.x * P_SIZE, player.y * P_SIZE) == -1)
+	// printf("Player pos --> (%f, %f)\n", player.pos.x, player.pos.y);
+	if (mlx_image_to_window(player.mlx, player.img, player.pos.x * P_SIZE, player.pos.y * P_SIZE) == -1)
 		return (EXIT_FAILURE);
 
 	mlx_loop_hook(data->display.mlx, movement, &player);

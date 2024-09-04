@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:40:42 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/04 12:30:12 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/04 13:35:50 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,29 @@ static int	checker(float x, float y, t_player *player, char **map)
 	new_x = (int)x;
 	new_y = (int)y;
 
-	if (check_inside_walls(map, new_x, new_y))
+	// if (check_inside_walls(map, new_x, new_y))
+	// 	return (0);
+	if (new_x <= 0 || new_y <= 0)	
 		return (0);
-	// if (new_x <= 0 || new_y <= 0)	
-	// 	return (0);
-	// if (map[new_y][new_x] == '1')
-	// 	return (0);
-	player->x = x;
-	player->y = y;
+	if (new_y >= array_len(map) || new_x >= (int)ft_strlen(map[new_y]))	
+		return (0);
+	if (map[new_y][new_x] == '1')
+		return (0);
+	player->pos.x = x;
+	player->pos.y = y;
 	return (1);
 }
 
 int	wasd_movement(mlx_t *mlx, t_player *player, char **map)
 {
-	t_cords new;
-	t_cords	const_sin;
+	t_cords_d new;
+	t_cords_d	const_sin;
 	int		draw;
 
 	const_sin.x = cos(player->angle) * MOVE_SPEED;
 	const_sin.y = sin(player->angle) * MOVE_SPEED;
-	new.x = player->x;
-	new.y = player->y;
+	new.x = player->pos.x;
+	new.y = player->pos.y;
 
 	draw = 0;
 	if (mlx_is_key_down(mlx, MLX_KEY_W))

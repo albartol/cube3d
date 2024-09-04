@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   array_char_len.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 17:10:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/14 00:13:22 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/04 13:36:31 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-size_t	array_char_len(const char **array)
+size_t	array_char_len(char **array)
 {
 	size_t	len;
 	int		i;

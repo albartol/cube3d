@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   array_trim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 18:22:26 by albartol          #+#    #+#             */
-/*   Updated: 2024/06/22 18:45:48 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/04 13:36:44 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-char	**array_trim(const char **array, const char *set)
+char	**array_trim(char **array, const char *set)
 {
 	char	**copy;
 	int		len;

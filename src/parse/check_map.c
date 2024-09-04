@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:31:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/09/04 11:26:21 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/04 13:21:58 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static int	check_value(char **map, size_t x, size_t y, t_game *data)
 	{
 		if (cant_player > 0)
 			return (exit_msg("Too many players\n", EXIT_FAILURE));
-		data->player.x = x + 0.5;
-		data->player.y = y + 0.5;
+		data->player.pos.x = x + 0.5;
+		data->player.pos.y = y + 0.5;
 		get_view(data, map[y][x]);
 		cant_player++;
 		if (check_inside_walls(map, x, y))

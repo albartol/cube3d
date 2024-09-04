@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 20:09:46 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/04 12:35:58 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/04 13:22:31 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,11 @@ y determina el vector de dirección segun sea N, S, W o E
 el angulo se seteó anteriormente en la función get_view()
 del archivo check_map.c
  */
-static void	set_cords(t_dda *dda , t_player *player)
+static void	set_cords_d(t_dda *dda , t_player *player)
 {
 	//Cambiar la posición de origen según lo que tenga data
-	dda->origin.x = player->x;
-	dda->origin.y = player->y;
+	dda->origin.x = player->pos.x;
+	dda->origin.y = player->pos.y;
 
 	//Cambiar el plano de camara según lo que tenga data
 	dda->camera_plane.x = player->camera_plane.x;
@@ -114,10 +114,10 @@ int	draw_img(t_game *game, mlx_image_t *img)
 	double		line_height;
 	t_dda		dda_info;
 	
-	set_cords(&dda_info, &game->player);
+	set_cords_d(&dda_info, &game->player);
 	printf(CYAN"Player angle --------_> %f\n" RESET, game->player.angle);
 	// printf(GREEN"Player eje y--------_> %f\n" RESET, game->player.move_y);
-	printf(GREEN"Player eje (x, y)--------_> (%f, %f)\n" RESET, game->player.x, game->player.y);
+	printf(GREEN"Player eje (x, y)--------_> (%f, %f)\n" RESET, game->player.pos.x, game->player.pos.y);
 	printf(YELLOW"Vector de dirección--------_> (%f, %f)\n" RESET, game->player.dir_vector.x, game->player.dir_vector.y);
 	// printf(YELLOW"origin (%f, %f)\n", ray_data.origin.x, ray_data.origin.y);
 	// printf("Direction vector (%f, %f)\n"RESET, ray_data.v_dir.x, ray_data.v_dir.y);
@@ -125,8 +125,8 @@ int	draw_img(t_game *game, mlx_image_t *img)
 	x = 0;
 	while (x < WIN_WIDTH)
 	{
-		dda_info.map_pos_x = (int)dda_info.origin.x;
-		dda_info.map_pos_y = (int)dda_info.origin.y;
+		dda_info.map_pos.x = (int)dda_info.origin.x;
+		dda_info.map_pos.y = (int)dda_info.origin.y;
 		dda_info.camera_x = 2 * x / (double)WIN_WIDTH - 1;
 		dda_info.ray_dir.x = dda_info.v_dir.x + (dda_info.camera_plane.x * dda_info.camera_x); //Dirección del rayo
 		dda_info.ray_dir.y = dda_info.v_dir.y + (dda_info.camera_plane.y * dda_info.camera_x);
