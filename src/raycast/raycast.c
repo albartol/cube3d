@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 09:28:31 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/03 14:39:38 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/04 10:39:49 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	draw_all(t_game *data)
 {
 	static int	frame;
 
-	draw_map(data, data->display.map[0]);
+	// draw_map(data, data->display.map[0]);
 	draw_img(data, data->display.frames[0]);//This part need protection
-	draw_map(data, data->display.map[0]);
+	// draw_map(data, data->display.map[0]);
 	frame = !frame;
 	return (EXIT_SUCCESS);
 }

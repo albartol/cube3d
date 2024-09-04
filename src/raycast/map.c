@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 12:40:41 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/03 17:21:53 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/04 10:41:36 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ uint32_t give_color(t_game *game, int x, int y)
 	player_y = game->player.y;
 	map = game->file.map;
 
-	printf("WASAAAAA ---> (%d, %d)\n", x, y);
 	if (x <= 0 || y <= 0 || x >= (int)ft_strlen(map[y]) - 1)
 		return (OUTSIDE_COLOR);
 	else if (map[y][x] == '1')

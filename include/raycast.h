@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:10:13 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/03 16:36:26 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/04 11:27:49 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define RAYCAST_H
 
 # include "cube3d.h"
+# include <check_scene.h>
 
 // PI DEFINITIONS
 # define PI 3.14159265358979323846    /* pi */

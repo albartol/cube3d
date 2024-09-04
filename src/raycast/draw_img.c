@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 20:09:46 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/03 17:05:58 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/04 11:24:38 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ del archivo check_map.c
 static void	set_cords(t_dda *dda , t_player *player)
 {
 	//Cambiar la posición de origen según lo que tenga data
-	dda->origin.x = player->x + 0.5;
-	dda->origin.y = player->y + 0.5;
+	dda->origin.x = player->x;
+	dda->origin.y = player->y;
 
 	//Cambiar el plano de camara según lo que tenga data
 	dda->camera_plane.x = player->camera_plane.x;

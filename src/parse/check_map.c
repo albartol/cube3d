@@ -6,26 +6,12 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:31:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/08/13 13:57:05 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/04 11:26:21 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <check_scene.h>
-#include <cube3d.h>
 
-
-static int	check_inside_walls(char **map, size_t x, size_t y)
-{
-	if (y == 0 || ft_strlen(map[y - 1]) <= x || map[y - 1][x] == SPACE) // UP
-		return (EXIT_FAILURE);
-	if (!map[y + 1] || ft_strlen(map[y + 1]) <= x || map[y + 1][x] == SPACE) // DOWN
-		return (EXIT_FAILURE);
-	if (x == 0 || map[y][x - 1] == SPACE) // LEFT
-		return (EXIT_FAILURE);
-	if (!map[y][x + 1] || map[y][x + 1] == SPACE) // DOWN
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
-}
 
 void	get_view(t_game *data, char character)
 {
@@ -49,8 +35,8 @@ static int	check_value(char **map, size_t x, size_t y, t_game *data)
 	{
 		if (cant_player > 0)
 			return (exit_msg("Too many players\n", EXIT_FAILURE));
-		data->player.x = x;
-		data->player.y = y;
+		data->player.x = x + 0.5;
+		data->player.y = y + 0.5;
 		get_view(data, map[y][x]);
 		cant_player++;
 		if (check_inside_walls(map, x, y))
