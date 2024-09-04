@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/09/04 11:35:47 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/09/04 17:24:05 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIBFT := lib/libft/libft.a
 LIBFT_DIR := lib/libft
 FT := -L$(LIBFT_DIR) -lft
 MKDIR := mkdir -p
-LIBRARIES := check_scene.h \
+HEADERS := check_scene.h \
 			 cube3d.h \
 			 extract_scene.h \
 			 raycast.h \
@@ -101,7 +101,7 @@ HOOKS := $(addprefix $(HOOKS_DIR)/, $(HOOKS))
 UTIL := $(addprefix $(UTILS_DIR)/, $(UTIL))
 PARSE := $(addprefix $(PARSE_DIR)/, $(PARSE))
 RAYCAST := $(addprefix $(RAYCAST_DIR)/, $(RAYCAST))
-LIBRARIES := $(addprefix $(LIB_DIR)/, $(LIBRARIES))
+HEADERS := $(addprefix $(LIB_DIR)/, $(HEADERS))
 
 SOURCES := $(SRC) $(PARSE) $(UTIL) $(RAYCAST) $(HOOKS)
 OBJS := $(SOURCES:%.c=$(OBJ_DIR)/%.o)
@@ -135,7 +135,7 @@ $(BONUS): $(BNS_OBJS) $(LIBFT) $(MLX42)
 	$(CC) $(CFLAGS) $(BNS_OBJS) $(LIBS) -o $@
 	@echo "$(GREEN)Program $(BONUS) created ✅$(RESET)"
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(LIBRARIES)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
 	@echo "$(YELLOW)Compiling...$(RESET)"
 	$(CC) $(CFLAGS) -c $< -o $@
 

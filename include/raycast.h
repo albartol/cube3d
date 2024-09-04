@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:10:13 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/04 13:46:07 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/04 17:58:17 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@
 # define WIN_HEIGHT 600
 
 // Map Size
-# define MAP_WIN_HEIGHT (WIN_HEIGHT / 5)
-# define MAP_WIN_WIDTH (WIN_WIDTH / 5)
-# define P_SIZE (MAP_WIN_WIDTH / 10)
+# define CELLS_NUM 9
+# define MAP_SIDE (WIN_HEIGHT / 5)
+# define CELL_SIZE (MAP_SIDE / CELLS_NUM)
 
 // Map colors
 # define WALL_COLOR 0xa8dadcff
@@ -56,7 +56,6 @@ typedef struct s_dda	t_dda;
 
 // Raycast
 double  dda(t_dda *dda_data, char **map);
-void    movement(mlx_key_data_t keydata, void *param);
 int	    init_ray_values(t_game *data);
 void    hooks(void *param);
 int	    draw_img(t_game *data, mlx_image_t *img);
@@ -71,6 +70,6 @@ void	rotate_UD(t_player *player, double rotation_val, int *draw);
 int		mouse_hook(t_game *data);
 
 // Map
-int draw_map(t_game *game, mlx_image_t *img);
+void    draw_map(t_game *game);
 
 #endif

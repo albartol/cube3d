@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:40:42 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/04 13:35:50 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/04 17:43:25 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	checker(float x, float y, t_player *player, char **map)
 		return (0);
 	if (new_y >= array_len(map) || new_x >= (int)ft_strlen(map[new_y]))	
 		return (0);
-	if (map[new_y][new_x] == '1')
+	if (map[new_y][new_x] == WALL)
 		return (0);
 	player->pos.x = x;
 	player->pos.y = y;
