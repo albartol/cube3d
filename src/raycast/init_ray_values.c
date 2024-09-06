@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 20:07:51 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/04 17:57:43 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/06 17:00:39 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 Iniciar el vector de dirección inicial
 al igual que la camara
  */
-void	init_dir_vector(t_game *data)
+static void	init_dir_vector(t_game *data)
 {
 	if (data->player.angle == 90) //North
 	{
@@ -30,13 +30,13 @@ void	init_dir_vector(t_game *data)
 	}
 	else if (data->player.angle == 0) //East
 	{
-		data->player.dir_vector.x = 1;
-		data->player.camera_plane.y = -FOV;
+		data->player.dir_vector.x = -1;
+		data->player.camera_plane.y = FOV;
 	}
 	if (data->player.angle == 180) // West
 	{
-		data->player.dir_vector.x = -1;
-		data->player.camera_plane.y = FOV;
+		data->player.dir_vector.x = 1;
+		data->player.camera_plane.y = -FOV;
 	}
 	data->player.angle *= (PI / 180);
 }

@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 20:09:46 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/04 15:28:16 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/06 17:08:38 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	set_texture(t_dda *dda, t_game *game)
 {
 	if (!dda->side)
 	{
-		if (dda->ray_dir.x < 0)
+		if (dda->ray_dir.x <= 0)
 			dda->texture = game->scene.west_texture;
 		else
 			dda->texture = game->scene.east_texture;
@@ -102,9 +102,9 @@ void	set_texture(t_dda *dda, t_game *game)
 	else
 	{
 		if (dda->ray_dir.y <= 0)
-			dda->texture = game->scene.north_texture;
-		else
 			dda->texture = game->scene.south_texture;
+		else
+			dda->texture = game->scene.north_texture;
 	}
 }
 
