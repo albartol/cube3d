@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   draw_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 12:11:53 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/06 14:11:03 by flopez-r         ###   ########.fr       */
+/*   Created: 2024/09/05 11:30:07 by flopez-r          #+#    #+#             */
+/*   Updated: 2024/09/05 11:30:31 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <raycast.h>
 
-void	hooks(void *param)
+int	draw_all(t_game *data)
 {
-	t_game  *data;
+	// static int	frame;
 
-	data = (t_game *)param;
-	if (keys_hook(data)/*  || mouse_hook(data) */)
-		draw_all(data);
-	// if (mouse_hook(data))
-	// 	draw_all(data);
+	draw_img(data, data->display.frames[0]);//This part need protection
+	draw_map(data);
+	// frame = !frame;
+	return (EXIT_SUCCESS);
 }

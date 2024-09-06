@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/09/04 17:24:05 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/09/05 11:30:47 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,7 @@ EXT :=		extract_elements.c \
 PARSE := $(CHK) $(EXT)
 
 RAYCAST	:=	dda.c \
+			draw_all.c \
 			draw_img.c \
 			init_ray_values.c \
 			map.c \

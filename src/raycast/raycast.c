@@ -6,22 +6,12 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 09:28:31 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/04 18:14:19 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/05 11:29:46 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <raycast.h>
 #include <check_scene.h>
-
-int	draw_all(t_game *data)
-{
-	// static int	frame;
-
-	draw_img(data, data->display.frames[0]);//This part need protection
-	draw_map(data);
-	// frame = !frame;
-	return (EXIT_SUCCESS);
-}
 
 int	raycast(t_game *data)
 {
