@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:05:27 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/04 13:35:50 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:19:44 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,10 @@
 #include <check_scene.h>
 
 // Función que determina si hay una pared en las coordenadas (x, y)
-int detect_colition(int x, int y, char **map)
+int detect_collision(int x, int y, char **map)
 {
-	
-	int	width;
-	int height;
-
-	width = ft_strlen(map[y]);
-	height = array_len(map);
-
-	if ((x < 0 || y < 0) || (x >= width || y >= height) || (map[y][x] == WALL))
+	if ((x <= 0 || y <= 0) || (y >= array_len(map)
+		|| x >= (int)ft_strlen(map[y])) || map[y][x] == WALL)
 		return (1);
 	return (0);
 }
@@ -108,7 +102,7 @@ double	dda(t_dda *dda_info, char **map)
 	get_steps_dist(dda_info);
 
 	//DDA (Algoritmo)
-	while (!detect_colition(dda_info->map_pos.x, dda_info->map_pos.y, map))
+	while (!detect_collision(dda_info->map_pos.x, dda_info->map_pos.y, map))
 	{
 		if (dda_info->side_dist.x < dda_info->side_dist.y)
 		{

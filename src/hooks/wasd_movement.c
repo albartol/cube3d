@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wasd_movement.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:40:42 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/04 17:43:25 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:20:18 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <raycast.h>
 
 /* 
-Returns true if its no colitions
+Returns true if its no collisions
 and false si hay colisiones
  */
 static int	checker(float x, float y, t_player *player, char **map)

@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 12:40:41 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/09 12:45:59 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:13:54 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ void	draw_map(t_game *game)
 
 	//Map movement
 	map_pos.y = CELLS_NUM;
-	printf(GREEN"PLayer position --> (%d, %d)"RESET, origin.x, origin.y);
-	printf("===================\n");
+	// printf(GREEN"PLayer position --> (%d, %d)"RESET, origin.x, origin.y);
+	// printf("===================\n");
 	while (map_pos.y >= 0)
 	{
 		map_pos.x = CELLS_NUM;
-		printf(";Row #%d\n", map_pos.y);
+		// printf(";Row #%d\n", map_pos.y);
 		while (map_pos.x >= 0)
 		{
 			color = get_cell_color(map_pos, game->file.map, origin);
@@ -80,7 +80,7 @@ void	draw_map(t_game *game)
 		}
 		map_pos.y--;
 	}
-	printf("===================\n");
+	// printf("===================\n");
 	origin.x = 4;
 	origin.y = 4;
 	put_cell(game->display.map, PLAYER_COLOR, origin);

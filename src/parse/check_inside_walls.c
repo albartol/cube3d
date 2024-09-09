@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   check_inside_walls.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 11:25:42 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/04 11:30:57 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:20:18 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <check_scene.h>
 
 /* 
-Returns True if it founds a colition
+Returns True if it founds a collision
 and false if they dont
  */
 int	check_inside_walls(char **map, size_t x, size_t y)
