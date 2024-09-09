@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 12:40:41 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/06 17:24:54 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/09 12:45:59 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ static void	put_cell(mlx_image_t *img, uint32_t color, t_cords_i coords)
 static uint32_t	get_cell_color(t_cords_i map_pos, char **map, t_cords_i	origin)
 {
 	// (void)origin;
-	map_pos.x += origin.x - 3;
-	map_pos.y += origin.y - 3;
+	map_pos.x += origin.x - 4;
+	map_pos.y += origin.y - 4;
 	if (map_pos.x < 0 || map_pos.y < 0)
 		return (OUTSIDE_COLOR);
 	else if (map_pos.y >= array_len(map)
@@ -81,9 +81,9 @@ void	draw_map(t_game *game)
 		map_pos.y--;
 	}
 	printf("===================\n");
-	// origin.x ;
-	// origin.y ;
-	// put_cell(game->display.map, PLAYER_COLOR, origin);
+	origin.x = 4;
+	origin.y = 4;
+	put_cell(game->display.map, PLAYER_COLOR, origin);
 }
 
 // void	draw_map(t_game *game)
