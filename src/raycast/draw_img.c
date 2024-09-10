@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 20:09:46 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/06 17:08:38 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/10 15:13:57 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,9 @@ void	set_texture(t_dda *dda, t_game *game)
 	if (!dda->side)
 	{
 		if (dda->ray_dir.x <= 0)
-			dda->texture = game->scene.west_texture;
-		else
 			dda->texture = game->scene.east_texture;
+		else
+			dda->texture = game->scene.west_texture;
 	}
 	else
 	{
@@ -120,7 +120,7 @@ int	draw_img(t_game *game, mlx_image_t *img)
 	{
 		dda_info.map_pos.x = (int)dda_info.origin.x;
 		dda_info.map_pos.y = (int)dda_info.origin.y;
-		dda_info.camera_x = 2 * x / (double)WIN_WIDTH - 1;
+		dda_info.camera_x = -(2 * x / (double)WIN_WIDTH - 1);
 		dda_info.ray_dir.x = dda_info.v_dir.x + (dda_info.camera_plane.x * dda_info.camera_x); //Dirección del rayo
 		dda_info.ray_dir.y = dda_info.v_dir.y + (dda_info.camera_plane.y * dda_info.camera_x);
 

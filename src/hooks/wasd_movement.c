@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wasd_movement.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:40:42 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/09 13:20:18 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/10 14:55:44 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int	wasd_movement(mlx_t *mlx, t_player *player, char **map)
 	if (mlx_is_key_down(mlx, MLX_KEY_S))
 		draw = checker(new.x - const_sin.x, new.y + const_sin.y, player, map);
 	if (mlx_is_key_down(mlx, MLX_KEY_A))
-		draw = checker(new.x + const_sin.y, new.y + const_sin.x, player, map);
-	if (mlx_is_key_down(mlx, MLX_KEY_D))
 		draw = checker(new.x - const_sin.y, new.y - const_sin.x, player, map);
+	if (mlx_is_key_down(mlx, MLX_KEY_D))
+		draw = checker(new.x + const_sin.y, new.y + const_sin.x, player, map);
 	return (draw);
 }
