@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_hook.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 14:42:12 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/12 19:28:01 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/12 23:32:35 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int	mouse_hook(t_game *data)
 
 	mlx_get_mouse_pos(data->display.mlx, &x, &y);
 	if (x < WIN_WIDTH / 2)
-		rotate_LR(&data->player, ROTATION_SPEED_R - 0.01, 1.0, &draw);
-	else if (x > WIN_WIDTH / 2)
 		rotate_LR(&data->player, ROTATION_SPEED_R - 0.01, -1.0, &draw);
+	else if (x > WIN_WIDTH / 2)
+		rotate_LR(&data->player, ROTATION_SPEED_R - 0.01, 1.0, &draw);
 	if (y < WIN_HEIGHT / 2)
 		rotate_UD(&data->player, (ROTATION_SPEED + 1), &draw);
 	else if (y > WIN_HEIGHT / 2)
