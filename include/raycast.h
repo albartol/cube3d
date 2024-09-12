@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:10:13 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/04 17:58:17 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/12 18:43:08 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 
 
 // Speed and sensibility
-# define MOVE_SPEED 0.1
-# define ROTATION_SPEED 3.0
+# define MOVE_SPEED 0.05
+# define ROTATION_SPEED 1.5
 # define MOVE_SPEED_R (MOVE_SPEED * PI / 180)
 # define ROTATION_SPEED_R (ROTATION_SPEED * PI / 180) // Radians
 
@@ -34,7 +34,8 @@
 # define WIN_HEIGHT 600
 
 // Map Size
-# define CELLS_NUM 9
+# define CELLS_NUM 21
+# define MAP_MID (CELLS_NUM / 2)
 # define MAP_SIDE (WIN_HEIGHT / 5)
 # define CELL_SIZE (MAP_SIDE / CELLS_NUM)
 

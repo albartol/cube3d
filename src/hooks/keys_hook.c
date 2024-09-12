@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys_hook.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:56:01 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/10 14:55:01 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/12 19:31:10 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	keys_hook(t_game *data)
 		rotate_LR(&data->player, ROTATION_SPEED_R, -1.0, &draw);
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT)|| mlx_is_key_down(mlx, MLX_KEY_E))
 		rotate_LR(&data->player, ROTATION_SPEED_R, 1.0, &draw);
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
 
 	//Up && Down
 	if (mlx_is_key_down(mlx, MLX_KEY_UP))

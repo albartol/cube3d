@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:11:53 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/06 14:11:03 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/12 18:55:51 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	hooks(void *param)
 	t_game  *data;
 
 	data = (t_game *)param;
-	if (keys_hook(data)/*  || mouse_hook(data) */)
+	if (keys_hook(data) || mouse_hook(data))
 		draw_all(data);
 	// if (mouse_hook(data))
 	// 	draw_all(data);
