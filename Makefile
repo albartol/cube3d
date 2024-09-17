@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
+#    By: albartol <albartol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/09/05 11:30:47 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/09/17 19:43:48 by albartol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,16 +21,16 @@ LIBFT := lib/libft/libft.a
 LIBFT_DIR := lib/libft
 FT := -L$(LIBFT_DIR) -lft
 MKDIR := mkdir -p
-HEADERS := check_scene.h \
-			 cube3d.h \
-			 extract_scene.h \
-			 raycast.h \
-			 utils.h
+HEADERS :=	check_scene.h \
+			cube3d.h \
+			extract_scene.h \
+			raycast.h \
+			utils.h
 			
-MLX42 :=	lib/MLX42/build/libmlx42.a
+MLX42 := lib/MLX42/build/libmlx42.a
 MLX42_DIR := lib/MLX42
 MLX42_BUILD := lib/MLX42/build
-MLX :=	-L$(MLX42_BUILD) -lmlx42 -ldl -lglfw -pthread -lm
+MLX := -L$(MLX42_BUILD) -lmlx42 -ldl -lglfw -pthread -lm
 
 # UNAME := $(shell uname)
 # ifeq ($(UNAME), Darwin)
@@ -39,13 +39,13 @@ MLX :=	-L$(MLX42_BUILD) -lmlx42 -ldl -lglfw -pthread -lm
 
 LIBS := $(FT) $(MLX)
 
-SRC_DIR		:= src
-OBJ_DIR		:= obj
-PARSE_DIR	:= parse
-HOOKS_DIR	:= hooks
-UTILS_DIR	:= utils
-RAYCAST_DIR	:= raycast
-LIB_DIR		:= include
+SRC_DIR			:= src
+OBJ_DIR			:= obj
+PARSE_DIR		:= parse
+GAME_LOOP_DIR	:= game_loop
+UTILS_DIR		:= utils
+RAYCAST_DIR		:= raycast
+LIB_DIR			:= include
 
 RED := \033[0;91m
 GREEN := \033[0;92m
@@ -77,7 +77,7 @@ RAYCAST	:=	dda.c \
 			draw_all.c \
 			draw_img.c \
 			init_ray_values.c \
-			map.c \
+			draw_map.c \
 			preload_textures.c \
 			raycast.c
 
@@ -90,26 +90,25 @@ UTIL :=		in_range.c \
 			free_and_exit.c \
 			print_map.c
 
-HOOKS :=	hooks.c \
-			keys_hook.c \
-			mouse_hook.c \
-			rotate_LR.c \
-			rotate_UD.c \
-			wasd_movement.c
+GAME_LOOP :=	game_loop.c \
+				keys_check.c \
+				mouse_pov.c \
+				rotate_LR.c \
+				rotate_UD.c
 
 # Add prefixes:
-HOOKS := $(addprefix $(HOOKS_DIR)/, $(HOOKS))
-UTIL := $(addprefix $(UTILS_DIR)/, $(UTIL))
-PARSE := $(addprefix $(PARSE_DIR)/, $(PARSE))
-RAYCAST := $(addprefix $(RAYCAST_DIR)/, $(RAYCAST))
-HEADERS := $(addprefix $(LIB_DIR)/, $(HEADERS))
+GAME_LOOP	:= $(addprefix $(GAME_LOOP_DIR)/, $(GAME_LOOP))
+UTIL 		:= $(addprefix $(UTILS_DIR)/, $(UTIL))
+PARSE		:= $(addprefix $(PARSE_DIR)/, $(PARSE))
+RAYCAST		:= $(addprefix $(RAYCAST_DIR)/, $(RAYCAST))
+HEADERS		:= $(addprefix $(LIB_DIR)/, $(HEADERS))
 
-SOURCES := $(SRC) $(PARSE) $(UTIL) $(RAYCAST) $(HOOKS)
-OBJS := $(SOURCES:%.c=$(OBJ_DIR)/%.o)
+SOURCES		:= $(SRC) $(PARSE) $(UTIL) $(RAYCAST) $(GAME_LOOP)
+OBJS		:= $(SOURCES:%.c=$(OBJ_DIR)/%.o)
 
-SRCS := $(addprefix $(SRC_DIR)/, $(SOURCES))
+SRCS		:= $(addprefix $(SRC_DIR)/, $(SOURCES))
 
-NAME := cube3D
+NAME		:= cube3D
 # ---------- MANDATORY END ----------
 
 # ---------- BONUS ----------
@@ -146,7 +145,7 @@ $(OBJ_DIR):
 	$(MKDIR) $(OBJ_DIR)/$(PARSE_DIR)
 	$(MKDIR) $(OBJ_DIR)/$(UTILS_DIR)
 	$(MKDIR) $(OBJ_DIR)/$(RAYCAST_DIR)
-	$(MKDIR) $(OBJ_DIR)/$(HOOKS_DIR)
+	$(MKDIR) $(OBJ_DIR)/$(GAME_LOOP_DIR)
 
 $(LIBFT):
 	@echo "$(YELLOW)Compiling libft...$(RESET)"

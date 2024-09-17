@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:10:13 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/12 18:43:08 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/17 19:43:43 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,17 @@
 typedef struct s_dda	t_dda;
 
 // Raycast
-double  dda(t_dda *dda_data, char **map);
-int	    init_ray_values(t_game *data);
-void    hooks(void *param);
-int	    draw_img(t_game *data, mlx_image_t *img);
-int     draw_all(t_game *data);
+double	dda(t_dda *dda_data, char **map);
+int		init_ray_values(t_game *data);
+int		draw_img(t_game *data, mlx_image_t *img);
+int		draw_all(t_game *data);
 
 // Hooks
-void    hooks(void *param);
-int		wasd_movement(mlx_t *mlx, t_player *player, char **map);
-int		keys_hook(t_game *data);
+void	game_loop(void *param);
+void	keys_check(t_game *data);
+void	mouse_pov(t_game *data);
 void	rotate_LR(t_player *player, double rotation_val, double lr, int *draw);
 void	rotate_UD(t_player *player, double rotation_val, int *draw);
-int		mouse_hook(t_game *data);
 
 // Map
 void    draw_map(t_game *game);

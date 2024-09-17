@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:11:53 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/12 23:33:37 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/17 19:39:23 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <raycast.h>
 
-void	hooks(void *param)
+void	game_loop(void *param)
 {
 	t_game  *data;
 
 	data = (t_game *)param;
-	if (keys_hook(data)/*  || mouse_hook(data) */)
-		draw_all(data);
-	if (mouse_hook(data))
+	keys_check(data);
+	mouse_pov(data);
+	if (data->draw)
 		draw_all(data);
 }

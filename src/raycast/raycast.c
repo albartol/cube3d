@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 09:28:31 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/05 11:29:46 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/17 19:43:35 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	raycast(t_game *data)
 	mlx_set_cursor(data->display.mlx, cursor);
 	mlx_image_to_window(data->display.mlx, data->display.frames[0], 0, 0);
 	mlx_image_to_window(data->display.mlx, data->display.map, 0, 0);
-	mlx_loop_hook(data->display.mlx, hooks, data);
+	mlx_loop_hook(data->display.mlx, game_loop, data);
 	mlx_loop(data->display.mlx);
 	return (EXIT_SUCCESS);
 }

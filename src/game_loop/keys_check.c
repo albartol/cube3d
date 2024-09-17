@@ -1,15 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wasd_movement.c                                    :+:      :+:    :+:   */
+/*   keys_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 14:40:42 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/10 14:55:44 by flopez-r         ###   ########.fr       */
+/*   Created: 2024/08/27 12:56:01 by flopez-r          #+#    #+#             */
+/*   Updated: 2024/09/17 19:43:22 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include <raycast.h>
 
@@ -19,14 +18,11 @@ and false si hay colisiones
  */
 static int	checker(float x, float y, t_player *player, char **map)
 {
-	int new_x;
-	int new_y;
+	int	new_x;
+	int	new_y;
 
 	new_x = (int)x;
 	new_y = (int)y;
-
-	// if (check_inside_walls(map, new_x, new_y))
-	// 	return (0);
 	if (new_x <= 0 || new_y <= 0)	
 		return (0);
 	if (new_y >= array_len(map) || new_x >= (int)ft_strlen(map[new_y]))	
@@ -38,17 +34,16 @@ static int	checker(float x, float y, t_player *player, char **map)
 	return (1);
 }
 
-int	wasd_movement(mlx_t *mlx, t_player *player, char **map)
+static int	wasd_movement(mlx_t *mlx, t_player *player, char **map)
 {
-	t_cords_d new;
+	t_cords_d	new;
 	t_cords_d	const_sin;
-	int		draw;
+	int			draw;
 
 	const_sin.x = cos(player->angle) * MOVE_SPEED;
 	const_sin.y = sin(player->angle) * MOVE_SPEED;
 	new.x = player->pos.x;
 	new.y = player->pos.y;
-
 	draw = 0;
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
 		draw = checker(new.x + const_sin.x, new.y - const_sin.y, player, map);
@@ -59,4 +54,37 @@ int	wasd_movement(mlx_t *mlx, t_player *player, char **map)
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
 		draw = checker(new.x + const_sin.y, new.y + const_sin.x, player, map);
 	return (draw);
+}
+
+static void	arrows_pov(mlx_t *mlx, t_player *player, int *draw)
+{
+	if (mlx_is_key_down(mlx, MLX_KEY_LEFT) || mlx_is_key_down(mlx, MLX_KEY_Q))
+		rotate_LR(player, ROTATION_SPEED_R, -1.0, draw);
+	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT)|| mlx_is_key_down(mlx, MLX_KEY_E))
+		rotate_LR(player, ROTATION_SPEED_R, 1.0, draw);
+	if (mlx_is_key_down(mlx, MLX_KEY_UP))
+		rotate_UD(player, (ROTATION_SPEED + 1), draw);
+	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
+		rotate_UD(player, -(ROTATION_SPEED + 1), draw);
+}
+
+void	keys_check(t_game *data)
+{
+	mlx_t	*mlx;
+
+	mlx = data->display.mlx;
+	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
+	{
+		mlx_close_window(data->display.mlx);
+		ft_putstr_fd("Thanks for playing\n", STDOUT_FILENO);
+	}
+	if (mlx_is_key_down(mlx, MLX_KEY_M))
+	{
+		data->display.map->enabled = !data->display.map->enabled;
+		data->draw = 1;
+	}
+	if (mlx_is_key_down(mlx, MLX_KEY_W) || mlx_is_key_down(mlx, MLX_KEY_A)
+		|| mlx_is_key_down(mlx, MLX_KEY_S) || mlx_is_key_down(mlx, MLX_KEY_D))
+		data->draw += wasd_movement(mlx, &data->player, data->file.map);
+	arrows_pov(mlx, &data->player, &data->draw);
 }
