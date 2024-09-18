@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:56:01 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/17 19:43:22 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/18 16:59:04 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,14 @@ void	keys_check(t_game *data)
 	{
 		data->display.map->enabled = !data->display.map->enabled;
 		data->draw = 1;
+	}
+	if (mlx_is_key_down(mlx, MLX_KEY_C))
+	{
+		data->mouse = !data->mouse;
+		if (data->mouse)
+			mlx_set_cursor_mode(data->display.mlx, MLX_MOUSE_NORMAL);
+		else
+			mlx_set_cursor_mode(data->display.mlx, MLX_MOUSE_HIDDEN);
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_W) || mlx_is_key_down(mlx, MLX_KEY_A)
 		|| mlx_is_key_down(mlx, MLX_KEY_S) || mlx_is_key_down(mlx, MLX_KEY_D))

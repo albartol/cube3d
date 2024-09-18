@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/09/17 19:30:48 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/18 16:28:23 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ struct s_game
 	t_display		display;
 	t_player		player;
 	int				draw;
+	int				mouse;
 };
 
 

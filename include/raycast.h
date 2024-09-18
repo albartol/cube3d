@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:10:13 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/17 19:43:43 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:05:59 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 # define ROTATION_SPEED_R (ROTATION_SPEED * PI / 180) // Radians
 
 // Screen Size
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 600
+# define WIN_WIDTH 1200
+# define WIN_HEIGHT 900
 
 // Map Size
 # define CELLS_NUM 21
@@ -40,10 +40,10 @@
 # define CELL_SIZE (MAP_SIDE / CELLS_NUM)
 
 // Map colors
-# define WALL_COLOR 0xa8dadcff
+# define WALL_COLOR 0xa8dadcef
 # define PLAYER_COLOR 0xe63946ff
-# define FLOOR_COLOR 0xf1faeeff
-# define OUTSIDE_COLOR 0x1d3557ff
+# define FLOOR_COLOR 0xf1faeeef
+# define OUTSIDE_COLOR 0x1d3557af
 
 
 # define FOV 0.66
