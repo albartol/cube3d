@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 14:42:12 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/20 12:49:55 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/20 14:48:33 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	mouse_pov(t_game *data)
 	vel_x = (abs(abs(x) - WIN_WIDTH / 2) / (WIN_WIDTH / 8)) * PI / 180;
 	vel_y = abs(abs(y) - WIN_HEIGHT / 2) / (WIN_HEIGHT / 12);
 	if (x < WIN_WIDTH / 2)
-		rotate_lr(&data->player, ROTATION_SPEED_R + vel_x, -1.0, &data->draw);
+		rotate_lr(&data->player, ROTATION_SPEED + vel_x, -1.0, &data->draw);
 	else if (x > WIN_WIDTH / 2)
-		rotate_lr(&data->player, ROTATION_SPEED_R + vel_x, 1.0, &data->draw);
+		rotate_lr(&data->player, ROTATION_SPEED + vel_x, 1.0, &data->draw);
 	if (y < WIN_HEIGHT / 2)
 		rotate_ud(&data->player, ROTATION_SPEED + vel_y, &data->draw);
 	else if (y > WIN_HEIGHT / 2)

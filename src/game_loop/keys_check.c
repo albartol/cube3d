@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:56:01 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/20 12:48:30 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/20 15:01:38 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ static int	wasd_movement(mlx_t *mlx, t_player *player, char **map)
 static void	arrows_pov(mlx_t *mlx, t_player *player, int *draw)
 {
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT) || mlx_is_key_down(mlx, MLX_KEY_Q))
-		rotate_lr(player, ROTATION_SPEED_R, -1.0, draw);
+		rotate_lr(player, ROTATION_SPEED, -1.0, draw);
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT) || mlx_is_key_down(mlx, MLX_KEY_E))
-		rotate_lr(player, ROTATION_SPEED_R, 1.0, draw);
+		rotate_lr(player, ROTATION_SPEED, 1.0, draw);
 	if (mlx_is_key_down(mlx, MLX_KEY_UP))
 		rotate_ud(player, (ROTATION_SPEED + 1), draw);
 	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
@@ -91,8 +91,9 @@ void	keys_check(t_game *data)
 		else
 			mlx_set_cursor_mode(data->display.mlx, MLX_MOUSE_HIDDEN);
 	}
-	if (mlx_is_key_down(mlx, MLX_KEY_W) || mlx_is_key_down(mlx, MLX_KEY_A)
-		|| mlx_is_key_down(mlx, MLX_KEY_S) || mlx_is_key_down(mlx, MLX_KEY_D))
-		data->draw += wasd_movement(mlx, &data->player, data->file.map);
+	data->draw = wasd_movement(mlx, &data->player, data->file.map);
 	arrows_pov(mlx, &data->player, &data->draw);
 }
+// if (mlx_is_key_down(mlx, MLX_KEY_W) || mlx_is_key_down(mlx, MLX_KEY_A)
+// 	|| mlx_is_key_down(mlx, MLX_KEY_S) || mlx_is_key_down(mlx, MLX_KEY_D))
+// 	data->draw += wasd_movement(mlx, &data->player, data->file.map);

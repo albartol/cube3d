@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:10:13 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/20 14:23:26 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/20 14:59:13 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@
 # define _1_PI 0.31830988618379067154 /* 1/pi */
 
 // Speed and sensibility
-# define MOVE_SPEED 0.05
+# define MOVE_SPEED 0.1
 # define ROTATION_SPEED 1.5
-# define MOVE_SPEED_R (MOVE_SPEED * PI / 180)
-# define ROTATION_SPEED_R (ROTATION_SPEED * PI / 180) // Radians
 
 // Screen Size
 # define WIN_WIDTH 1200
@@ -34,9 +32,7 @@
 
 // Map Size
 # define CELLS_NUM 21
-# define MAP_MID (CELLS_NUM / 2)
-# define MAP_SIDE (WIN_HEIGHT / 5)
-# define CELL_SIZE (MAP_SIDE / CELLS_NUM)
+# define MAP_SIDE 5
 
 // Map colors
 # define WALL_COLOR 0xa8dadcef
@@ -45,11 +41,8 @@
 # define OUTSIDE_COLOR 0x1d3557af
 
 # define FOV 0.66
-# define LIMIT_UP_DOWN (WIN_HEIGHT / 2)
 
 # define RAY_WIDTH 4
-
-# define NUM_RAY (WIN_WIDTH / RAY_WIDTH)
 
 typedef struct s_dda	t_dda;
 

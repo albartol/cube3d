@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate_LR.c                                        :+:      :+:    :+:   */
+/*   rotate_lr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:42:06 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/20 12:46:44 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/20 14:46:34 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	rotate_lr(t_player *player, double rotation_val, double lr, int *draw)
 	save_plane.y = player->camera_plane.y;
 	save_pos.x = player->dir_vector.x;
 	save_pos.y = player->dir_vector.y;
+	rotation_val = (rotation_val * PI) / 180;
 	cos_sin.x = cos(rotation_val * lr);
 	cos_sin.y = sin(rotation_val * lr);
 	// Rotate the direction vector

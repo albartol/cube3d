@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 20:07:51 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/20 12:57:08 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/20 14:55:01 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,13 @@ static void	init_dir_vector(t_game *data)
 int	init_ray_values(t_game *data)
 {
 	mlx_t	*mlx;
+	uint32_t	map_size;
 
+	map_size = WIN_HEIGHT / MAP_SIDE;
 	mlx = data->display.mlx;
 	data->display.frames[0] = mlx_new_image(mlx, WIN_WIDTH, WIN_HEIGHT);
 	data->display.frames[1] = mlx_new_image(mlx, WIN_WIDTH, WIN_HEIGHT);
-	data->display.map = mlx_new_image(mlx, MAP_SIDE, MAP_SIDE);
+	data->display.map = mlx_new_image(mlx, map_size, map_size);
 	if (!data->display.frames[0] || !data->display.frames[0]
 		|| !data->display.map)
 		return (EXIT_FAILURE);

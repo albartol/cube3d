@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 12:40:41 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/20 14:04:04 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/20 14:57:35 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,34 @@
 static void	put_cell(mlx_image_t *img, uint32_t color, t_cords_i coords)
 {
 	t_cords_i	pixel;
-	t_cords_i	cell_size;
+	t_cords_i	cells;
+	int			map_size;
+	int			cell_size;
 
-	pixel.x = coords.x * CELL_SIZE;
-	pixel.y = coords.y * CELL_SIZE;
-	cell_size.y = 0;
-	while (cell_size.y < CELL_SIZE)
+	map_size = WIN_HEIGHT / MAP_SIDE;
+	cell_size = map_size / CELLS_NUM;
+	pixel.x = coords.x * cell_size;
+	pixel.y = coords.y * cell_size;
+	cells.y = 0;
+	while (cells.y < cell_size)
 	{
-		cell_size.x = 0;
-		while (cell_size.x < CELL_SIZE)
+		cells.x = 0;
+		while (cells.x < cell_size)
 		{
-			if (pixel.x < MAP_SIDE && pixel.y < MAP_SIDE)
+			if (pixel.x < map_size && pixel.y < map_size)
 				mlx_put_pixel(img, pixel.x++, pixel.y, color);
-			cell_size.x++;
+			cells.x++;
 		}
 		pixel.y++;
-		pixel.x -= CELL_SIZE;
-		cell_size.y++;
+		pixel.x -= cell_size;
+		cells.y++;
 	}
 }
 
 static uint32_t	get_cell_color(t_cords_i map_pos, char **map, t_cords_i origin)
 {
-	map_pos.x += origin.x - MAP_MID;
-	map_pos.y += origin.y - MAP_MID;
+	map_pos.x += origin.x - (CELLS_NUM / 2);
+	map_pos.y += origin.y - (CELLS_NUM / 2);
 	if (map_pos.x < 0 || map_pos.y < 0)
 		return (OUTSIDE_COLOR);
 	else if (map_pos.y >= array_len(map)
@@ -72,7 +76,7 @@ void	draw_map(t_game *game)
 		}
 		map_pos.y--;
 	}
-	origin.x = MAP_MID;
-	origin.y = MAP_MID;
+	origin.x = CELLS_NUM / 2;
+	origin.y = CELLS_NUM / 2;
 	put_cell(game->display.map, PLAYER_COLOR, origin);
 }
