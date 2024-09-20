@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:31:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/09/04 12:50:28 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/20 12:52:32 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	check_texture_path(const char *texture_path)
 	if (check_file_type(texture_path, ".png"))
 	{
 		print_error(texture_path);
-		ft_putstr_fd(RED": The texture must be an *.png file\n"RESET, STDERR_FILENO);
+		ft_putstr_fd(RED": The texture must be an *.png file\n"RESET, 2);
 		return (EXIT_FAILURE);
 	}
 	fd = open(texture_path, O_RDONLY);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: albartol <albartol@student.42.fr>          +#+  +:+       +#+         #
+#    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/09/17 19:43:48 by albartol         ###   ########.fr        #
+#    Updated: 2024/09/20 12:47:29 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,8 +93,8 @@ UTIL :=		in_range.c \
 GAME_LOOP :=	game_loop.c \
 				keys_check.c \
 				mouse_pov.c \
-				rotate_LR.c \
-				rotate_UD.c
+				rotate_lr.c \
+				rotate_ud.c
 
 # Add prefixes:
 GAME_LOOP	:= $(addprefix $(GAME_LOOP_DIR)/, $(GAME_LOOP))

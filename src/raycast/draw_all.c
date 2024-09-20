@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:30:07 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/17 19:20:36 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/20 12:59:16 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 // 	y = 0;
 // 	while (y < src->height && y < dest->height)
 // 	{
-// 		ft_memcpy(&dest->pixels[y * dest->width], &src->pixels[y * src->width], src->width);
+// 		ft_memcpy(&dest->pixels[y * dest->width], &src->pixels[y * src->width],
+			// src->width);
 // 		// x = 0;
 // 		// while (x < src->width && x < dest->width)
 // 		// {
@@ -33,10 +34,7 @@
 
 int	draw_all(t_game *data)
 {
-	// static int	frame;
-
-	draw_img(data, data->display.frames[0]);//This part need protection
+	draw_img(data, data->display.frames[0]); // This part need protection
 	draw_map(data);
-	// frame = !frame;
 	return (EXIT_SUCCESS);
 }

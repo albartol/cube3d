@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:10:13 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/18 17:05:59 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/20 12:47:29 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int		draw_all(t_game *data);
 void	game_loop(void *param);
 void	keys_check(t_game *data);
 void	mouse_pov(t_game *data);
-void	rotate_LR(t_player *player, double rotation_val, double lr, int *draw);
-void	rotate_UD(t_player *player, double rotation_val, int *draw);
+void	rotate_lr(t_player *player, double rotation_val, double lr, int *draw);
+void	rotate_ud(t_player *player, double rotation_val, int *draw);
 
 // Map
 void    draw_map(t_game *game);

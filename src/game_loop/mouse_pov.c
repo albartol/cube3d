@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_pov.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 14:42:12 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/18 17:07:49 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/20 12:49:55 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // {
 // 	int32_t vel_x;
 // 	int32_t vel_y;
-	
+
 // 	vel_x = abs(abs(*x) - WIN_WIDTH / 2) / 10;
 // 	vel_y = abs(abs(*y) - WIN_HEIGHT / 2) / 10;
 // 	if (*x < WIN_WIDTH / 2)
@@ -37,8 +37,8 @@ void	mouse_pov(t_game *data)
 {
 	int32_t	x;
 	int32_t	y;
-	double vel_x;
-	double vel_y;
+	double	vel_x;
+	double	vel_y;
 
 	if (data->mouse)
 		return ;
@@ -46,14 +46,12 @@ void	mouse_pov(t_game *data)
 	vel_x = (abs(abs(x) - WIN_WIDTH / 2) / (WIN_WIDTH / 8)) * PI / 180;
 	vel_y = abs(abs(y) - WIN_HEIGHT / 2) / (WIN_HEIGHT / 12);
 	if (x < WIN_WIDTH / 2)
-		rotate_LR(&data->player, ROTATION_SPEED_R + vel_x, -1.0, &data->draw);
+		rotate_lr(&data->player, ROTATION_SPEED_R + vel_x, -1.0, &data->draw);
 	else if (x > WIN_WIDTH / 2)
-		rotate_LR(&data->player, ROTATION_SPEED_R + vel_x, 1.0, &data->draw);
+		rotate_lr(&data->player, ROTATION_SPEED_R + vel_x, 1.0, &data->draw);
 	if (y < WIN_HEIGHT / 2)
-		rotate_UD(&data->player, ROTATION_SPEED + vel_y, &data->draw);
+		rotate_ud(&data->player, ROTATION_SPEED + vel_y, &data->draw);
 	else if (y > WIN_HEIGHT / 2)
-		rotate_UD(&data->player, -(ROTATION_SPEED + vel_y), &data->draw);
+		rotate_ud(&data->player, -(ROTATION_SPEED + vel_y), &data->draw);
 	mlx_set_mouse_pos(data->display.mlx, WIN_WIDTH / 2, WIN_HEIGHT / 2);
-	// new_mouse_pos(&x, &y);
-	// mlx_set_mouse_pos(data->display.mlx, x, y);
 }

@@ -6,13 +6,13 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:18 by albartol          #+#    #+#             */
-/*   Updated: 2024/09/04 12:55:52 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/20 12:40:17 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cube3d.h>
 
-void print_info(t_game *data)
+void	print_info(t_game *data)
 {
 	ft_printf("───────────────────SCENE-FILE───────────────────\n");
 	ft_printf("%s\n", data->file.north_texture);
@@ -22,7 +22,6 @@ void print_info(t_game *data)
 	ft_printf("%s\n", data->file.floor_color);
 	ft_printf("%s\n", data->file.celling_color);
 	ft_printf("───────────────────SCENE────────────────────────\n");
-
 	ft_printf("Map width ----->   %lu\n", data->scene.map_width);
 	ft_printf("Map height ---->   %lu\n", data->scene.map_height);
 	ft_printf("Player x ------>   %lu\n", data->scene.player_x);
@@ -35,7 +34,6 @@ void	game_data_init(t_game *data)
 {
 	data = ft_memset(data, 0, sizeof(t_game));
 }
-
 
 int	main(int argc, char **argv)
 {

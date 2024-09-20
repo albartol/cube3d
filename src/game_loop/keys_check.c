@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   keys_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:56:01 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/18 16:59:04 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/20 12:48:30 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <raycast.h>
 
-/* 
+/*
 Returns true if its no collisions
 and false si hay colisiones
  */
@@ -23,9 +23,9 @@ static int	checker(float x, float y, t_player *player, char **map)
 
 	new_x = (int)x;
 	new_y = (int)y;
-	if (new_x <= 0 || new_y <= 0)	
+	if (new_x <= 0 || new_y <= 0)
 		return (0);
-	if (new_y >= array_len(map) || new_x >= (int)ft_strlen(map[new_y]))	
+	if (new_y >= array_len(map) || new_x >= (int)ft_strlen(map[new_y]))
 		return (0);
 	if (map[new_y][new_x] == WALL)
 		return (0);
@@ -59,13 +59,13 @@ static int	wasd_movement(mlx_t *mlx, t_player *player, char **map)
 static void	arrows_pov(mlx_t *mlx, t_player *player, int *draw)
 {
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT) || mlx_is_key_down(mlx, MLX_KEY_Q))
-		rotate_LR(player, ROTATION_SPEED_R, -1.0, draw);
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT)|| mlx_is_key_down(mlx, MLX_KEY_E))
-		rotate_LR(player, ROTATION_SPEED_R, 1.0, draw);
+		rotate_lr(player, ROTATION_SPEED_R, -1.0, draw);
+	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT) || mlx_is_key_down(mlx, MLX_KEY_E))
+		rotate_lr(player, ROTATION_SPEED_R, 1.0, draw);
 	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		rotate_UD(player, (ROTATION_SPEED + 1), draw);
+		rotate_ud(player, (ROTATION_SPEED + 1), draw);
 	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		rotate_UD(player, -(ROTATION_SPEED + 1), draw);
+		rotate_ud(player, -(ROTATION_SPEED + 1), draw);
 }
 
 void	keys_check(t_game *data)

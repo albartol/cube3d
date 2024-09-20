@@ -6,12 +6,11 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:31:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/09/04 13:21:58 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/20 12:53:37 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <check_scene.h>
-
 
 void	get_view(t_game *data, char character)
 {
@@ -52,7 +51,7 @@ static int	check_value(char **map, size_t x, size_t y, t_game *data)
 	return (EXIT_SUCCESS);
 }
 
-int	check_map(char **map,  t_game *data)
+int	check_map(char **map, t_game *data)
 {
 	size_t	y;
 	size_t	x;

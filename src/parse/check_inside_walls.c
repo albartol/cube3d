@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_inside_walls.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 11:25:42 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/09 13:20:18 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/20 12:54:11 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ and false if they dont
  */
 int	check_inside_walls(char **map, size_t x, size_t y)
 {
-	if (y == 0 || ft_strlen(map[y - 1]) <= x || map[y - 1][x] == SPACE) // UP
+	if (y == 0 || ft_strlen(map[y - 1]) <= x || map[y - 1][x] == SPACE)
 		return (EXIT_FAILURE);
-	if (!map[y + 1] || ft_strlen(map[y + 1]) <= x || map[y + 1][x] == SPACE) // DOWN
+	if (!map[y + 1] || ft_strlen(map[y + 1]) <= x || map[y + 1][x] == SPACE)
 		return (EXIT_FAILURE);
-	if (x == 0 || map[y][x - 1] == SPACE) // LEFT
+	if (x == 0 || map[y][x - 1] == SPACE)
 		return (EXIT_FAILURE);
-	if (!map[y][x + 1] || map[y][x + 1] == SPACE) // DOWN
+	if (!map[y][x + 1] || map[y][x + 1] == SPACE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

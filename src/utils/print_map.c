@@ -6,13 +6,13 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 19:50:05 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/08/15 19:50:19 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/20 14:06:09 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cube3d.h>
 
-void print_map(char **map)
+void	print_map(char **map)
 {
 	int	i;
 	int	j;
