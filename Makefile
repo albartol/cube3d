@@ -6,7 +6,7 @@
 #    By: albartol <albartol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/09/25 14:57:44 by albartol         ###   ########.fr        #
+#    Updated: 2024/09/25 16:52:05 by albartol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ CC := cc
 
 INCLUDE := -Iinclude -Ilib/libft/include -Ilib/MLX42/include/MLX42
 
-# CFLAGS := -Wall -Wextra -Werror -O3 -g3 $(INCLUDE)
-CFLAGS := -Wall -Wextra -Werror -O3 -g3 $(INCLUDE) -fsanitize=address
+CFLAGS := -Wall -Wextra -Werror -O2 $(INCLUDE)
+# CFLAGS := -Wall -Wextra -Werror -g3 $(INCLUDE) -fsanitize=address
 
 LIBFT := lib/libft/libft.a
 LIBFT_DIR := lib/libft
