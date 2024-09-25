@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:10:13 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/25 15:00:46 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/25 15:25:13 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,6 @@
 # define OUTSIDE_COLOR 0x1d3557af
 
 # define FOV 0.66
-
-# define RAY_WIDTH 4
-
-typedef struct s_dda	t_dda;
 
 // Raycast
 double	dda(t_dda *dda_data, char **map);

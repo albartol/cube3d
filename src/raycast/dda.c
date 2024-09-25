@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:05:27 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/20 14:04:52 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:06:53 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	get_deltas(t_dda *dda_info)
 		dda_info->delta_dist.y = fabs(1 / dda_info->ray_dir.y);
 }
 
-static void	get_distance(double *line, t_dda *dda)
+static double	get_distance(t_dda *dda)
 {
 	double	per_wall_distance;
 
@@ -91,13 +91,11 @@ static void	get_distance(double *line, t_dda *dda)
 	}
 	dda->x_hit -= floor(dda->x_hit);
 	// Tamaño de la linea a dibujar en la ventana ahre:
-	*line = WIN_HEIGHT / per_wall_distance;
+	return (WIN_HEIGHT / per_wall_distance); // probar
 }
 
 double	dda(t_dda *dda_info, char **map)
 {
-	double	line_height;
-
 	// DDA (Calculus)
 	get_deltas(dda_info);
 	get_steps_dist(dda_info);
@@ -117,6 +115,5 @@ double	dda(t_dda *dda_info, char **map)
 			dda_info->side = 1;
 		}
 	}
-	get_distance(&line_height, dda_info);
-	return (line_height);
+	return (get_distance(dda_info));
 }

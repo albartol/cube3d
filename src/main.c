@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:18 by albartol          #+#    #+#             */
-/*   Updated: 2024/09/25 14:49:02 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:00:25 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,15 @@
 void	print_info(t_game *data)
 {
 	ft_printf("───────────────────SCENE-FILE───────────────────\n");
-	ft_printf("%s\n", data->file.north_texture);
-	ft_printf("%s\n", data->file.south_texture);
-	ft_printf("%s\n", data->file.east_texture);
-	ft_printf("%s\n", data->file.west_texture);
-	ft_printf("%s\n", data->file.floor_color);
-	ft_printf("%s\n", data->file.celling_color);
-	ft_printf("───────────────────SCENE────────────────────────\n");
-	ft_printf("Map width ----->   %lu\n", data->scene.map_width);
-	ft_printf("Map height ---->   %lu\n", data->scene.map_height);
-	ft_printf("Player x ------>   %lu\n", data->scene.player_x);
-	ft_printf("Player y ------>   %lu\n", data->scene.player_y);
-	ft_printf("Player angle -->   %d\n", data->scene.angle);
-	ft_printf("──────────────────────────────────────────────────────\n");
+	ft_printf("north_texture: %s\n", data->file.north_texture);
+	ft_printf("south_texture: %s\n", data->file.south_texture);
+	ft_printf("east_texture:  %s\n", data->file.east_texture);
+	ft_printf("west_texture:  %s\n", data->file.west_texture);
+	ft_printf("floor_color:   %s\n", data->file.floor_color);
+	ft_printf("celling_color: %s\n", data->file.celling_color);
+	ft_printf("floor_color:   %X\n", data->scene.floor_color);
+	ft_printf("celling_color: %X\n", data->scene.celling_color);
+	print_map(data->file.map);
 }
 
 void	game_data_init(t_game *data)
@@ -49,9 +45,6 @@ int	main(int argc, char **argv)
 	if (check_scene_info(&data))
 		return (free_and_exit(&data, EXIT_FAILURE));
 	print_info(&data);
-	print_map(data.file.map);
-	printf("floor_color: %X\n", data.scene.floor_color);
-	printf("celling_color: %X\n", data.scene.celling_color);
 	if (preload_textures(&data))
 		return (free_and_exit(&data, EXIT_FAILURE));
 	if (raycast(&data))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 19:50:05 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/20 14:06:09 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/25 15:58:28 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ void	print_map(char **map)
 		while (map[i][j])
 		{
 			if (ft_strchr("NSWE", map[i][j]))
-				printf(PLAYER_COL);
+				ft_putstr_fd(PLAYER_COL, STDOUT_FILENO);
 			else if (map[i][j] == '1')
-				printf(WALL_COL);
-			printf("%c", map[i][j]);
-			printf(RESET);
+				ft_putstr_fd(WALL_COL, STDOUT_FILENO);
+			ft_printf("%c", map[i][j]);
+			ft_putstr_fd(RESET, STDOUT_FILENO);
 			j++;
 		}
-		printf("\n");
+		ft_putstr_fd("\n", STDOUT_FILENO);
 		i++;
 	}
 	ft_putstr_fd("──────────────────────────────────────────────────────\n", 1);

@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 20:07:51 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/25 14:51:14 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/25 15:15:42 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ static void	init_dir_vector(t_game *data)
 		data->player.dir_vector.y = 1;
 		data->player.camera_plane.x = FOV;
 	}
-	if (data->player.angle == 0) // East
+	else if (data->player.angle == 0) // East
 	{
 		data->player.dir_vector.x = 1;
 		data->player.camera_plane.y = -FOV;
 	}
-	if (data->player.angle == 180) // West
+	else if (data->player.angle == 180) // West
 	{
 		data->player.dir_vector.x = -1;
 		data->player.camera_plane.y = FOV;
