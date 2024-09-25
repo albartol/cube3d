@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_and_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:32:05 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/20 14:06:00 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/25 14:49:58 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,9 @@ int	free_and_exit(t_game *data, int exit)
 {
 	free_scene_info(&data->file);
 	free_scene(&data->scene);
+	if (data->display.frame)
+		mlx_delete_image(data->display.mlx, data->display.frame);
+	if (data->display.map)
+		mlx_delete_image(data->display.mlx, data->display.map);
 	return (exit);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:56:01 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/20 15:01:38 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/25 15:05:26 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,56 +16,65 @@
 Returns true if its no collisions
 and false si hay colisiones
  */
-static int	checker(float x, float y, t_player *player, char **map)
+static void	checker(float x, float y, t_player *player, char **map)
 {
-	int	new_x;
-	int	new_y;
+	t_cords_i	new;
+	t_cords_i	old;
 
-	new_x = (int)x;
-	new_y = (int)y;
-	if (new_x <= 0 || new_y <= 0)
-		return (0);
-	if (new_y >= array_len(map) || new_x >= (int)ft_strlen(map[new_y]))
-		return (0);
-	if (map[new_y][new_x] == WALL)
-		return (0);
+	old.x = (int)player->pos.x;
+	old.y = (int)player->pos.y;
+	new.x = (int)x;
+	new.y = (int)y;
+	if (new.x <= 0 || new.y <= 0 || new.y >= array_len(map)
+		|| new.x >= (int)ft_strlen(map[new.y]) || map[new.y][new.x] == WALL)
+		return ;
+	if (old.x < new.x && map[old.y][old.x + 1] == WALL)
+	{
+		if (old.y < new.y && map[old.y + 1][old.x] == WALL)
+			return ;
+		if (old.y > new.y && map[old.y - 1][old.x] == WALL)
+			return ;
+	}
+	if (old.x > new.x && map[old.y][old.x - 1] == WALL)
+	{
+		if (old.y < new.y && map[old.y + 1][old.x] == WALL)
+			return ;
+		if (old.y > new.y && map[old.y - 1][old.x] == WALL)
+			return ;
+	}
 	player->pos.x = x;
 	player->pos.y = y;
-	return (1);
 }
 
-static int	wasd_movement(mlx_t *mlx, t_player *player, char **map)
+static void	wasd_movement(mlx_t *mlx, t_player *player, char **map)
 {
 	t_cords_d	new;
 	t_cords_d	const_sin;
-	int			draw;
 
 	const_sin.x = cos(player->angle) * MOVE_SPEED;
 	const_sin.y = sin(player->angle) * MOVE_SPEED;
 	new.x = player->pos.x;
 	new.y = player->pos.y;
-	draw = 0;
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
-		draw = checker(new.x + const_sin.x, new.y - const_sin.y, player, map);
+		checker(new.x + const_sin.x, new.y - const_sin.y, player, map);
 	if (mlx_is_key_down(mlx, MLX_KEY_S))
-		draw = checker(new.x - const_sin.x, new.y + const_sin.y, player, map);
+		checker(new.x - const_sin.x, new.y + const_sin.y, player, map);
 	if (mlx_is_key_down(mlx, MLX_KEY_A))
-		draw = checker(new.x - const_sin.y, new.y - const_sin.x, player, map);
+		checker(new.x - const_sin.y, new.y - const_sin.x, player, map);
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
-		draw = checker(new.x + const_sin.y, new.y + const_sin.x, player, map);
-	return (draw);
+		checker(new.x + const_sin.y, new.y + const_sin.x, player, map);
 }
 
-static void	arrows_pov(mlx_t *mlx, t_player *player, int *draw)
+static void	arrows_pov(mlx_t *mlx, t_player *player)
 {
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT) || mlx_is_key_down(mlx, MLX_KEY_Q))
-		rotate_lr(player, ROTATION_SPEED, -1.0, draw);
+		rotate_lr(player, ROTATION_SPEED, -1.0);
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT) || mlx_is_key_down(mlx, MLX_KEY_E))
-		rotate_lr(player, ROTATION_SPEED, 1.0, draw);
+		rotate_lr(player, ROTATION_SPEED, 1.0);
 	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		rotate_ud(player, (ROTATION_SPEED + 1), draw);
+		rotate_ud(player, (ROTATION_SPEED + 1));
 	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		rotate_ud(player, -(ROTATION_SPEED + 1), draw);
+		rotate_ud(player, -(ROTATION_SPEED + 1));
 }
 
 void	keys_check(t_game *data)
@@ -79,10 +88,7 @@ void	keys_check(t_game *data)
 		ft_putstr_fd("Thanks for playing\n", STDOUT_FILENO);
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_M))
-	{
 		data->display.map->enabled = !data->display.map->enabled;
-		data->draw = 1;
-	}
 	if (mlx_is_key_down(mlx, MLX_KEY_C))
 	{
 		data->mouse = !data->mouse;
@@ -91,9 +97,9 @@ void	keys_check(t_game *data)
 		else
 			mlx_set_cursor_mode(data->display.mlx, MLX_MOUSE_HIDDEN);
 	}
-	data->draw = wasd_movement(mlx, &data->player, data->file.map);
-	arrows_pov(mlx, &data->player, &data->draw);
+	wasd_movement(mlx, &data->player, data->file.map);
+	arrows_pov(mlx, &data->player);
 }
 // if (mlx_is_key_down(mlx, MLX_KEY_W) || mlx_is_key_down(mlx, MLX_KEY_A)
 // 	|| mlx_is_key_down(mlx, MLX_KEY_S) || mlx_is_key_down(mlx, MLX_KEY_D))
-// 	data->draw += wasd_movement(mlx, &data->player, data->file.map);
+// 	wasd_movement(mlx, &data->player, data->file.map);

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   rotate_ud.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:44:19 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/20 14:44:06 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/25 14:29:39 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <raycast.h>
 
-void	rotate_ud(t_player *player, double rotation_val, int *draw)
+void	rotate_ud(t_player *player, double rotation_val)
 {
 	double	limit_up_down;
 
@@ -22,5 +22,4 @@ void	rotate_ud(t_player *player, double rotation_val, int *draw)
 		player->move_y = limit_up_down;
 	else if (player->move_y < -limit_up_down)
 		player->move_y = -limit_up_down;
-	*draw = 1;
 }

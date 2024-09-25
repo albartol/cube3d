@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_all.c                                         :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:30:07 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/20 12:59:16 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/25 14:57:03 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,8 @@
 // 	}
 // }
 
-int	draw_all(t_game *data)
+void	render(t_game *data)
 {
-	draw_img(data, data->display.frames[0]); // This part need protection
+	draw_img(data, data->display.frame); // This part need protection
 	draw_map(data);
-	return (EXIT_SUCCESS);
 }

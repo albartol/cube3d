@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:07 by albartol          #+#    #+#             */
-/*   Updated: 2024/09/20 14:20:26 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/25 14:25:43 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ struct						s_scene
 struct						s_display
 {
 	mlx_t					*mlx;
-	mlx_image_t				*frames[2];
+	mlx_image_t				*frame;
 	mlx_image_t				*map;
 };
 
@@ -152,7 +152,6 @@ struct						s_game
 	t_scene					scene;
 	t_display				display;
 	t_player				player;
-	int						draw;
 	int						mouse;
 };
 

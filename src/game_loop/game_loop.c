@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:11:53 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/20 12:40:56 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/25 14:57:22 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,5 @@ void	game_loop(void *param)
 	data = (t_game *)param;
 	keys_check(data);
 	mouse_pov(data);
-	if (data->draw)
-		draw_all(data);
+	render(data);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   draw_img.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 20:09:46 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/20 14:02:57 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/25 15:00:04 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <raycast.h>
 
-uint32_t	get_textured_color(int y_col, double line_h, t_dda *dda)
+static uint32_t	get_textured_color(int y_col, double line_h, t_dda *dda)
 {
 	int			i;
 	int			colum;
@@ -83,7 +83,7 @@ static void	set_cords_d(t_dda *dda, t_player *player)
 	dda->v_dir.y = player->dir_vector.y;
 }
 
-void	set_texture(t_dda *dda, t_game *game)
+static void	set_texture(t_dda *dda, t_game *game)
 {
 	if (!dda->side)
 	{
@@ -101,7 +101,7 @@ void	set_texture(t_dda *dda, t_game *game)
 	}
 }
 
-int	draw_img(t_game *game, mlx_image_t *img)
+void	draw_img(t_game *game, mlx_image_t *img)
 {
 	int			x;
 	double		line_height;
@@ -125,5 +125,4 @@ int	draw_img(t_game *game, mlx_image_t *img)
 			break ;
 		x++;
 	}
-	return (EXIT_SUCCESS);
 }

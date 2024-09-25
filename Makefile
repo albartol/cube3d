@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
+#    By: albartol <albartol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/09/20 12:47:29 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/09/25 14:57:44 by albartol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,7 @@ EXT :=		extract_elements.c \
 PARSE := $(CHK) $(EXT)
 
 RAYCAST	:=	dda.c \
-			draw_all.c \
+			render.c \
 			draw_img.c \
 			init_ray_values.c \
 			draw_map.c \

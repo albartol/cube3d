@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ray_values.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 20:07:51 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/20 14:55:01 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/09/25 14:51:14 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ int	init_ray_values(t_game *data)
 
 	map_size = WIN_HEIGHT / MAP_SIDE;
 	mlx = data->display.mlx;
-	data->display.frames[0] = mlx_new_image(mlx, WIN_WIDTH, WIN_HEIGHT);
-	data->display.frames[1] = mlx_new_image(mlx, WIN_WIDTH, WIN_HEIGHT);
+	data->display.frame = mlx_new_image(mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (!data->display.frame)
+		return (EXIT_FAILURE);
 	data->display.map = mlx_new_image(mlx, map_size, map_size);
-	if (!data->display.frames[0] || !data->display.frames[0]
-		|| !data->display.map)
+	if (!data->display.map)
 		return (EXIT_FAILURE);
 	init_dir_vector(data);
 	return (EXIT_SUCCESS);
