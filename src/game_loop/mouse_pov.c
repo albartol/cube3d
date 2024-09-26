@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 14:42:12 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/25 14:30:13 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:13:13 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,22 @@
 
 void	mouse_pov(t_game *data)
 {
-	int32_t	x;
-	int32_t	y;
-	double	vel_x;
-	double	vel_y;
+	int32_t		x;
+	int32_t		y;
+	t_cords_d	rotation_speed;
 
 	if (data->mouse)
 		return ;
 	mlx_get_mouse_pos(data->display.mlx, &x, &y);
-	vel_x = (abs(abs(x) - WIN_WIDTH / 2) / (WIN_WIDTH / 8)) * PI / 180;
-	vel_y = abs(abs(y) - WIN_HEIGHT / 2) / (WIN_HEIGHT / 12);
+	rotation_speed.x = (abs(abs(x) - WIN_WIDTH / 2) / 24);
+	rotation_speed.y = abs(abs(y) - WIN_HEIGHT / 2) / 6;
 	if (x < WIN_WIDTH / 2)
-		rotate_lr(&data->player, ROTATION_SPEED + vel_x, -1.0);
+		rotate_lr(&data->player, rotation_speed.x, -1.0);
 	else if (x > WIN_WIDTH / 2)
-		rotate_lr(&data->player, ROTATION_SPEED + vel_x, 1.0);
+		rotate_lr(&data->player, rotation_speed.x, 1.0);
 	if (y < WIN_HEIGHT / 2)
-		rotate_ud(&data->player, ROTATION_SPEED + vel_y);
+		rotate_ud(&data->player, rotation_speed.y);
 	else if (y > WIN_HEIGHT / 2)
-		rotate_ud(&data->player, -(ROTATION_SPEED + vel_y));
+		rotate_ud(&data->player, -(rotation_speed.y));
 	mlx_set_mouse_pos(data->display.mlx, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 }

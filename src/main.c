@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:18 by albartol          #+#    #+#             */
-/*   Updated: 2024/09/25 16:00:25 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/26 14:43:39 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	main(int argc, char **argv)
 	if (preload_textures(&data))
 		return (free_and_exit(&data, EXIT_FAILURE));
 	if (raycast(&data))
-		free_and_exit(&data, EXIT_FAILURE);
-	free_and_exit(&data, EXIT_SUCCESS);
-	return (EXIT_SUCCESS);
+		return (free_and_exit(&data, EXIT_FAILURE));
+	return (free_and_exit(&data, EXIT_SUCCESS));
 }

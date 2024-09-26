@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:32:05 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/25 14:49:58 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:06:38 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,10 @@ int	free_and_exit(t_game *data, int exit)
 		mlx_delete_image(data->display.mlx, data->display.frame);
 	if (data->display.map)
 		mlx_delete_image(data->display.mlx, data->display.map);
+	if (data->display.mlx)
+	{
+		mlx_close_window(data->display.mlx);
+		mlx_terminate(data->display.mlx);
+	}
 	return (exit);
 }

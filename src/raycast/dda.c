@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:05:27 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/25 16:06:53 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:33:14 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ por ello fue que
 en la primera versión que hice del raycast llamé a la estructura de coordenadas
 "increment | increment->x, increment->y"
 creo que queda mejor con el nombre de "deltas" <(>w <)>
+Calcular la razon
  */
 static void	get_deltas(t_dda *dda_info)
 {
-	// Calcular la razon
 	if (!dda_info->ray_dir.x)
 		dda_info->delta_dist.x = __DBL_MAX__;
 	else
@@ -73,12 +73,13 @@ static void	get_deltas(t_dda *dda_info)
 		dda_info->delta_dist.y = fabs(1 / dda_info->ray_dir.y);
 }
 
+// Distancia perpendicular de la pared con la camara
+// Calcular por la distancia perpendicular segun el rayo de impacto x o y
+// El return es el tamaño de la linea a dibujar en la ventana
 static double	get_distance(t_dda *dda)
 {
 	double	per_wall_distance;
 
-	// Distancia perpendicular de la pared con la camara
-	// Calcular por la distancia perpendicular segun el rayo de impacto x o y
 	if (dda->side == 0)
 	{
 		per_wall_distance = (dda->side_dist.x - dda->delta_dist.x);
@@ -90,16 +91,13 @@ static double	get_distance(t_dda *dda)
 		dda->x_hit = per_wall_distance * dda->ray_dir.x + dda->origin.x;
 	}
 	dda->x_hit -= floor(dda->x_hit);
-	// Tamaño de la linea a dibujar en la ventana ahre:
-	return (WIN_HEIGHT / per_wall_distance); // probar
+	return (WIN_HEIGHT / per_wall_distance);
 }
 
 double	dda(t_dda *dda_info, char **map)
 {
-	// DDA (Calculus)
 	get_deltas(dda_info);
 	get_steps_dist(dda_info);
-	// DDA (Algoritmo)
 	while (!detect_collision(dda_info->map_pos.x, dda_info->map_pos.y, map))
 	{
 		if (dda_info->side_dist.x < dda_info->side_dist.y)

@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 20:07:51 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/25 15:15:42 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/26 13:36:12 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,22 @@ al igual que la camara
  */
 static void	init_dir_vector(t_game *data)
 {
-	if (data->player.angle == 90) // North
+	if (data->player.angle == 90)
 	{
 		data->player.dir_vector.y = -1;
 		data->player.camera_plane.x = -FOV;
 	}
-	else if (data->player.angle == 270) // South
+	else if (data->player.angle == 270)
 	{
 		data->player.dir_vector.y = 1;
 		data->player.camera_plane.x = FOV;
 	}
-	else if (data->player.angle == 0) // East
+	else if (data->player.angle == 0)
 	{
 		data->player.dir_vector.x = 1;
 		data->player.camera_plane.y = -FOV;
 	}
-	else if (data->player.angle == 180) // West
+	else if (data->player.angle == 180)
 	{
 		data->player.dir_vector.x = -1;
 		data->player.camera_plane.y = FOV;
@@ -43,7 +43,7 @@ static void	init_dir_vector(t_game *data)
 
 int	init_ray_values(t_game *data)
 {
-	mlx_t	*mlx;
+	mlx_t		*mlx;
 	uint32_t	map_size;
 
 	map_size = WIN_HEIGHT / MAP_SIDE;

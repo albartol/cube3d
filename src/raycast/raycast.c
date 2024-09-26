@@ -6,14 +6,43 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 09:28:31 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/25 16:02:41 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:19:14 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <check_scene.h>
 #include <raycast.h>
 
-// Raycasting:
+static void	keys_hook(mlx_key_data_t keydata, void *param)
+{
+	t_game	*data;
+
+	data = (t_game *)param;
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
+	{
+		mlx_close_window(data->display.mlx);
+		ft_putstr_fd("Thanks for playing\n", STDOUT_FILENO);
+	}
+	if (keydata.key == MLX_KEY_M && keydata.action == MLX_RELEASE)
+		data->display.map->enabled = !data->display.map->enabled;
+	if (keydata.key == MLX_KEY_C && keydata.action == MLX_RELEASE)
+	{
+		data->mouse = !data->mouse;
+		if (data->mouse)
+			mlx_set_cursor_mode(data->display.mlx, MLX_MOUSE_NORMAL);
+		else
+			mlx_set_cursor_mode(data->display.mlx, MLX_MOUSE_HIDDEN);
+	}
+}
+
+static void	close_hook(void *param)
+{
+	t_game	*data;
+
+	data = (t_game *)param;
+	ft_putstr_fd("Thanks for playing\n", STDOUT_FILENO);
+}
+
 int	raycast(t_game *data)
 {
 	data->display.mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cube 3D", false);
@@ -27,13 +56,10 @@ int	raycast(t_game *data)
 		return (exit_msg(mlx_strerror(mlx_errno), EXIT_FAILURE));
 	if (!mlx_loop_hook(data->display.mlx, game_loop, data))
 		return (exit_msg(mlx_strerror(mlx_errno), EXIT_FAILURE));
-	mlx_set_cursor_mode(data->display.mlx, MLX_MOUSE_HIDDEN);
+	mlx_key_hook(data->display.mlx, keys_hook, data);
+	mlx_close_hook(data->display.mlx, close_hook, data);
+	data->mouse = !data->mouse;
 	mlx_loop(data->display.mlx);
 	return (EXIT_SUCCESS);
 }
 
-// mlx_win_cursor_t *cursor;
-// cursor = mlx_create_std_cursor(MLX_CURSOR_CROSSHAIR);
-// if (!cursor)
-// 	return (exit_msg(mlx_strerror(mlx_errno), EXIT_FAILURE));
-// mlx_set_cursor(data->display.mlx, cursor);

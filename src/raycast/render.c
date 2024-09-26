@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:30:07 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/25 14:57:03 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/26 13:37:37 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@
 
 void	render(t_game *data)
 {
-	draw_img(data, data->display.frame); // This part need protection
+	draw_img(data, data->display.frame);
 	draw_map(data);
 }

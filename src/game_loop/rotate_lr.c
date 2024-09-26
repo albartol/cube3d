@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:42:06 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/25 14:29:44 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/26 13:39:54 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,8 @@ void	rotate_lr(t_player *player, double rotation_val, double lr)
 	rotation_val = (rotation_val * PI) / 180;
 	cos_sin.x = cos(rotation_val * lr);
 	cos_sin.y = sin(rotation_val * lr);
-	// Rotate the direction vector
 	player->dir_vector.x = (save_pos.x * cos_sin.x) - (save_pos.y * cos_sin.y);
 	player->dir_vector.y = (save_pos.x * cos_sin.y) + (save_pos.y * cos_sin.x);
-	// Rotate the camera plane
 	player->camera_plane.x = (save_plane.x * cos_sin.x) - (save_plane.y
 			* cos_sin.y);
 	player->camera_plane.y = (save_plane.x * cos_sin.y) + (save_plane.y
