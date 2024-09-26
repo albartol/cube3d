@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 09:28:31 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/26 15:19:14 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/26 17:41:33 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,3 @@ int	raycast(t_game *data)
 	mlx_loop(data->display.mlx);
 	return (EXIT_SUCCESS);
 }
-

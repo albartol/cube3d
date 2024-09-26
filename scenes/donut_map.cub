@@ -1,7 +1,7 @@
-NO ./textures/blue_city2.png
-SO ./textures/blue_city1.png
+NO ./textures/pillar.png
+SO ./textures/greystone.png
 WE ./textures/colorstone.png
-EA ./textures/mossy.png
+EA ./textures/barrel.png
 
 F 8, 36, 90
 C 64, 146, 174
