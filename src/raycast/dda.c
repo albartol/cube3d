@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:05:27 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/26 15:33:14 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/27 13:13:50 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,15 @@ static double	get_distance(t_dda *dda)
 	{
 		per_wall_distance = (dda->side_dist.x - dda->delta_dist.x);
 		dda->x_hit = per_wall_distance * dda->ray_dir.y + dda->origin.y;
+		if (dda->map_pos.x < dda->origin.x)
+			dda->x_hit = 1 - dda->x_hit;
 	}
 	else
 	{
 		per_wall_distance = (dda->side_dist.y - dda->delta_dist.y);
 		dda->x_hit = per_wall_distance * dda->ray_dir.x + dda->origin.x;
+		if (dda->map_pos.y > dda->origin.y)
+			dda->x_hit = 1 - dda->x_hit;
 	}
 	dda->x_hit -= floor(dda->x_hit);
 	return (WIN_HEIGHT / per_wall_distance);
