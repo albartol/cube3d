@@ -6,7 +6,7 @@
 #    By: albartol <albartol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/16 16:58:28 by albartol          #+#    #+#              #
-#    Updated: 2024/09/25 16:52:05 by albartol         ###   ########.fr        #
+#    Updated: 2024/09/27 15:12:14 by albartol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,11 +31,6 @@ MLX42 := lib/MLX42/build/libmlx42.a
 MLX42_DIR := lib/MLX42
 MLX42_BUILD := lib/MLX42/build
 MLX := -L$(MLX42_BUILD) -lmlx42 -ldl -lglfw -pthread -lm
-
-# UNAME := $(shell uname)
-# ifeq ($(UNAME), Darwin)
-# 	MLX := -lmlx -framework OpenGL -framework AppKit
-# endif
 
 LIBS := $(FT) $(MLX)
 
@@ -108,20 +103,7 @@ OBJS		:= $(SOURCES:%.c=$(OBJ_DIR)/%.o)
 
 SRCS		:= $(addprefix $(SRC_DIR)/, $(SOURCES))
 
-NAME		:= cube3D
-# ---------- MANDATORY END ----------
-
-# ---------- BONUS ----------
-BNS :=	
-
-BNS_SOURCES := $(BNS)
-
-BNS_SRCS := $(addprefix $(SRC_DIR)/, $(BNS_SOURCES))
-
-BNS_OBJS := $(BNS_SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-
-BONUS := cube3D_bonus
-# ---------- BONUS END ----------
+NAME		:= cub3D
 
 all: $(OBJ_DIR) $(NAME)
 
@@ -129,11 +111,9 @@ $(NAME): $(OBJS) $(LIBFT) $(MLX42)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $@
 	@echo "$(GREEN)Program $(NAME) created ✅$(RESET)"
 
-bonus: $(OBJ_DIR) $(BONUS)
-
-$(BONUS): $(BNS_OBJS) $(LIBFT) $(MLX42)
-	$(CC) $(CFLAGS) $(BNS_OBJS) $(LIBS) -o $@
-	@echo "$(GREEN)Program $(BONUS) created ✅$(RESET)"
+# ---------- BONUS ----------
+bonus: all
+	@echo "$(GREEN)Program with bonus $(NAME) created ✅$(RESET)"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
 	@echo "$(YELLOW)Compiling...$(RESET)"
@@ -160,11 +140,6 @@ clean:
 	$(MAKE) fclean -C $(LIBFT_DIR)
 	rm -rf $(MLX42_BUILD)
 	rm -rf $(OBJ_DIR)
-
-# clean:
-# 	$(MAKE) fclean -C $(LIBFT_DIR)
-# 	# $(MAKE) clean -C $(MLX42_BUILD)
-# 	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -f $(NAME) $(BONUS)

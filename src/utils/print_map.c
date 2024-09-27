@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 19:50:05 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/09/25 15:58:28 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/27 15:08:56 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	print_map(char **map)
 				ft_putstr_fd(PLAYER_COL, STDOUT_FILENO);
 			else if (map[i][j] == '1')
 				ft_putstr_fd(WALL_COL, STDOUT_FILENO);
-			ft_printf("%c", map[i][j]);
+			ft_putchar_fd(map[i][j], STDOUT_FILENO);
 			ft_putstr_fd(RESET, STDOUT_FILENO);
 			j++;
 		}
 		ft_putstr_fd("\n", STDOUT_FILENO);
 		i++;
 	}
-	ft_putstr_fd("──────────────────────────────────────────────────────\n", 1);
+	ft_putstr_fd("─────────────────────────────────────────────────\n", 1);
 }

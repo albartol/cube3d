@@ -1,10 +1,10 @@
 .DS_Store
 .vscode
-cube3D
-cube3D_bonus
+cub3D
 *.sw*
 *.o
 *.a
 compile_flags.txt
 # *.sh
 build
+*.pdf

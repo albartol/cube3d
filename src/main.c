@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 22:27:18 by albartol          #+#    #+#             */
-/*   Updated: 2024/09/26 14:43:39 by albartol         ###   ########.fr       */
+/*   Updated: 2024/09/27 15:10:44 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_info(t_game *data)
 {
-	ft_printf("───────────────────SCENE-FILE───────────────────\n");
+	ft_putstr_fd("──────────────────SCENE-FILE─────────────────────\n", 1);
 	ft_printf("north_texture: %s\n", data->file.north_texture);
 	ft_printf("south_texture: %s\n", data->file.south_texture);
 	ft_printf("east_texture:  %s\n", data->file.east_texture);
