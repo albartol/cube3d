@@ -40,6 +40,7 @@ static void	close_hook(void *param)
 	t_game	*data;
 
 	data = (t_game *)param;
+	(void)data;
 	ft_putstr_fd("Thanks for playing\n", STDOUT_FILENO);
 }
 
